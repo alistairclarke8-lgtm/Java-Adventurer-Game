@@ -16,6 +16,7 @@ public class Adventurer {
         this.pay = pay;
     }
 
+
     public String getName() {
         return name;
     }
@@ -43,6 +44,5 @@ public class Adventurer {
     public void setPerception(int perception) {
         this.perception = perception;
     }
-
 
 }
