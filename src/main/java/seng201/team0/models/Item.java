@@ -1,20 +1,22 @@
 package seng201.team0.models;
 
-public class Item {
+public abstract class Item {
 
     private final String name;
     private final int cost;
     private final String description;
-    private final String statAffected;
-    private final int affectAmount;
 
-    public Item(String name, int cost, String description, String statAffected, int affectAmount) {
+    public Item(String name, int cost, String description) {
         this.name = name;
         this.cost = cost;
         this.description = description;
-        this.statAffected = statAffected;
-        this.affectAmount = affectAmount;
+    }
 
+    public abstract String getType();
+
+//sell price will be decided based off difficulty selected.
+    public double getSellPrice(double difficultyMultiplier) {
+        return (cost * difficultyMultiplier);
     }
 
     public String getName() {
@@ -27,13 +29,5 @@ public class Item {
 
     public String getDescription() {
         return description;
-    }
-
-    public String getStatAffected() {
-        return statAffected;
-    }
-
-    public int getAffectAmount() {
-        return affectAmount;
     }
 }
