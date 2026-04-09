@@ -1,6 +1,6 @@
 package seng201.team0.models;
 
-public class Adventurer {
+public abstract class Adventurer {
 
     private final String name;
     private int stamina;
@@ -16,6 +16,7 @@ public class Adventurer {
         this.pay = pay;
     }
 
+    public abstract String getType();
 
     public String getName() {
         return name;
