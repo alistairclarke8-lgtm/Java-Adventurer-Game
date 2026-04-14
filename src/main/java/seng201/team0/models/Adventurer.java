@@ -4,6 +4,7 @@ public abstract class Adventurer {
 
     private final String name;
     private int stamina;
+    private final int maxStamina;
     private int perception;
     private final int hiringCost;
     private final int pay;
@@ -14,6 +15,7 @@ public abstract class Adventurer {
         this.perception = perception;
         this.hiringCost = hiringCost;
         this.pay = pay;
+        this.maxStamina = stamina;
     }
 
     public abstract String getType();
@@ -38,12 +40,13 @@ public abstract class Adventurer {
         return pay;
     }
 
-    public void setStamina(int stamina) {
-        this.stamina = stamina;
+    public void increaseStamina(int amount) {
+        this.stamina = Math.min(stamina + amount, maxStamina); /*stamina cannot increase past maxStamina*/
+
     }
 
-    public void setPerception(int perception) {
-        this.perception = perception;
+    public void decreaseStamina(int amount) {
+        this.stamina = Math.max(0, stamina - amount);
     }
 
 }
