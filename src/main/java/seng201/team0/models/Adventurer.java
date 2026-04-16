@@ -20,26 +20,6 @@ public abstract class Adventurer {
 
     public abstract String getType();
 
-    public String getName() {
-        return name;
-    }
-
-    public int getStamina() {
-        return stamina;
-    }
-
-    public int getPerception() {
-        return perception;
-    }
-
-    public int getHiringCost() {
-        return hiringCost;
-    }
-
-    public int getPay() {
-        return pay;
-    }
-
     public void increaseStamina(int amount) {
         this.stamina = Math.min(stamina + amount, maxStamina); /*stamina cannot increase past maxStamina*/
 
@@ -56,5 +36,15 @@ public abstract class Adventurer {
     public void decreasePerception(int amount) {
         this.perception = Math.max(this.perception - amount, 0);
     }
+
+    public String getName() {return name;}
+
+    public int getStamina() {return stamina;}
+
+    public int getPerception() {return perception;}
+
+    public int getHiringCost() {return hiringCost;}
+
+    public int getPay() {return pay;}
 
 }
