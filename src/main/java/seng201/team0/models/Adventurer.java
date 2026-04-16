@@ -49,4 +49,12 @@ public abstract class Adventurer {
         this.stamina = Math.max(0, stamina - amount);
     }
 
+    public void increasePerception(int amount) {
+        this.perception = this.perception + amount; /*no max to perception for now*/
+    }
+
+    public void decreasePerception(int amount) {
+        this.perception = Math.max(this.perception - amount, 0);
+    }
+
 }
