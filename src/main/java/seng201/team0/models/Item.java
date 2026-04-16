@@ -14,6 +14,8 @@ public abstract class Item {
 
     public abstract String getType();
 
+    public abstract void applyTo(Adventurer adventurer);
+
 //sell price will be decided based off difficulty selected.
     public double getSellPrice(double difficultyMultiplier) {
         return (cost * difficultyMultiplier);
