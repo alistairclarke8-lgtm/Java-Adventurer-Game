@@ -4,11 +4,12 @@ public class UpgradeItem extends Item {
     private final String stat;
     private final int amount;
 
-    public UpgradeItem(String name, int cost, String description, String stat, int amount) {
+    public UpgradeItem(String name, int cost, String description, String stat, int amount, boolean consumedOnUse) {
         super(name, cost, description);
         this.stat = stat;
         this.amount = amount;
     }
+    @Override
     public String getType() {
         return "Upgrade";
     }
@@ -20,6 +21,10 @@ public class UpgradeItem extends Item {
         else if (stat.equals("perception")) {
             adventurer.increasePerception(amount);
         }
+    }
+
+    public boolean isConsumedOnUse() {
+        return true;
     }
 
     public String getStat() { return stat;}
