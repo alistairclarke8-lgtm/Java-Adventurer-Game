@@ -2,10 +2,7 @@ package seng201.team0.models;
 
 /**
  * Marker interface for anything the player can buy with gold, whether from
- * the guild hall (adventurers) or the market (items). Implementing this
- * interface lets the GUI render a single generic "purchase" panel, and lets
- * a single transaction method in the market/guild services charge the
- * correct amount of gold without knowing the concrete type.
+ * the guild hall (adventurers) or the market (items).
  */
 
 public interface Purchasable {
@@ -17,14 +14,14 @@ public interface Purchasable {
 
     /**
      * @return the amount of gold required to purchase this object. For
-     *         adventurers this is the hiring cost; for items this is the
-     *         shop price
+     * adventurers this is the hiring cost; for items this is the
+     * shop price
      */
     int getBuyPrice();
 
     /**
      * @return a short, player-facing description explaining what this
-     *         purchase does
+     * purchase does
      */
     String getDescription();
 
