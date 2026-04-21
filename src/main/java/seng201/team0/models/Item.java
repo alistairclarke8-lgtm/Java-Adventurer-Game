@@ -1,5 +1,7 @@
 package seng201.team0.models;
 
+import java.util.Objects;
+
 public abstract class Item {
 
     private final String name;
@@ -7,9 +9,9 @@ public abstract class Item {
     private final String description;
 
     public Item(String name, int cost, String description) {
-        this.name = name;
+        this.name = Objects.requireNonNull(name, "name");
         this.cost = cost;
-        this.description = description;
+        this.description = Objects.requireNonNull(description, "description");
     }
 
     public abstract String getType();
