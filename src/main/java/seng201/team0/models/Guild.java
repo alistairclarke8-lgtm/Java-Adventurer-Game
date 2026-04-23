@@ -19,7 +19,7 @@ public class Guild {
 
     public void buyItem(Item item) {
         if (playersGoldAmount - item.getCost() >= 0) {
-            playersGoldAmount = -item.getCost();
+            playersGoldAmount -= item.getCost();
             inventoryItems.add(item);
         } else {
             throw new IllegalArgumentException("Insufficient Gold");
