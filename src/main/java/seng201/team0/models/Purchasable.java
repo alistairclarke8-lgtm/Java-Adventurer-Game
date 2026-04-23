@@ -2,7 +2,7 @@ package seng201.team0.models;
 
 /**
  * Marker interface for anything the player can buy with gold, whether from
- * the guild hall (adventurers) or the market (items).
+ * the guild hall (adventurers) or the market (items).git pull
  */
 
 public interface Purchasable {
