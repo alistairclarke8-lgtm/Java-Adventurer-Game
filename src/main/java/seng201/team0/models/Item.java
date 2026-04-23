@@ -17,6 +17,8 @@ public abstract class Item {
     public abstract String getType();
 
     public abstract void applyTo(Adventurer adventurer);
+    public abstract void removeFrom(Adventurer adventurer);
+
 
     public abstract boolean isConsumedOnUse();
 
