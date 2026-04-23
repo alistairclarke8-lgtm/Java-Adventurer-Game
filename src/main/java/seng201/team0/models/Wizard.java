@@ -13,4 +13,13 @@ public class Wizard extends Adventurer {
     }
 
 
+    @Override
+    public int getBuyPrice() {
+        return getHiringCost();
+    }
+
+    @Override
+    public String getDescription() {
+        return "";
+    }
 }

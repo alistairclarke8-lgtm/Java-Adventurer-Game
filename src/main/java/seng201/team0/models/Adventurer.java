@@ -1,6 +1,6 @@
 package seng201.team0.models;
 
-public abstract class Adventurer {
+public abstract class Adventurer implements Purchasable {
 
     private final String name;
     private int stamina;
