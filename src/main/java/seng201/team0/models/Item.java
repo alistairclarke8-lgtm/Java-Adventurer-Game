@@ -19,12 +19,11 @@ public abstract class Item {
     public abstract void applyTo(Adventurer adventurer);
     public abstract void removeFrom(Adventurer adventurer);
 
-
     public abstract boolean isConsumedOnUse();
 
 //sell price will be decided based off difficulty selected.
     public double getSellPrice(double difficultyMultiplier) {
-        return (cost * difficultyMultiplier);
+        return (int) (cost * 0.5 * difficultyMultiplier);
     }
 
     public String getName() {return name;}

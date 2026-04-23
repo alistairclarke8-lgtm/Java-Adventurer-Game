@@ -20,6 +20,12 @@ public abstract class Adventurer implements Purchasable {
         this.maxStamina = stamina;
     }
 
+
+    @Override public String getName() { return name; }
+    @Override public int getBuyPrice() { return hiringCost; }
+    @Override public String getDescription() { return getType() + " — Pay: " + pay + "g/exp"; }
+
+
     public abstract String getType();
 
     public void increaseStamina(int amount) {
@@ -43,7 +49,6 @@ public abstract class Adventurer implements Purchasable {
     }
 
 
-    public String getName() {return name;}
     public int getMaxStamina() {return maxStamina;}
     public int getStamina() {return stamina;}
     public int getPerception() {return perception;}

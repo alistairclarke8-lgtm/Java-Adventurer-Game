@@ -30,14 +30,13 @@ public class EquipableItem  extends Item {
             adventurer.increasePerception(adventurer.getPerception());
         }
     }
-    public void removeItem(Adventurer adventurer) {
-        if (stat.equals("stamina")) {
-            adventurer.decreaseStamina(amount);
-        }
-        if (stat.equals("perception")) {
-            adventurer.decreasePerception(adventurer.getPerception());
-        }
 
-
+    @Override
+    public void removeFrom(Adventurer adventurer) {
+        if ("stamina".equals(stat)) adventurer.decreaseStamina(amount);
+        if ("perception".equals(stat)) adventurer.decreasePerception(amount);
     }
+
+
+
 }

@@ -1,5 +1,7 @@
 package seng201.team0.models;
 
+import seng201.team0.exception.GuildFullException;
+
 import java.util.ArrayList;
 
 /**
@@ -29,7 +31,7 @@ public class Guildhall {
             selectedAdventurers.add(adventurer);
         }
         else {
-            throw new Exception("Maximum adventurers selected");
+            throw new GuildFullException("Maximum adventurers selected");
         }
     }
 

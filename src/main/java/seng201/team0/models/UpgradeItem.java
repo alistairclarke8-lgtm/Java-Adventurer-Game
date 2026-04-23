@@ -23,6 +23,11 @@ public class UpgradeItem extends Item {
         }
     }
 
+    @Override
+    public void removeFrom(Adventurer adventurer) {
+
+    }
+
     public boolean isConsumedOnUse() {
         return true;
     }
