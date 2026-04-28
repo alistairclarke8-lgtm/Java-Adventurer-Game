@@ -13,6 +13,7 @@ public class UpgradeItem extends Item {
     public String getType() {
         return "Upgrade";
     }
+
     @Override
     public void applyTo(Adventurer adventurer) {
         if (stat.equals("stamina")) {

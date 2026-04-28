@@ -10,10 +10,10 @@ import java.util.ArrayList;
  */
 public class Guildhall {
     private ArrayList<Adventurer> selectedAdventurers = new ArrayList<>();
-    private ArrayList<Adventurer> reservedAdventurers = new ArrayList<>();
+    private final  ArrayList<Adventurer> reservedAdventurers = new ArrayList<>();
 
     private ArrayList<Item> selectedItems = new ArrayList<>();
-    private ArrayList<Item> inventoryItems = new ArrayList<>();
+    private final ArrayList<Item> inventoryItems = new ArrayList<>();
 
 
     public Guildhall(ArrayList<Adventurer> selectedAdventurers,ArrayList<Item> selectedItems ) {
@@ -22,11 +22,11 @@ public class Guildhall {
     }
 
     /**
-     * adds an adventurer to the selected adventurers
-     * @param adventurer to add to the main party
+     * adds an adventurer to the main party.
+     * @param adventurer to add to the main party.
      * @throws Exception if 5 adventurers are already selected.
      */
-    public void makeSelectedAdventurer(Adventurer adventurer) throws Exception {
+    public void makeMainPartyAdventurer(Adventurer adventurer) throws Exception {
         if (selectedAdventurers.size() <5) {
             selectedAdventurers.add(adventurer);
         }
@@ -36,33 +36,34 @@ public class Guildhall {
     }
 
     /**
-     *removes adventurer from main party
-     * @param adventurer to remove from main party
-     * @throws Exception if selected adventurers is empty
+     *removes adventurer from main party.
+     * @param adventurer to remove from main party.
+     * @throws Exception if selected adventurers is empty.
      */
-    public void removeSelectedAdventurer(Adventurer adventurer) throws Exception {
+    public void removeMainPartyAdventurer(Adventurer adventurer) throws Exception {
         if (!selectedAdventurers.isEmpty()) {
             selectedAdventurers.remove(adventurer);
         }
         else {
-            throw new Exception("selected adventurers empty");
+            throw new Exception("main party empty");
         }
     }
 
     /**
-     * adds an adventurer to reserves
-     * @param adventurer to add to reserves
+     * adds an adventurer to reserves.
+     * @param adventurer to add to reserves.
      */
     public void makeReservedAdventurer(Adventurer adventurer){
+
         reservedAdventurers.add(adventurer);
     }
 
     /**
-     * kicks adventurer from the reserve party
-     * @param adventurer to remove from the reserve party
-     * @throws Exception if the reserve party is empty
+     * removes adventurer from the reserve party.
+     * @param adventurer to remove from the reserve party.
+     * @throws Exception if the reserve party is empty.
      */
-    public void kickReservedAdventurer(Adventurer adventurer) throws Exception {
+    public void removeReservedAdventurer(Adventurer adventurer) throws Exception {
         if (!reservedAdventurers.isEmpty()) {
             reservedAdventurers.remove(adventurer);
         } else {
@@ -70,8 +71,24 @@ public class Guildhall {
         }
     }
 
-    public void moveReserveToMainParty() {
+    /**
+     * removes adventurer from reserves and adds them to main party.
+     * @param adventurer to move from reserve to main party.
+     * @throws Exception if reserve party is empty and if 5 adventurers are already selected.
+     */
+    public void moveReserveToMainParty(Adventurer adventurer) throws Exception {
+        removeReservedAdventurer(adventurer);
+        makeMainPartyAdventurer(adventurer);
+    }
 
+    /**
+     * removes adventurer from main party and adds them to reserves.
+     * @param adventurer to move from main party to reserves.
+     * @throws Exception if main party empty.
+     */
+    public void moveMainPartyToReserve(Adventurer adventurer) throws Exception {
+        removeMainPartyAdventurer(adventurer);
+        makeReservedAdventurer(adventurer);
     }
 
     public ArrayList<Adventurer> getReservedAdventurers() {return reservedAdventurers;}
