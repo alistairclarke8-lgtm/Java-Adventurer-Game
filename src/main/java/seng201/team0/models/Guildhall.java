@@ -111,7 +111,7 @@ public class Guildhall {
 //            playersGoldAmount -= item.getCost();
 //            inventoryItems.add(item);
 //        } else {
-//            throw new IllegalArgumentException("Insufficient Gold");
+//            throw new InsufficientGoldException("Insufficient Gold");
 //        }
 //    }
 //
