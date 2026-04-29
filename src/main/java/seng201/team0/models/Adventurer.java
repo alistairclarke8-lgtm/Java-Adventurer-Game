@@ -7,7 +7,7 @@ package seng201.team0.models;
 public abstract class Adventurer implements Purchasable {
 
     /**
-     * A series of setters for initialising an Adventurer
+     * A series of setters for initializing an Adventurer
      **/
     private final String name;
     private int stamina;
