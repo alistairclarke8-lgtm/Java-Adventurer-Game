@@ -47,23 +47,15 @@ public enum Difficulty {
     public String getDisplayName() {
         return displayName;
     }
-
-
     public int getStartingGold() {
         return startingGold;
     }
-
-
     public double getRewardMultiplier() {
         return rewardMultiplier;
     }
-
-
     public double getScoreMultiplier() {
         return scoreMultiplier;
     }
-
-
     public double getRandomEventChance() {
         return randomEventChance;
     }

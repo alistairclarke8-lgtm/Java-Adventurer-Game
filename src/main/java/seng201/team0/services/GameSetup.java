@@ -20,7 +20,7 @@ public class GameSetup {
 
     public String createGuildName(String name) {
         if ( name.length() > min_length_guild_name | name.length() < max_length_guild_name ) {
-            this.guildName = 
+            this.guildName = name;
         }
 
     }

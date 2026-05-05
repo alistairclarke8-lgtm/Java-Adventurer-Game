@@ -2,6 +2,10 @@ package seng201.team0.models;
 
 import java.util.Objects;
 
+/**
+ *
+ */
+
 public abstract class Item {
 
     private final String name;

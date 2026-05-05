@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GameEnvironment {
-    private final List<Adventurer> defualtAdventurers = new ArrayList<>();
+    private final List<Adventurer> defaultAdventurers = new ArrayList<>();
     private List<Adventurer> selectedAdventurers = new ArrayList<>();
     private int numExpeditions;
     private String difficulty;
@@ -38,7 +38,7 @@ public class GameEnvironment {
 
     }
 
-    public List<Adventurer> getDefualtAdventurers() {return defualtAdventurers;}
+    public List<Adventurer> getDefualtAdventurers() {return defaultAdventurers;}
     public List<Adventurer> getSelectedAdventurers() {return selectedAdventurers;}
     public int getNumExpeditions() {return numExpeditions;}
     public String getDifficulty() {return difficulty;}

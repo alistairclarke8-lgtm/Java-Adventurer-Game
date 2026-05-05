@@ -2,6 +2,11 @@ package seng201.team0.models;
 
 import java.util.ArrayList;
 
+/**
+ * Class for holding information about the player's current guild
+ * It
+ */
+
 public class Guild {
     ArrayList<Adventurer> selectedAdventurers = new ArrayList<>();
     ArrayList<Adventurer> reservedAdventurers = new ArrayList<>();
