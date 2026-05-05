@@ -1,14 +1,12 @@
 package seng201.team0.exception;
 
 /**
- * Thrown when the guild attempts to pay for something (hire an adventurer,
- * buy an item, pay wages after an expedition) but does not have enough gold.
+ * Thrown when the guild attempts to pay for something but does not have enough gold.
  */
 public class InsufficientGoldException extends Exception {
 
     /**
      * Constructs a new exception with the given detail message.
-     *
      * @param message human-readable description, typically including the
      *                amount required and the amount held
      */
@@ -17,10 +15,8 @@ public class InsufficientGoldException extends Exception {
     }
 
     /**
-     * Convenience constructor that builds a detail message from the price
-     * owed and the gold on hand.
-     *
-     * @param price    gold required for the transaction
+     * Message from the price owed and the gold on hand.
+     * @param price gold required for the transaction
      * @param goldHeld gold currently in the guild's treasury
      */
     public InsufficientGoldException(int price, int goldHeld) {

@@ -47,7 +47,7 @@ public class EquipableItem  extends Item {
             adventurer.increaseStamina(amount);
         }
         if (stat.equals("perception")) {
-            adventurer.increasePerception(adventurer.getPerception());
+            adventurer.increasePerception(amount);
         }
     }
 

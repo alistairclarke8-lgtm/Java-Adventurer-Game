@@ -92,5 +92,6 @@ public abstract class Adventurer implements Purchasable {
     public int getPerception() {return perception;}
     public int getHiringCost() {return hiringCost;}
     public int getPay() {return pay;}
+    public Item getEquippedItem() { return equippedItem; }
 
 }
