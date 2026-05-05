@@ -39,7 +39,7 @@ public class GameEnvironment {
 
     }
 
-    public List<Adventurer> getDefualtAdventurers() {return defaultAdventurers;}
+    public List<Adventurer> getDefaultAdventurers() {return defaultAdventurers;}
     public List<Adventurer> getSelectedAdventurers() {return selectedAdventurers;}
     public int getNumExpeditions() {return numExpeditions;}
     public String getDifficulty() {return difficulty;}
