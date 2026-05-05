@@ -1,5 +1,8 @@
 package seng201.team0.models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Class for holding information and operating on Adventurers
  */
@@ -11,11 +14,12 @@ public abstract class Adventurer implements Purchasable {
      **/
     private final String name;
     private int stamina;
-    private final int maxStamina;
+    private int maxStamina;
     private int perception;
     private final int hiringCost;
     private final int pay;
     private Item equippedItem;
+    private final List<Skill> skills = new ArrayList<>();
 
 
     public Adventurer(String name, int stamina, int perception, int hiringCost, int pay) {
@@ -70,6 +74,12 @@ public abstract class Adventurer implements Purchasable {
     }
 
 
+    private void increaseMaxStamina(int staminaBonus) {
+        if (staminaBonus < 0) throw new IllegalArgumentException("amount must be >= 0");
+        this.maxStamina += staminaBonus;
+        this.stamina += staminaBonus;
+    }
+
     /**
      * Method for equipping and item for and Adventurer
      * Removes any current equipped item first
@@ -79,6 +89,17 @@ public abstract class Adventurer implements Purchasable {
         if (equippedItem != null) equippedItem.removeFrom(this);
         equippedItem = item;
         if (item != null) item.applyTo(this);
+    }
+
+
+    public void learnSkill(Skill skill) {
+        skills.add(skill);
+        if (skill.getStaminaBonus() > 0) {
+            increaseMaxStamina(skill.getStaminaBonus());
+        }
+        if (skill.getPerceptionBonus() != 0) {
+            increasePerception(skill.getPerceptionBonus());
+        }
     }
 
 
