@@ -22,6 +22,7 @@ public class GameEnvironment {
 
 
     public GameEnvironment(ScreenNavigator navigator) {
+        this.navigator = navigator;
         defualtAdventurers.addAll(List.of(new Archer(), new Swordsman(), new Wizard()));
         navigator.launchSetupScreen(this);
 
