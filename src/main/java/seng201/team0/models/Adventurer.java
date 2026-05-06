@@ -1,6 +1,7 @@
 package seng201.team0.models;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -114,5 +115,6 @@ public abstract class Adventurer implements Purchasable {
     public int getHiringCost() {return hiringCost;}
     public int getPay() {return pay;}
     public Item getEquippedItem() { return equippedItem; }
+    public List<Skill> getSkills() {return Collections.unmodifiableList(skills); }
 
 }
