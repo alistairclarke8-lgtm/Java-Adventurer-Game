@@ -1,10 +1,8 @@
 package seng201.team0.gui;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
+import seng201.team0.GameEnvironment;
 
 import java.io.IOException;
 
@@ -21,16 +19,7 @@ public class MainWindow extends Application {
      */
     @Override
     public void start(Stage primaryStage) throws IOException {
-        FXMLLoader baseLoader = new FXMLLoader(getClass().getResource("/fxml/main.fxml"));
-        Parent root = baseLoader.load();
-
-        MainController baseController = baseLoader.getController();
-        baseController.init(primaryStage);
-
-        primaryStage.setTitle("SENG201 Example App");
-        Scene scene = new Scene(root, 600, 400);
-        primaryStage.setScene(scene);
-        primaryStage.show();
+       new GameEnvironment(new ScreenNavigator(primaryStage));
     }
 
     /**
@@ -41,5 +30,6 @@ public class MainWindow extends Application {
     public static void launchWrapper(String [] args) {
         launch(args);
     }
+
 
 }

@@ -3,16 +3,16 @@ package seng201.team0.gui;
 import seng201.team0.GameEnvironment;
 
 /**
- * Abstract parent class for all {@link RocketManager} UI controller classes.
- * @author seng201 teaching team
+ * Abstract parent class for all {@link GameEnvironment} UI controller classes.
+ * @author seng201 teaching team /
  */
 public abstract class ScreenController {
 
     private final GameEnvironment gameEnvironment;
 
     /**
-     * Creates an instance of a ScreenController with the given {@link RocketManager}
-     * @param rocketManager The rocket manager used by this ScreenController
+     * Creates an instance of a ScreenController with the given {@link GameEnvironment}
+     * @param gameEnvironment The game environment used by this ScreenController
      */
     protected ScreenController(final GameEnvironment gameEnvironment) {
         this.gameEnvironment = gameEnvironment;
@@ -36,7 +36,7 @@ public abstract class ScreenController {
      * Gets the rocket manager associated with this screen controller.
      * @return The rocket manager for this controller
      */
-    protected GameEnvironment gameEnvironment() {
+    protected GameEnvironment getGameEnvironment() {
         return gameEnvironment;
     }
 }
