@@ -14,7 +14,6 @@ public class App {
      * trying to run MainWindow itself will cause an error
      * @param args program arguments from command line
      */
-    public static void main(String[] args) {
-        MainWindow.launchWrapper(args);
+    public static void main(String[] args) {MainWindow.launch(MainWindow.class, args);
     }
 }

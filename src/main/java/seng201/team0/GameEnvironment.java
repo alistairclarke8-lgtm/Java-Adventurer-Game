@@ -23,7 +23,7 @@ public class GameEnvironment {
 
     public GameEnvironment(ScreenNavigator navigator) {
         this.navigator = navigator;
-        defualtAdventurers.addAll(List.of(new Archer(), new Swordsman(), new Wizard()));
+        defaultAdventurers.addAll(List.of(new Archer(), new Swordsman(), new Wizard(), new Wizard(), new Swordsman()));
         navigator.launchSetupScreen(this);
 
     }
@@ -44,6 +44,7 @@ public class GameEnvironment {
     public int getNumExpeditions() {return numExpeditions;}
     public String getDifficulty() {return difficulty;}
     public String getGuildName() {return guildName;}
+    public void setGuildName(String name) {this.guildName = name;}
 
 
 
