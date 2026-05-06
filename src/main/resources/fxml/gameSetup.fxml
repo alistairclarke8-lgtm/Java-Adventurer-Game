@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="15.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="15.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng201.team0.gui.SetupScreenController">
    <opaqueInsets>
       <Insets />
    </opaqueInsets>
@@ -91,11 +91,11 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Button fx:id="adventurer1Btn" mnemonicParsing="false" text="Button" GridPane.halignment="LEFT" />
-                        <Button fx:id="adventurer2Btn" mnemonicParsing="false" text="Button" GridPane.columnIndex="1" GridPane.halignment="LEFT" />
-                        <Button fx:id="adventurer3Btn" mnemonicParsing="false" text="Button" GridPane.columnIndex="2" GridPane.halignment="LEFT" />
-                        <Button fx:id="adventurer4Btn" mnemonicParsing="false" text="Button" GridPane.columnIndex="3" GridPane.halignment="LEFT" />
-                        <Button fx:id="adventurer5Btn" mnemonicParsing="false" text="Button" GridPane.columnIndex="4" GridPane.halignment="LEFT" />
+                        <Button fx:id="adventurer1Btn" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="64.0" prefWidth="60.0" text="Button" GridPane.halignment="LEFT" />
+                        <Button fx:id="adventurer2Btn" minHeight="-Infinity" mnemonicParsing="false" prefHeight="64.0" prefWidth="60.0" text="Button" GridPane.columnIndex="1" GridPane.halignment="LEFT" />
+                        <Button fx:id="adventurer3Btn" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="64.0" prefWidth="60.0" text="Button" GridPane.columnIndex="2" GridPane.halignment="LEFT" />
+                        <Button fx:id="adventurer4Btn" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="64.0" prefWidth="60.0" text="Button" GridPane.columnIndex="3" GridPane.halignment="LEFT" />
+                        <Button fx:id="adventurer5Btn" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="64.0" prefWidth="60.0" text="Button" GridPane.columnIndex="4" GridPane.halignment="LEFT" />
                      </children>
                   </GridPane>
                </children>
@@ -111,9 +111,10 @@
                         <Insets bottom="10.0" />
                      </VBox.margin>
                   </Label>
-                  <Label fx:id="staminaLabel" text="Stamina:" />
-                  <Label fx:id="perceptionLabel" text="Perception:" />
-                  <Label fx:id="payLabel" text="Pay:" />
+                  <Label fx:id="nameLabel" prefHeight="17.0" prefWidth="101.0" text="Name:" />
+                  <Label fx:id="staminaLabel" prefHeight="17.0" prefWidth="79.0" text="Stamina:" />
+                  <Label fx:id="perceptionLabel" prefHeight="17.0" prefWidth="94.0" text="Perception:" />
+                  <Label fx:id="payLabel" prefHeight="17.0" prefWidth="96.0" text="Pay:" />
                </children>
             </VBox>
          </children>
