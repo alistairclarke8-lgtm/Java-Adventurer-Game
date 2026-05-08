@@ -6,7 +6,6 @@
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
@@ -30,11 +29,6 @@
                </padding>
             </Label>
             <TextField fx:id="guildnameField" HBox.hgrow="ALWAYS" />
-            <Button fx:id="submitNameBtn" mnemonicParsing="false" text="Submit">
-               <HBox.margin>
-                  <Insets right="20.0" />
-               </HBox.margin>
-            </Button>
          </children>
       </HBox>
       <Separator prefWidth="200.0" />
@@ -60,9 +54,9 @@
                   <Label text="Choose difficulty:" />
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="144.0" spacing="10.0">
                      <children>
-                        <ToggleButton fx:id="easyBtn" mnemonicParsing="false" text="Easy" />
-                        <ToggleButton fx:id="normalBtn" mnemonicParsing="false" text="Normal" />
-                        <ToggleButton fx:id="hardBtn" mnemonicParsing="false" text="Hard" />
+                        <Button fx:id="easyBtn" mnemonicParsing="false" text="Easy" />
+                        <Button fx:id="normalBtn" mnemonicParsing="false" text="Normal" />
+                        <Button fx:id="hardBtn" mnemonicParsing="false" text="Hard" />
                      </children>
                   </HBox>
                </children>

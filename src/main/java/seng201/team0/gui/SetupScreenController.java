@@ -4,6 +4,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import seng201.team0.GameEnvironment;
 import seng201.team0.models.Adventurer;
+
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -14,18 +16,16 @@ public class SetupScreenController extends ScreenController {
     @FXML
     private TextField guildnameField;
     @FXML
-    private Button submitNameBtn;
-    @FXML
     private Slider expeditionCountSlider;
     @FXML
     private Label expeditionCountLabel;
     //    difficulty Buttons
     @FXML
-    private ToggleButton easyBtn;
+    private Button easyBtn;
     @FXML
-    private ToggleButton normalBtn;
+    private Button normalBtn;
     @FXML
-    private ToggleButton hardBtn;
+    private Button hardBtn;
 //      all starting adventurer buttons
     @FXML
     private Button adventurer1Btn;
@@ -67,14 +67,39 @@ public class SetupScreenController extends ScreenController {
         for (int i=0; i < availableAdventurerBtns.size(); i++) {
             int buttonIndex= i;
             availableAdventurerBtns.get(i).setOnAction(actionEvent -> onAvailableAdventurerBtnClicked(availableAdventurerBtns, buttonIndex));
-            availableAdventurerBtns.get(i).setText(getGameEnvironment().getDefualtAdventurers().get(i).getName());
+            availableAdventurerBtns.get(i).setText(getGameEnvironment().getDefaultAdventurers().get(i).getName());
         }
-        submitNameBtn.setOnAction(actionEvent -> onSubmitNameButtonClicked());
+        startGameBtn.setOnAction(actionEvent -> onStartGameBtnClicked());
 
-
+        for (int i=0; i< selectedAdventurerBtns.size(); i++) {
+            int index=i;
+            selectedAdventurerBtns.get(i).setOnAction(actionEvent -> onSelectedButtonClicked(selectedAdventurerBtns, index));
         }
-    public void onAvailableAdventurerBtnClicked(List<Button> availableAdventurerbtns, int adventurerIndex) {
-        updateStats(getGameEnvironment().getDefualtAdventurers().get(adventurerIndex));
+        expeditionCountSlider.valueProperty().addListener((observable, oldValue, newValue) ->
+                onExpeditionCountUpdated(newValue.intValue()));
+    }
+
+    private void onExpeditionCountUpdated(int i) {
+        getGameEnvironment().setNumExpeditions(i);
+        expeditionCountLabel.setText(" "+getGameEnvironment().getNumExpeditions());
+    }
+
+    public void onSelectedButtonClicked(List<Button> selectedAdventurerBtns, int index) {
+        GameEnvironment gameEnvironment = getGameEnvironment();
+        if (selectedAdventurerIndex != -1) {
+            Adventurer selectedAdventurer = gameEnvironment.getDefaultAdventurers().get(selectedAdventurerIndex);
+            // Only add the selected rocket to the array of selected rockets if it isn't already in
+            // the array.
+            if (Arrays.stream(selectedAdventurers).noneMatch(adventurer -> adventurer == selectedAdventurer)) {
+                selectedAdventurerBtns.get(index).setText(selectedAdventurer.getName());
+                selectedAdventurers[index] = selectedAdventurer;
+            }
+        }
+    }
+
+    private void onAvailableAdventurerBtnClicked(List<Button> availableAdventurerbtns, int adventurerIndex) {
+        selectedAdventurerIndex = adventurerIndex;
+        updateStats(getGameEnvironment().getDefaultAdventurers().get(adventurerIndex));
         availableAdventurerbtns.forEach(button -> {
             if (button == availableAdventurerbtns.get(adventurerIndex)) {
                 button.setStyle("-fx-background-color: #b3b3b3; -fx-background-radius: 5;");
@@ -84,7 +109,7 @@ public class SetupScreenController extends ScreenController {
         });
 
     }
-    public void onSubmitNameButtonClicked() {
+    public void onStartGameBtnClicked() {
         getGameEnvironment().setGuildName(guildnameField.getText());
         System.out.println(getGameEnvironment().getGuildName());
     }

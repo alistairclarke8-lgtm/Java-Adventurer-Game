@@ -45,6 +45,7 @@ public class GameEnvironment {
     public String getDifficulty() {return difficulty;}
     public String getGuildName() {return guildName;}
     public void setGuildName(String name) {this.guildName = name;}
+    public int setNumExpeditions(int num) {return this.numExpeditions = num;}
 
 
 
