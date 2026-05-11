@@ -25,13 +25,8 @@ public class GameEnvironment {
 
     }
 
-    public void onSetupComplete(List<Adventurer> selectedAdventurers, int numExpeditions,
-                                Difficulty difficulty, String guildName) {
-        this.selectedAdventurers = selectedAdventurers;
-        this.numExpeditions = numExpeditions;
-        this.difficulty = difficulty;
-        this.guildName = guildName;
-//        navigator.launchMainScreen.this;
+    public void onSetupComplete() {
+        navigator.launchMenuScreenController(this);
 
 
     }
