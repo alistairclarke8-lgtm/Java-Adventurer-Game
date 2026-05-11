@@ -13,6 +13,10 @@ public class GameEnvironment {
     private Difficulty difficulty;
     private String guildName;
     private final ScreenNavigator navigator;
+    private int gold;
+    private int currentExpedition = 1;
+    private int expeditionsRemaining;
+
 
 
 
@@ -26,9 +30,20 @@ public class GameEnvironment {
     }
 
     public void onSetupComplete() {
+        gold = difficulty.getStartingGold();
         navigator.launchMenuScreenController(this);
-
-
+    }
+    public void navigateToRecruitment() {
+//        navigator.launchMenuScreenController(this);
+    }
+    public void navigateToMarket() {
+//        navigator.launchMenuScreenController(this);
+    }
+    public void navigateToExpedition() {
+//        navigator.launchMenuScreenController(this);
+    }
+    public void navigateToGuildHall() {
+//        navigator.launchMenuScreenController(this);
     }
 
     public List<Adventurer> getDefaultAdventurers() {return defaultAdventurers;}
@@ -39,8 +54,10 @@ public class GameEnvironment {
     public void setDifficulty(Difficulty difficulty) {this.difficulty = difficulty;}
     public String getGuildName() {return guildName;}
     public void setGuildName(String name) {this.guildName = name;}
-    public int setNumExpeditions(int num) {return this.numExpeditions = num;}
-
+    public void setNumExpeditions(int num) {this.numExpeditions = num;}
+    public int getGold() {return gold;}
+    public int getCurrentExpedition() {return currentExpedition;}
+    public int getRemainingExpeditions() {return numExpeditions-currentExpedition;}
 
 
 
