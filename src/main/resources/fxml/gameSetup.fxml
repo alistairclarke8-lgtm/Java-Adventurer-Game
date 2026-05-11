@@ -44,7 +44,7 @@
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="26.0" prefWidth="180.0" spacing="5.0">
                      <children>
-                        <Slider fx:id="expeditionCountSlider" blockIncrement="1.0" max="15.0" prefHeight="22.0" prefWidth="140.0" showTickLabels="true" />
+                        <Slider fx:id="expeditionCountSlider" blockIncrement="1.0" max="15.0" min="5.0" prefHeight="22.0" prefWidth="140.0" showTickLabels="true" />
                      </children>
                   </HBox>
                </children>

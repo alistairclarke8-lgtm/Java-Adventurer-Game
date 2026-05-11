@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import seng201.team0.GameEnvironment;
 import seng201.team0.models.Adventurer;
+import seng201.team0.models.Difficulty;
 
 import java.util.Arrays;
 import java.util.List;
@@ -64,6 +65,7 @@ public class SetupScreenController extends ScreenController {
     public void initialize() {
         List<Button> availableAdventurerBtns = List.of(adventurer1Btn,adventurer2Btn,adventurer3Btn,adventurer4Btn,adventurer5Btn);
         List<Button> selectedAdventurerBtns = List.of(selectedAdventurer1,selectedAdventurer2,selectedAdventurer3);
+        List<Button> difficultyBtns = List.of(easyBtn,normalBtn,hardBtn);
         for (int i=0; i < availableAdventurerBtns.size(); i++) {
             int buttonIndex= i;
             availableAdventurerBtns.get(i).setOnAction(actionEvent -> onAvailableAdventurerBtnClicked(availableAdventurerBtns, buttonIndex));
@@ -75,24 +77,35 @@ public class SetupScreenController extends ScreenController {
             int index=i;
             selectedAdventurerBtns.get(i).setOnAction(actionEvent -> onSelectedButtonClicked(selectedAdventurerBtns, index));
         }
+        for (int i=0;i<difficultyBtns.size();i++) {
+            int buttonIndex = i;
+            difficultyBtns.get(i).setOnAction(actionEvent -> onDifficultyBtnClicked(difficultyBtns,buttonIndex));
+        }
+
+
         expeditionCountSlider.valueProperty().addListener((observable, oldValue, newValue) ->
                 onExpeditionCountUpdated(newValue.intValue()));
     }
+
+
+
+
 
     private void onExpeditionCountUpdated(int i) {
         getGameEnvironment().setNumExpeditions(i);
         expeditionCountLabel.setText(" "+getGameEnvironment().getNumExpeditions());
     }
 
-    public void onSelectedButtonClicked(List<Button> selectedAdventurerBtns, int index) {
+    private void onSelectedButtonClicked(List<Button> selectedAdventurerBtns, int index) {
         GameEnvironment gameEnvironment = getGameEnvironment();
         if (selectedAdventurerIndex != -1) {
             Adventurer selectedAdventurer = gameEnvironment.getDefaultAdventurers().get(selectedAdventurerIndex);
-            // Only add the selected rocket to the array of selected rockets if it isn't already in
+            // Only add the selected adventurer to the array of selected adventurers if it isn't already in
             // the array.
             if (Arrays.stream(selectedAdventurers).noneMatch(adventurer -> adventurer == selectedAdventurer)) {
                 selectedAdventurerBtns.get(index).setText(selectedAdventurer.getName());
                 selectedAdventurers[index] = selectedAdventurer;
+                gameEnvironment.setSelectedAdventurers(selectedAdventurer);
             }
         }
     }
@@ -109,9 +122,12 @@ public class SetupScreenController extends ScreenController {
         });
 
     }
-    public void onStartGameBtnClicked() {
+    private void onStartGameBtnClicked() {
         getGameEnvironment().setGuildName(guildnameField.getText());
         System.out.println(getGameEnvironment().getGuildName());
+        System.out.println(getGameEnvironment().getNumExpeditions());
+        System.out.println(getGameEnvironment().getSelectedAdventurers());
+        System.out.println(getGameEnvironment().getDifficulty());
     }
 
     public void updateStats (Adventurer adventurer) {
