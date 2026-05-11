@@ -27,7 +27,7 @@ public class SetupScreenController extends ScreenController {
     private Button normalBtn;
     @FXML
     private Button hardBtn;
-//      all starting adventurer buttons
+    //      all starting adventurer buttons
     @FXML
     private Button adventurer1Btn;
     @FXML
@@ -38,7 +38,7 @@ public class SetupScreenController extends ScreenController {
     private Button adventurer4Btn;
     @FXML
     private Button adventurer5Btn;
-//    stat labels
+    //    stat labels
     @FXML
     private Label nameLabel;
     @FXML
@@ -47,7 +47,7 @@ public class SetupScreenController extends ScreenController {
     private Label perceptionLabel;
     @FXML
     private Label payLabel;
-//    buttons to contain selected adventurers
+    //    buttons to contain selected adventurers
     @FXML
     private Button selectedAdventurer1;
     @FXML
@@ -81,15 +81,26 @@ public class SetupScreenController extends ScreenController {
             int buttonIndex = i;
             difficultyBtns.get(i).setOnAction(actionEvent -> onDifficultyBtnClicked(difficultyBtns,buttonIndex));
         }
-
-
         expeditionCountSlider.valueProperty().addListener((observable, oldValue, newValue) ->
                 onExpeditionCountUpdated(newValue.intValue()));
     }
 
-
-
-
+    private void onDifficultyBtnClicked(List<Button> difficultyBtns, int buttonIndex) {
+        difficultyBtns.forEach(button -> {
+            if (button == difficultyBtns.get(buttonIndex)) {
+                button.setStyle("-fx-background-color: #b3b3b3; -fx-background-radius: 5;");
+            } else {
+                button.setStyle("");
+            }
+        });
+        if (difficultyBtns.get(buttonIndex) == easyBtn) {
+            getGameEnvironment().setDifficulty(Difficulty.EASY);
+        } else if (difficultyBtns.get(buttonIndex) == normalBtn) {
+            getGameEnvironment().setDifficulty(Difficulty.NORMAL);
+        } else if (difficultyBtns.get(buttonIndex) == hardBtn) {
+            getGameEnvironment().setDifficulty(Difficulty.HARD);
+        }
+    }
 
     private void onExpeditionCountUpdated(int i) {
         getGameEnvironment().setNumExpeditions(i);
@@ -100,8 +111,6 @@ public class SetupScreenController extends ScreenController {
         GameEnvironment gameEnvironment = getGameEnvironment();
         if (selectedAdventurerIndex != -1) {
             Adventurer selectedAdventurer = gameEnvironment.getDefaultAdventurers().get(selectedAdventurerIndex);
-            // Only add the selected adventurer to the array of selected adventurers if it isn't already in
-            // the array.
             if (Arrays.stream(selectedAdventurers).noneMatch(adventurer -> adventurer == selectedAdventurer)) {
                 selectedAdventurerBtns.get(index).setText(selectedAdventurer.getName());
                 selectedAdventurers[index] = selectedAdventurer;
@@ -120,35 +129,22 @@ public class SetupScreenController extends ScreenController {
                 button.setStyle("");
             }
         });
-
     }
+
     private void onStartGameBtnClicked() {
         getGameEnvironment().setGuildName(guildnameField.getText());
         System.out.println(getGameEnvironment().getGuildName());
         System.out.println(getGameEnvironment().getNumExpeditions());
         System.out.println(getGameEnvironment().getSelectedAdventurers());
-        System.out.println(getGameEnvironment().getDifficulty());
     }
 
-    public void updateStats (Adventurer adventurer) {
+    private void updateStats (Adventurer adventurer) {
         nameLabel.setText("Name: " + adventurer.getName());
         staminaLabel.setText("Stamina: "+ adventurer.getStamina());
         perceptionLabel.setText("Perception: " + adventurer.getPerception());
         payLabel.setText("Pay: " + adventurer.getPay());
-
     }
 
-
-
-
-
-
-
-    /**
-     * Creates an instance of a ScreenController with the given {@link GameEnvironment}
-     *
-     * @param gameEnvironment
-     */
     protected SetupScreenController(GameEnvironment gameEnvironment) {
         super(gameEnvironment);
     }
