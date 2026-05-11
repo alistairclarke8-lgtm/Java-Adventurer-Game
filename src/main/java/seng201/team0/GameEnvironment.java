@@ -1,10 +1,7 @@
 package seng201.team0;
 
 import seng201.team0.gui.ScreenNavigator;
-import seng201.team0.models.Adventurer;
-import seng201.team0.models.Archer;
-import seng201.team0.models.Swordsman;
-import seng201.team0.models.Wizard;
+import seng201.team0.models.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +10,7 @@ public class GameEnvironment {
     private final List<Adventurer> defaultAdventurers = new ArrayList<>();
     private List<Adventurer> selectedAdventurers = new ArrayList<>();
     private int numExpeditions;
-    private String difficulty;
+    private Difficulty difficulty;
     private String guildName;
     private final ScreenNavigator navigator;
 
@@ -29,7 +26,7 @@ public class GameEnvironment {
     }
 
     public void onSetupComplete(List<Adventurer> selectedAdventurers, int numExpeditions,
-                                String difficulty, String guildName) {
+                                Difficulty difficulty, String guildName) {
         this.selectedAdventurers = selectedAdventurers;
         this.numExpeditions = numExpeditions;
         this.difficulty = difficulty;
@@ -41,8 +38,10 @@ public class GameEnvironment {
 
     public List<Adventurer> getDefaultAdventurers() {return defaultAdventurers;}
     public List<Adventurer> getSelectedAdventurers() {return selectedAdventurers;}
+    public void setSelectedAdventurers(Adventurer adventurer) {this.selectedAdventurers.add(adventurer);}
     public int getNumExpeditions() {return numExpeditions;}
-    public String getDifficulty() {return difficulty;}
+    public Difficulty getDifficulty() {return difficulty;}
+    public void setDifficulty(Difficulty difficulty) {this.difficulty = difficulty;}
     public String getGuildName() {return guildName;}
     public void setGuildName(String name) {this.guildName = name;}
     public int setNumExpeditions(int num) {return this.numExpeditions = num;}
