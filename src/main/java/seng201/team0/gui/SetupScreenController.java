@@ -83,6 +83,8 @@ public class SetupScreenController extends ScreenController {
         }
         expeditionCountSlider.valueProperty().addListener((observable, oldValue, newValue) ->
                 onExpeditionCountUpdated(newValue.intValue()));
+        guildnameField.textProperty().addListener((observable, oldValue, newValue) ->
+                getGameEnvironment().setGuildName(newValue));
     }
 
     private void onDifficultyBtnClicked(List<Button> difficultyBtns, int buttonIndex) {
@@ -132,10 +134,11 @@ public class SetupScreenController extends ScreenController {
     }
 
     private void onStartGameBtnClicked() {
-        getGameEnvironment().setGuildName(guildnameField.getText());
         System.out.println(getGameEnvironment().getGuildName());
         System.out.println(getGameEnvironment().getNumExpeditions());
         System.out.println(getGameEnvironment().getSelectedAdventurers());
+        System.out.println(getGameEnvironment().getDifficulty());
+        getGameEnvironment().onSetupComplete();
     }
 
     private void updateStats (Adventurer adventurer) {
