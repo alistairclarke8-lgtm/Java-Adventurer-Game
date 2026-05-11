@@ -12,6 +12,14 @@ public class EquipableItem  extends Item {
     private final String stat;
     private final int amount;
 
+    /**
+     * Constructs a new EquipableItem.
+     * @param name display name
+     * @param cost gold cost
+     * @param description short blurb
+     * @param stat the stat this item buffs: "stamina" or "perception"
+     * @param amount the size of the buff
+     */
     public EquipableItem(String name, int cost, String description, String stat, int amount) {
         super(name, cost, description);
         this.stat = stat;
@@ -61,6 +69,14 @@ public class EquipableItem  extends Item {
         if ("stamina".equals(stat)) adventurer.decreaseStamina(amount);
         if ("perception".equals(stat)) adventurer.decreasePerception(amount);
     }
+
+    /**
+     * @return the stat name buffed by this item ("stamina" or "perception")
+     */
+    public String getStat() { return stat; }
+
+    /** @return the size of the buff */
+    public int getAmount() { return amount; }
 
 
 

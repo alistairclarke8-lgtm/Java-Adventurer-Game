@@ -7,11 +7,11 @@ package seng201.team0.models;
 
 public enum Difficulty {
 
-    EASY("Easy", 120, 1.0, 1.0, 0.2),
+    EASY("Easy", 120, 1.0, 1.0, 0.2, 0.8),
 
-    NORMAL("Normal", 80, 1.0, 1.25, 0.3),
+    NORMAL("Normal", 80, 1.0, 1.25, 0.3, 1.0),
 
-    HARD("Hard", 50, 1.25, 1.75, 0.4);
+    HARD("Hard", 50, 1.25, 1.75, 0.4, 1.1);
 
     /**
      * A series of setters, initializing the variables that apply to difficulty
@@ -21,17 +21,20 @@ public enum Difficulty {
     private final double rewardMultiplier;
     private final double scoreMultiplier;
     private final double randomEventChance;
+    private final double costMultiplier;
 
     Difficulty(String displayName,
                int startingGold,
                double rewardMultiplier,
                double scoreMultiplier,
-               double randomEventChance) {
+               double randomEventChance,
+               double costMultiplier) {
         this.displayName = displayName;
         this.startingGold = startingGold;
         this.rewardMultiplier = rewardMultiplier;
         this.scoreMultiplier = scoreMultiplier;
         this.randomEventChance = randomEventChance;
+        this.costMultiplier = costMultiplier;
     }
 
     /**
@@ -59,5 +62,9 @@ public enum Difficulty {
     public double getRandomEventChance() {
         return randomEventChance;
     }
+    public double getCostMultiplier() {
+        return costMultiplier;
+    }
+
 
 }
