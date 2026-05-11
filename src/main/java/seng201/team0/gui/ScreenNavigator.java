@@ -53,10 +53,10 @@ public class ScreenNavigator {
      *
      * @param gameEnvironment The game environment used by the main screen controller
      */
-//    public void launchMainScreen(GameEnvironment gameEnvironment) {
-//        ScreenController controller = new MainScreenController(gameEnvironment);
-//        launchScreen(controller);
-//    }
+    public void launchMenuScreenController(GameEnvironment gameEnvironment) {
+        ScreenController controller = new MenuScreenController(gameEnvironment);
+        launchScreen(controller);
+    }
 
     /**
      * Replaces the root border pane's center component with the screen defined by the given
