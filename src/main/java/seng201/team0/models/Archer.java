@@ -1,5 +1,8 @@
 package seng201.team0.models;
 
+/**
+ *
+ */
 public class Archer extends Adventurer {
 
     public Archer() {

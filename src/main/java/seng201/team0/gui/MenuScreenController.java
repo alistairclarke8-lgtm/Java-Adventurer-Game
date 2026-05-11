@@ -24,6 +24,10 @@ public class MenuScreenController extends ScreenController {
     @FXML
     private Button startExpeditionBtn;
 
+    /**
+     * Initialize the Guild Hall
+     * Activate the methods needed to service the player with options on the menu screen
+     */
     public void initialize() {
         guildHallBtn.setOnAction(actionEvent -> onGuildHallBtnClicked());
         marketBtn.setOnAction(actionEvent -> onMarketBtnBtnClicked());
@@ -35,6 +39,10 @@ public class MenuScreenController extends ScreenController {
         remainingExpeditionsLabel.setText("Expeditions Remaining: " + getGameEnvironment().getRemainingExpeditions());
     }
 
+    /**
+     * Providing the methods to navigate the players to the
+     * various screens they can go to from the menu
+     */
     private void onStartExpeditionBtnClicked() {
         getGameEnvironment().navigateToExpedition();
     }
@@ -58,11 +66,19 @@ public class MenuScreenController extends ScreenController {
     }
 
 
+    /**
+     * A getter for the filename of the fxml file
+     * @return the location / filename of the fxml file in question
+     */
     @Override
     protected String getFxmlFile() {
         return "/fxml/menu.fxml";
     }
 
+    /**
+     * A getter for the title of the fxml file
+     * @return the file title
+     */
     @Override
     protected String getTitle() {
         return "Menu Screen";

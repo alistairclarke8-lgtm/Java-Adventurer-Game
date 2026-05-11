@@ -21,8 +21,17 @@ public abstract class Adventurer implements Purchasable {
     private final int pay;
     private Item equippedItem;
     private final List<Skill> skills = new ArrayList<>();
+    private int expeditionsInARow = 0;
 
 
+    /**
+     * Constructor for an Adventurer
+     * @param name Adventurer's name
+     * @param stamina The initial stamina of an Adventurer. Also doubles as the initial maxStamina
+     * @param perception The initial perception of an Adventurer
+     * @param hiringCost amount needed to buy an Adventurer from the market
+     * @param pay the amount an Adventurer must be paid per Expedition
+     */
     public Adventurer(String name, int stamina, int perception, int hiringCost, int pay) {
         this.name = name;
         this.stamina = stamina;
@@ -48,6 +57,7 @@ public abstract class Adventurer implements Purchasable {
      * @param amount the amount the Adventurer's stamina is going to increase
      */
     public void increaseStamina(int amount) {
+        if (amount < 0) throw new IllegalArgumentException("amount must be >= 0");
         this.stamina = Math.min(stamina + amount, maxStamina); /*stamina cannot increase past maxStamina*/
     }
     /**
@@ -56,6 +66,7 @@ public abstract class Adventurer implements Purchasable {
      *               Its stamina cannot decrease below zero
      */
     public void decreaseStamina(int amount) {
+        if (amount < 0) throw new IllegalArgumentException("amount must be >= 0");
         this.stamina = Math.max(0, stamina - amount);
     }
     /**
@@ -63,6 +74,7 @@ public abstract class Adventurer implements Purchasable {
      * @param amount the amount the Adventurer's perception is going to increase
      */
     public void increasePerception(int amount) {
+        if (amount < 0) throw new IllegalArgumentException("amount must be >= 0");
         this.perception = this.perception + amount; /*no max to perception for now*/
     }
     /**
@@ -71,6 +83,7 @@ public abstract class Adventurer implements Purchasable {
      *               Its stamina cannot decrease below zero
      */
     public void decreasePerception(int amount) {
+        if (amount < 0) throw new IllegalArgumentException("amount must be >= 0");
         this.perception = Math.max(this.perception - amount, 0);
     }
 
@@ -80,6 +93,14 @@ public abstract class Adventurer implements Purchasable {
         this.maxStamina += staminaBonus;
         this.stamina += staminaBonus;
     }
+
+    /**
+     * Restores the adventurer's stamina back to their current max.
+     */
+    public void fullyRest() {
+        this.stamina = this.maxStamina;
+    }
+
 
     /**
      * Method for equipping and item for and Adventurer
@@ -93,6 +114,11 @@ public abstract class Adventurer implements Purchasable {
     }
 
 
+    /**
+     * Method for teaching an adventurer a skill
+     * The modifying their attributes based on what the skill provides
+     * @param skill The skill in question being applied to the Adventurer
+     */
     public void learnSkill(Skill skill) {
         skills.add(skill);
         if (skill.getStaminaBonus() > 0) {
@@ -102,6 +128,21 @@ public abstract class Adventurer implements Purchasable {
             increasePerception(skill.getPerceptionBonus());
         }
     }
+
+    /**
+     * Increments the consecutive expedition counter (used for fatigue-based
+     * random retirement chance).
+     */
+    public void incrementExpeditionsInARow() { this.expeditionsInARow++; }
+
+    /**
+     * Resets the consecutive expedition counter (when the adventurer is benched).
+     */
+    public void resetExpeditionsInARow() { this.expeditionsInARow = 0; }
+
+    /** @return number of consecutive expeditions this adventurer has been on */
+    public int getExpeditionsInARow() { return expeditionsInARow; }
+
 
     @Override
     public String toString() {return name;}
