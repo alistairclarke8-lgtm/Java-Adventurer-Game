@@ -11,7 +11,7 @@ public class MenuScreenController extends ScreenController {
     @FXML
     private Label currentExpeditionLabel;
     @FXML
-    private Label expeditionsRemainingLabel;
+    private Label remainingExpeditionsLabel;
     @FXML
     private Label goldLabel;
 
@@ -23,6 +23,30 @@ public class MenuScreenController extends ScreenController {
     private Button recruitBtn;
     @FXML
     private Button startExpeditionBtn;
+
+    public void initialize() {
+        guildHallBtn.setOnAction(actionEvent -> onGuildHallBtnClicked());
+        marketBtn.setOnAction(actionEvent -> onMarketBtnBtnClicked());
+        recruitBtn.setOnAction(actionEvent -> onRecruitBtnBtnClicked());
+        startExpeditionBtn.setOnAction(actionEvent -> onStartExpeditionBtnClicked());
+
+        currentExpeditionLabel.setText("Current Expedition: " + getGameEnvironment().getCurrentExpedition());
+        goldLabel.setText("Gold: " + getGameEnvironment().getGold());
+        remainingExpeditionsLabel.setText("Expeditions Remaining: " + getGameEnvironment().getRemainingExpeditions());
+    }
+
+    private void onStartExpeditionBtnClicked() {
+        getGameEnvironment().navigateToExpedition();
+    }
+    private void onRecruitBtnBtnClicked() {
+        getGameEnvironment().navigateToRecruitment();
+    }
+    private void onMarketBtnBtnClicked() {
+        getGameEnvironment().navigateToMarket();
+    }
+    private void onGuildHallBtnClicked() {
+        getGameEnvironment().navigateToGuildHall();
+    }
 
     /**
      * Creates an instance of a ScreenController with the given {@link GameEnvironment}
