@@ -103,6 +103,9 @@ public abstract class Adventurer implements Purchasable {
         }
     }
 
+    @Override
+    public String toString() {return name;}
+
 
     /**
      * A series of getters to retrieve information about an Adventurer
