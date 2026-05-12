@@ -30,6 +30,11 @@ public class Skill {
         this.perceptionBonus = perceptionBonus;
     }
 
+    /**
+     * A series of getters for the attributes of a skill
+     * @return (one of) name, staminaBonus
+     *                  description, perceptionBonus
+     */
     public String getName() { return name; }
     public String getDescription() { return description; }
     public int getStaminaBonus() { return staminaBonus; }

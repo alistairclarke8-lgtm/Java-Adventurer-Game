@@ -8,6 +8,9 @@ import java.util.ArrayList;
 public class Market {
     private final ArrayList<Item> availableItems = new ArrayList<>();
 
+    /**
+     * Construct an empty market
+     */
     public Market(){}
 
     /**
@@ -18,16 +21,27 @@ public class Market {
         availableItems.add(item);
     }
 
+
     /**
      * removes item from shop.
-     * @param item to remove from available items.
+     * @param item to remove from available items
+     * @return True is the item was removed
      */
-    public void removeItem(Item item) {
-        availableItems.remove(item);
+    public boolean removeItem(Item item) {
+        return availableItems.remove(item);
     }
 
+
+    /** @return an unmodifiable view of the items currently for sale */
     public ArrayList<Item> getAvailableItems() {
         return availableItems;
+    }
+
+    /**
+     * Clears all available items
+     */
+    public void clear() {
+        availableItems.clear();
     }
 }
 

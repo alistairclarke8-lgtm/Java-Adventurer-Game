@@ -88,7 +88,7 @@ public abstract class Adventurer implements Purchasable {
     }
 
 
-    private void increaseMaxStamina(int staminaBonus) {
+    public void increaseMaxStamina(int staminaBonus) {
         if (staminaBonus < 0) throw new IllegalArgumentException("amount must be >= 0");
         this.maxStamina += staminaBonus;
         this.stamina += staminaBonus;
