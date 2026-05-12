@@ -29,6 +29,9 @@ public class GameEnvironment {
 
     public void onSetupComplete() {
         gold = difficulty.getStartingGold();
+        navigateToMenu();
+    }
+    public void navigateToMenu() {
         navigator.launchMenuScreenController(this);
     }
     public void navigateToRecruitment() {
