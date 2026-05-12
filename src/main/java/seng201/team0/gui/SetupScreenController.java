@@ -116,7 +116,7 @@ public class SetupScreenController extends ScreenController {
             if (Arrays.stream(selectedAdventurers).noneMatch(adventurer -> adventurer == selectedAdventurer)) {
                 selectedAdventurerBtns.get(index).setText(selectedAdventurer.getName());
                 selectedAdventurers[index] = selectedAdventurer;
-                gameEnvironment.setSelectedAdventurers(selectedAdventurer);
+                gameEnvironment.setMainParty(selectedAdventurer);
             }
         }
     }
@@ -134,10 +134,6 @@ public class SetupScreenController extends ScreenController {
     }
 
     private void onStartGameBtnClicked() {
-        System.out.println(getGameEnvironment().getGuildName());
-        System.out.println(getGameEnvironment().getNumExpeditions());
-        System.out.println(getGameEnvironment().getSelectedAdventurers());
-        System.out.println(getGameEnvironment().getDifficulty());
         getGameEnvironment().onSetupComplete();
     }
 

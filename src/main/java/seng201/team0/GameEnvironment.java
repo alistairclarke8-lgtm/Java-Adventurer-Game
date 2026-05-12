@@ -9,7 +9,7 @@ import java.util.List;
 
 public class GameEnvironment {
     private final List<Adventurer> defaultAdventurers = new ArrayList<>();
-    private List<Adventurer> selectedAdventurers = new ArrayList<>();
+    private List<Adventurer> mainParty = new ArrayList<>();
     private int numExpeditions;
     private Difficulty difficulty;
     private String guildName;
@@ -48,8 +48,8 @@ public class GameEnvironment {
     }
 
     public List<Adventurer> getDefaultAdventurers() {return defaultAdventurers;}
-    public List<Adventurer> getSelectedAdventurers() {return selectedAdventurers;}
-    public void setSelectedAdventurers(Adventurer adventurer) {this.selectedAdventurers.add(adventurer);}
+    public List<Adventurer> getMainParty() {return mainParty;}
+    public void setMainParty(Adventurer adventurer) {this.mainParty.add(adventurer);}
     public int getNumExpeditions() {return numExpeditions;}
     public Difficulty getDifficulty() {return difficulty;}
     public void setDifficulty(Difficulty difficulty) {this.difficulty = difficulty;}
