@@ -13,4 +13,5 @@ public class EndGameScreenController {
     @FXML private Label goldLabel;
     @FXML private Label scoreLabel;
     @FXML private Button quitBtn;
+
 }
