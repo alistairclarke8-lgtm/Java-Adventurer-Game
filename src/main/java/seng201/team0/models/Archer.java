@@ -22,6 +22,6 @@ public class Archer extends Adventurer {
 
     @Override
     public String getDescription() {
-        return "";
+        return "Archer has reasonable perception and stamina";
     }
 }
