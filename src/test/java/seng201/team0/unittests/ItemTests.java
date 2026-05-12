@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
- * Tests for {@link UpgradeItem}, {@link EquipableItem}, and {@link SkillTome}.
+ * Tests for UpgradeItem, EquipableItem, and SkillTome
  */
 public class ItemTests {
 
