@@ -43,7 +43,7 @@ public class GameEnvironment {
 //        navigator.launchMenuScreenController(this);
     }
     public void navigateToGuildHall() {
-//        navigator.launchMenuScreenController(this);
+        navigator.launchGuildHallScreenController(this);
     }
 
     public List<Adventurer> getDefaultAdventurers() {return defaultAdventurers;}

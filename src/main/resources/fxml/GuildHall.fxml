@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1"
+fx:controller="seng201.team0.gui.GuildHallScreenController">
+   <children>
+      <HBox alignment="CENTER_LEFT" prefHeight="94.0" prefWidth="600.0" style="-fx-background-color: light;">
+         <children>
+            <Label prefHeight="17.0" prefWidth="526.0" text="Guild Hall:" HBox.hgrow="ALWAYS">
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </Label>
+            <Button fx:id="backBtn" mnemonicParsing="false" text="Back" />
+         </children>
+      </HBox>
+      <Separator prefWidth="200.0" />
+      <HBox prefHeight="400.0" prefWidth="600.0">
+         <children>
+            <VBox prefHeight="352.0" prefWidth="415.0">
+               <children>
+                  <GridPane maxHeight="-Infinity" prefHeight="158.0" prefWidth="414.0">
+                    <columnConstraints>
+                      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints maxHeight="31.0" minHeight="10.0" prefHeight="15.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="60.0" minHeight="10.0" prefHeight="55.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="28.0" minHeight="10.0" prefHeight="11.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="88.0" minHeight="10.0" prefHeight="57.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label text="Main Party:" />
+                        <Button fx:id="mainPartyBtn1" mnemonicParsing="false" text="Empty" GridPane.rowIndex="1" />
+                        <Button fx:id="mainPartyBtn2" mnemonicParsing="false" text="Empty" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Button fx:id="mainPartyBtn3" mnemonicParsing="false" text="Empty" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                        <Button fx:id="mainPartyBtn4" mnemonicParsing="false" text="Empty" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                        <Button fx:id="mainPartyBtn5" mnemonicParsing="false" text="Empty" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                        <Label text="Reserves:" GridPane.rowIndex="2" />
+                        <Button fx:id="reserveParty1" mnemonicParsing="false" text="Empty" GridPane.rowIndex="3" />
+                        <Button fx:id="reserveParty2" mnemonicParsing="false" text="Empty" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <Button fx:id="reserveParty3" mnemonicParsing="false" text="Empty" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                        <Button fx:id="reserveParty4" mnemonicParsing="false" text="Empty" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                        <Button fx:id="reserveParty5" mnemonicParsing="false" text="Empty" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+                     </children>
+                  </GridPane>
+                  <Separator prefWidth="200.0" />
+                  <Label text="Selected:">
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                  </Label>
+                  <GridPane prefHeight="45.0" prefWidth="415.0">
+                    <columnConstraints>
+                      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Button fx:id="swapBtn" mnemonicParsing="false" text="Swap" />
+                        <Button fx:id="useEquipBtn" mnemonicParsing="false" text="Use/Equip Item" GridPane.columnIndex="1" />
+                        <Button fx:id="retireBtn" mnemonicParsing="false" text="Retire" GridPane.columnIndex="2" />
+                     </children>
+                  </GridPane>
+                  <HBox alignment="CENTER" prefHeight="131.0" prefWidth="414.0">
+                     <children>
+                        <VBox prefHeight="112.0" prefWidth="150.0" style="-fx-border-color: black;">
+                           <HBox.margin>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </HBox.margin>
+                           <children>
+                              <Label fx:id="adventurerNameLabel" text="Name:">
+                                 <padding>
+                                    <Insets left="5.0" top="5.0" />
+                                 </padding>
+                                 <font>
+                                    <Font size="12.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="adventurerStaminaLabel" text="Stamina:">
+                                 <padding>
+                                    <Insets left="5.0" top="5.0" />
+                                 </padding>
+                                 <font>
+                                    <Font size="12.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="adventurerPerceptionLabel" text="Perception:">
+                                 <padding>
+                                    <Insets left="5.0" top="5.0" />
+                                 </padding>
+                                 <font>
+                                    <Font size="12.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="adventurerPayLabel" text="Pay:">
+                                 <padding>
+                                    <Insets left="5.0" top="5.0" />
+                                 </padding>
+                                 <font>
+                                    <Font size="12.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="equipedItemLabel" text="Equiped Item:">
+                                 <padding>
+                                    <Insets left="5.0" top="5.0" />
+                                 </padding>
+                                 <font>
+                                    <Font size="12.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </VBox>
+                        <VBox layoutX="40.0" layoutY="20.0" prefHeight="112.0" prefWidth="150.0" style="-fx-border-color: black;">
+                           <HBox.margin>
+                              <Insets bottom="10.0" left="30.0" right="10.0" top="10.0" />
+                           </HBox.margin>
+                           <children>
+                              <Label fx:id="ItemNameLabel" text="Name:">
+                                 <padding>
+                                    <Insets left="5.0" top="5.0" />
+                                 </padding>
+                              </Label>
+                              <Label fx:id="ItemTypeLabel" text="Type:">
+                                 <padding>
+                                    <Insets left="5.0" top="5.0" />
+                                 </padding>
+                              </Label>
+                              <Label fx:id="ItemBuffLabel" text="Buff:">
+                                 <padding>
+                                    <Insets left="5.0" top="5.0" />
+                                 </padding>
+                              </Label>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <Separator orientation="VERTICAL" prefHeight="200.0" />
+            <VBox prefHeight="350.0" prefWidth="181.0">
+               <children>
+                  <Label prefHeight="40.0" prefWidth="170.0" text="Item Inventory:">
+                     <VBox.margin>
+                        <Insets left="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <GridPane prefHeight="259.0" prefWidth="311.0">
+                    <columnConstraints>
+                      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Button fx:id="InventoryBtn1" mnemonicParsing="false" text="Empty" />
+                        <Button fx:id="InventoryBtn2" mnemonicParsing="false" text="Empty" GridPane.rowIndex="1" />
+                        <Button fx:id="InventoryBtn3" mnemonicParsing="false" text="Empty" GridPane.rowIndex="2" />
+                        <Button fx:id="InventoryBtn4" mnemonicParsing="false" text="Empty" GridPane.rowIndex="3" />
+                        <Button fx:id="InventoryBtn5" mnemonicParsing="false" text="Empty" GridPane.rowIndex="4" />
+                     </children>
+                  </GridPane>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+</VBox>
