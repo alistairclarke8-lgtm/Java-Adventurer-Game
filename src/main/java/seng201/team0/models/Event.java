@@ -1,4 +1,4 @@
-package seng201.team0.models.events;
+package seng201.team0.models;
 
 import java.util.ArrayList;
 import java.util.Collections;

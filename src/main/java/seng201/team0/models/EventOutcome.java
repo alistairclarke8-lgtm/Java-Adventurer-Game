@@ -1,4 +1,4 @@
-package seng201.team0.models.events;
+package seng201.team0.models;
 
 /**
  * One possible result of an EventOption, including the narrative
