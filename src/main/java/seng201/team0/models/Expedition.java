@@ -1,7 +1,5 @@
 package seng201.team0.models;
 
-import seng201.team0.models.events.Event;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -11,9 +9,6 @@ import java.util.List;
  * on. Each expedition has a name, a short description, an event pool to draw
  * from, a maximum number of events for a full expedition, a pay multiplier
  * applied to adventurer wages, and a reward multiplier on gold gains.
- *
- * <p>Use {@code ExpeditionService} to actually run an expedition; this class
- * is just the data describing one.
  */
 public class Expedition {
 
