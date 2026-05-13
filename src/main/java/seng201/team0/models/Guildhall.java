@@ -1,6 +1,7 @@
 package seng201.team0.models;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Guildhall represents the players guild and holds their main party and reserved adventurers,
@@ -19,6 +20,7 @@ public class Guildhall {
     private ArrayList<Item> selectedItems = new ArrayList<>();
     private final ArrayList<Item> inventoryItems = new ArrayList<>();
 
+
     /**
      * Constructs a Guildhall with existing adventurers and items.
      * @param mainPartyAdventurers the starting main party adventurers
@@ -33,6 +35,9 @@ public class Guildhall {
      * Constructs an empty Guildhall.
      */
     public Guildhall() {
+//        for testing guildservices
+        reservedAdventurers.addAll(List.of(new Archer(), new Swordsman(), new Wizard(), new Wizard(), new Swordsman()));
+
     }
 
     /** @return the main party adventurers */

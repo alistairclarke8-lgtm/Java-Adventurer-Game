@@ -128,17 +128,17 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Button fx:id="selectedAdventurer1" mnemonicParsing="false">
+                  <Button fx:id="selectedAdventurer1Btn" mnemonicParsing="false">
                      <padding>
                         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                      </padding>
                   </Button>
-                  <Button fx:id="selectedAdventurer2" mnemonicParsing="false" GridPane.columnIndex="1">
+                  <Button fx:id="selectedAdventurer2Btn" mnemonicParsing="false" GridPane.columnIndex="1">
                      <padding>
                         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                      </padding>
                   </Button>
-                  <Button fx:id="selectedAdventurer3" mnemonicParsing="false" GridPane.columnIndex="2">
+                  <Button fx:id="selectedAdventurer3Btn" mnemonicParsing="false" GridPane.columnIndex="2">
                      <padding>
                         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                      </padding>
