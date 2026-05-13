@@ -49,11 +49,11 @@ public class SetupScreenController extends ScreenController {
     private Label payLabel;
     //    buttons to contain selected adventurers
     @FXML
-    private Button selectedAdventurer1;
+    private Button selectedAdventurer1Btn;
     @FXML
-    private Button selectedAdventurer2;
+    private Button selectedAdventurer2Btn;
     @FXML
-    private Button selectedAdventurer3;
+    private Button selectedAdventurer3Btn;
 
     @FXML
     private Button startGameBtn;
@@ -64,7 +64,7 @@ public class SetupScreenController extends ScreenController {
 
     public void initialize() {
         List<Button> availableAdventurerBtns = List.of(adventurer1Btn,adventurer2Btn,adventurer3Btn,adventurer4Btn,adventurer5Btn);
-        List<Button> selectedAdventurerBtns = List.of(selectedAdventurer1,selectedAdventurer2,selectedAdventurer3);
+        List<Button> selectedAdventurerBtns = List.of(selectedAdventurer1Btn,selectedAdventurer2Btn,selectedAdventurer3Btn);
         List<Button> difficultyBtns = List.of(easyBtn,normalBtn,hardBtn);
         for (int i=0; i < availableAdventurerBtns.size(); i++) {
             int buttonIndex= i;
@@ -109,14 +109,13 @@ public class SetupScreenController extends ScreenController {
         expeditionCountLabel.setText(" "+getGameEnvironment().getNumExpeditions());
     }
 
-    private void onSelectedButtonClicked(List<Button> selectedAdventurerBtns, int index) {
+    private void onSelectedButtonClicked(List<Button> selectedAdventurerBtns, int index){
         GameEnvironment gameEnvironment = getGameEnvironment();
         if (selectedAdventurerIndex != -1) {
             Adventurer selectedAdventurer = gameEnvironment.getDefaultAdventurers().get(selectedAdventurerIndex);
             if (Arrays.stream(selectedAdventurers).noneMatch(adventurer -> adventurer == selectedAdventurer)) {
                 selectedAdventurerBtns.get(index).setText(selectedAdventurer.getName());
                 selectedAdventurers[index] = selectedAdventurer;
-                gameEnvironment.setMainParty(selectedAdventurer);
             }
         }
     }
@@ -134,7 +133,7 @@ public class SetupScreenController extends ScreenController {
     }
 
     private void onStartGameBtnClicked() {
-        getGameEnvironment().onSetupComplete();
+        getGameEnvironment().onSetupComplete(selectedAdventurers);
     }
 
     private void updateStats (Adventurer adventurer) {

@@ -2,6 +2,7 @@ package seng201.team0;
 
 import seng201.team0.gui.ScreenNavigator;
 import seng201.team0.models.*;
+import seng201.team0.services.GuildHallService;
 import seng201.team0.services.MarketService;
 
 import java.util.ArrayList;
@@ -9,7 +10,6 @@ import java.util.List;
 
 public class GameEnvironment {
     private final List<Adventurer> defaultAdventurers = new ArrayList<>();
-    private List<Adventurer> mainParty = new ArrayList<>();
     private int numExpeditions;
     private Difficulty difficulty;
     private String guildName;
@@ -19,6 +19,9 @@ public class GameEnvironment {
     private int expeditionsRemaining;
     private MarketService marketService;
 
+    private final Guildhall guildhall = new Guildhall();
+    private final GuildHallService guildHallService = new GuildHallService(guildhall);
+
 
     public GameEnvironment(ScreenNavigator navigator) {
         this.navigator = navigator;
@@ -27,8 +30,9 @@ public class GameEnvironment {
 
     }
 
-    public void onSetupComplete() {
+    public void onSetupComplete(Adventurer[] selectedAdventurers) {
         gold = difficulty.getStartingGold();
+        guildHallService.addStartingParty(selectedAdventurers);
         navigateToMenu();
     }
     public void navigateToMenu() {
@@ -48,8 +52,6 @@ public class GameEnvironment {
     }
 
     public List<Adventurer> getDefaultAdventurers() {return defaultAdventurers;}
-    public List<Adventurer> getMainParty() {return mainParty;}
-    public void setMainParty(Adventurer adventurer) {this.mainParty.add(adventurer);}
     public int getNumExpeditions() {return numExpeditions;}
     public Difficulty getDifficulty() {return difficulty;}
     public void setDifficulty(Difficulty difficulty) {this.difficulty = difficulty;}
@@ -60,15 +62,12 @@ public class GameEnvironment {
     public int getCurrentExpedition() {return currentExpedition;}
     public int getRemainingExpeditions() {return numExpeditions-currentExpedition;}
     private final Market market = new Market();
-    private final Guildhall guildhall = new Guildhall();
-
+    public GuildHallService getGuildHallService() { return guildHallService; }
+    public Guildhall getGuildhall() { return guildhall; }
 
 
     /** @return the market */
     public Market getMarket() { return market; }
-
-    public Guildhall getGuildhall() { return guildhall; }
-
     public MarketService getMarketService() { return marketService; }
 
 }

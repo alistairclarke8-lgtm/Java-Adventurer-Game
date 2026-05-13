@@ -21,15 +21,27 @@ public class GuildHallService {
     }
 
     /**
+     * Adds the starting adventurers to the main party at the beginning of the game.
+     * @param adventurers the starting adventurers selected during setup
+     */
+    public void addStartingParty(Adventurer[] adventurers) {
+        for (Adventurer adventurer : adventurers) {
+            if (adventurer != null) {
+                guildhall.getMainPartyAdventurers().add(adventurer);
+            }
+        }
+    }
+
+    /**
      * Adds an adventurer to the main party.
      * @param adventurer to add to the main party
      * @throws GuildFullException if the main party is full
      */
     public void makeMainPartyAdventurer(Adventurer adventurer) throws GuildFullException {
-        if (guildhall.getSelectedAdventurers().size() >= Guildhall.MAIN_PARTY_CAPACITY) {
+        if (guildhall.getMainPartyAdventurers().size() >= Guildhall.MAIN_PARTY_CAPACITY) {
             throw new GuildFullException("Main party is full (max " + Guildhall.MAIN_PARTY_CAPACITY + ").");
         }
-        guildhall.getSelectedAdventurers().add(adventurer);
+        guildhall.getMainPartyAdventurers().add(adventurer);
     }
 
     /**
@@ -38,8 +50,8 @@ public class GuildHallService {
      * @throws Exception if the main party is empty
      */
     public void removeMainPartyAdventurer(Adventurer adventurer) throws Exception {
-        if (!guildhall.getSelectedAdventurers().isEmpty()) {
-            guildhall.getSelectedAdventurers().remove(adventurer);
+        if (!guildhall.getMainPartyAdventurers().isEmpty()) {
+            guildhall.getMainPartyAdventurers().remove(adventurer);
         } else {
             throw new Exception("Main party is empty.");
         }
@@ -79,7 +91,7 @@ public class GuildHallService {
         if (getTotalAdventurers() <= 1) {
             throw new IllegalStateException("Cannot retire the last adventurer.");
         }
-        guildhall.getSelectedAdventurers().remove(adventurer);
+        guildhall.getMainPartyAdventurers().remove(adventurer);
         guildhall.getReservedAdventurers().remove(adventurer);
     }
 
@@ -92,7 +104,7 @@ public class GuildHallService {
         if (!guildhall.getReservedAdventurers().contains(adventurer)) {
             throw new IllegalArgumentException("Adventurer is not in reserves.");
         }
-        if (guildhall.getSelectedAdventurers().size() >= Guildhall.MAIN_PARTY_CAPACITY) {
+        if (guildhall.getMainPartyAdventurers().size() >= Guildhall.MAIN_PARTY_CAPACITY) {
             throw new GuildFullException("Main party is full (max " + Guildhall.MAIN_PARTY_CAPACITY + ").");
         }
         removeReservedAdventurer(adventurer);
@@ -105,16 +117,16 @@ public class GuildHallService {
      * @throws GuildFullException if reserves are full or main party would be empty
      */
     public void moveMainPartyToReserve(Adventurer adventurer) throws GuildFullException {
-        if (!guildhall.getSelectedAdventurers().contains(adventurer)) {
+        if (!guildhall.getMainPartyAdventurers().contains(adventurer)) {
             throw new IllegalArgumentException("Adventurer is not in main party.");
         }
-        if (guildhall.getSelectedAdventurers().size() <= 1) {
+        if (guildhall.getMainPartyAdventurers().size() <= 1) {
             throw new IllegalStateException("Main party must have at least one adventurer.");
         }
         if (guildhall.getReservedAdventurers().size() >= Guildhall.RESERVES_CAPACITY) {
             throw new GuildFullException("Reserves are full (max " + Guildhall.RESERVES_CAPACITY + ").");
         }
-        guildhall.getSelectedAdventurers().remove(adventurer);
+        guildhall.getMainPartyAdventurers().remove(adventurer);
         guildhall.getReservedAdventurers().add(adventurer);
         adventurer.resetExpeditionsInARow();
     }
@@ -126,9 +138,9 @@ public class GuildHallService {
      * @throws Exception if either adventurer is not in their respective list
      */
     public void swapAdventurers(Adventurer partyAdventurer, Adventurer reserveAdventurer) throws Exception {
-        guildhall.getSelectedAdventurers().remove(partyAdventurer);
+        guildhall.getMainPartyAdventurers().remove(partyAdventurer);
         guildhall.getReservedAdventurers().remove(reserveAdventurer);
-        guildhall.getSelectedAdventurers().add(reserveAdventurer);
+        guildhall.getMainPartyAdventurers().add(reserveAdventurer);
         guildhall.getReservedAdventurers().add(partyAdventurer);
         partyAdventurer.resetExpeditionsInARow();
     }
@@ -162,6 +174,6 @@ public class GuildHallService {
      * @return total adventurer count
      */
     public int getTotalAdventurers() {
-        return guildhall.getSelectedAdventurers().size() + guildhall.getReservedAdventurers().size();
+        return guildhall.getMainPartyAdventurers().size() + guildhall.getReservedAdventurers().size();
     }
 }

@@ -119,7 +119,7 @@ fx:controller="seng201.team0.gui.GuildHallScreenController">
                                     <Font size="12.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="equipedItemLabel" text="Equiped Item:">
+                              <Label fx:id="equippedItemLabel" text="Equipped Item:">
                                  <padding>
                                     <Insets left="5.0" top="5.0" />
                                  </padding>
