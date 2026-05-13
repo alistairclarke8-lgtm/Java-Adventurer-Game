@@ -138,10 +138,10 @@ public class GuildHallService {
      * @throws Exception if either adventurer is not in their respective list
      */
     public void swapAdventurers(Adventurer partyAdventurer, Adventurer reserveAdventurer) throws Exception {
-        guildhall.getMainPartyAdventurers().remove(partyAdventurer);
-        guildhall.getReservedAdventurers().remove(reserveAdventurer);
-        guildhall.getMainPartyAdventurers().add(reserveAdventurer);
-        guildhall.getReservedAdventurers().add(partyAdventurer);
+        int partyIndex = guildhall.getMainPartyAdventurers().indexOf(partyAdventurer);
+        int reserveIndex = guildhall.getReservedAdventurers().indexOf(reserveAdventurer);
+        guildhall.getMainPartyAdventurers().set(partyIndex, reserveAdventurer);
+        guildhall.getReservedAdventurers().set(reserveIndex, partyAdventurer);
         partyAdventurer.resetExpeditionsInARow();
     }
 
