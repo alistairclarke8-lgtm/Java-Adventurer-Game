@@ -1,6 +1,5 @@
 package seng201.team0.gui;
 
-import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
