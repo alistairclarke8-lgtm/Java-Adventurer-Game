@@ -8,7 +8,7 @@ import seng201.team0.models.Adventurer;
 
 import java.util.List;
 
-public class GuildHallScreenController extends ScreenController{
+public class GuildHallScreenController extends ScreenController {
 
     @FXML private Button backBtn;
 
@@ -27,6 +27,8 @@ public class GuildHallScreenController extends ScreenController{
     @FXML private Button swapBtn;
     @FXML private Button useEquipBtn;
     @FXML private Button retireBtn;
+    @FXML private Button makeReserveBtn;
+    @FXML private Button moveToMainBtn;
 
     @FXML private Button InventoryBtn1;
     @FXML private Button InventoryBtn2;
@@ -46,6 +48,7 @@ public class GuildHallScreenController extends ScreenController{
 
     private int selectedMainPartyIndex = -1;
     private int selectedReservePartyIndex = -1;
+    private Adventurer selectedAdventurer = null;
 
     public void initialize() {
         setupMainPartyButtons();
@@ -53,18 +56,22 @@ public class GuildHallScreenController extends ScreenController{
         backBtn.setOnAction(actionEvent -> onBackBtnClicked());
         swapBtn.setOnAction(actionEvent -> onSwapBtnClicked());
         retireBtn.setOnAction(actionEvent -> onRetireBtnClicked());
+        makeReserveBtn.setOnAction(actionEvent -> onMakeReserveBtnClicked());
+        moveToMainBtn.setOnAction(actionEvent -> onMoveToMainBtnClicked());
     }
 
     private void setupMainPartyButtons() {
         List<Button> mainPartyBtns = List.of(mainPartyBtn1, mainPartyBtn2, mainPartyBtn3, mainPartyBtn4, mainPartyBtn5);
         for (int i = 0; i < mainPartyBtns.size(); i++) {
             int index = i;
+            Button btn = mainPartyBtns.get(i);
             if (i < getGameEnvironment().getGuildhall().getMainPartyAdventurers().size()) {
-                mainPartyBtns.get(i).setText(getGameEnvironment().getGuildhall().getMainPartyAdventurers().get(i).getName());
+                btn.setText(getGameEnvironment().getGuildhall().getMainPartyAdventurers().get(i).getName());
+                btn.setVisible(true);
             } else {
-                mainPartyBtns.get(i).setText("Empty");
+                btn.setVisible(false);
             }
-            mainPartyBtns.get(i).setOnAction(actionEvent -> onMainPartyBtnClicked(mainPartyBtns, index));
+            btn.setOnAction(actionEvent -> onMainPartyBtnClicked(mainPartyBtns, index));
         }
     }
 
@@ -72,12 +79,14 @@ public class GuildHallScreenController extends ScreenController{
         List<Button> reservePartyBtns = List.of(reserveParty1, reserveParty2, reserveParty3, reserveParty4, reserveParty5);
         for (int i = 0; i < reservePartyBtns.size(); i++) {
             int index = i;
+            Button btn = reservePartyBtns.get(i);
             if (i < getGameEnvironment().getGuildhall().getReservedAdventurers().size()) {
-                reservePartyBtns.get(i).setText(getGameEnvironment().getGuildhall().getReservedAdventurers().get(i).getName());
+                btn.setText(getGameEnvironment().getGuildhall().getReservedAdventurers().get(i).getName());
+                btn.setVisible(true);
             } else {
-                reservePartyBtns.get(i).setText("Empty");
+                btn.setVisible(false);
             }
-            reservePartyBtns.get(i).setOnAction(actionEvent -> onReservePartBtnClicked(reservePartyBtns, index));
+            btn.setOnAction(actionEvent -> onReservePartBtnClicked(reservePartyBtns, index));
         }
     }
 
@@ -87,16 +96,45 @@ public class GuildHallScreenController extends ScreenController{
             getGameEnvironment().getGuildHallService().swapAdventurers(
                     getGameEnvironment().getGuildhall().getMainPartyAdventurers().get(selectedMainPartyIndex),
                     getGameEnvironment().getGuildhall().getReservedAdventurers().get(selectedReservePartyIndex));
+            selectedMainPartyIndex = -1;
+            selectedReservePartyIndex = -1;
+            selectedAdventurer = null;
             setupMainPartyButtons();
             setupReserveButtons();
         } catch (Exception e) {}
     }
 
     private void onRetireBtnClicked() {
+        if (selectedAdventurer == null) return;
+        try {
+            getGameEnvironment().getGuildHallService().retire(selectedAdventurer);
+            selectedAdventurer = null;
+            selectedMainPartyIndex = -1;
+            selectedReservePartyIndex = -1;
+            setupMainPartyButtons();
+            setupReserveButtons();
+        } catch (Exception e) {}
+    }
+
+    private void onMakeReserveBtnClicked() {
         if (selectedMainPartyIndex == -1) return;
         try {
-            getGameEnvironment().getGuildHallService().retire(
+            getGameEnvironment().getGuildHallService().moveMainPartyToReserve(
                     getGameEnvironment().getGuildhall().getMainPartyAdventurers().get(selectedMainPartyIndex));
+            selectedMainPartyIndex = -1;
+            selectedAdventurer = null;
+            setupMainPartyButtons();
+            setupReserveButtons();
+        } catch (Exception e) {}
+    }
+
+    private void onMoveToMainBtnClicked() {
+        if (selectedReservePartyIndex == -1) return;
+        try {
+            getGameEnvironment().getGuildHallService().moveReserveToMainParty(
+                    getGameEnvironment().getGuildhall().getReservedAdventurers().get(selectedReservePartyIndex));
+            selectedReservePartyIndex = -1;
+            selectedAdventurer = null;
             setupMainPartyButtons();
             setupReserveButtons();
         } catch (Exception e) {}
@@ -105,13 +143,15 @@ public class GuildHallScreenController extends ScreenController{
     private void onReservePartBtnClicked(List<Button> reservePartyBtns, int index) {
         if (index >= getGameEnvironment().getGuildhall().getReservedAdventurers().size()) return;
         selectedReservePartyIndex = index;
-        updateAdventurerStats(getGameEnvironment().getGuildhall().getReservedAdventurers().get(index));
+        selectedAdventurer = getGameEnvironment().getGuildhall().getReservedAdventurers().get(index);
+        updateAdventurerStats(selectedAdventurer);
     }
 
     private void onMainPartyBtnClicked(List<Button> mainPartyBtns, int index) {
         if (index >= getGameEnvironment().getGuildhall().getMainPartyAdventurers().size()) return;
         selectedMainPartyIndex = index;
-        updateAdventurerStats(getGameEnvironment().getGuildhall().getMainPartyAdventurers().get(index));
+        selectedAdventurer = getGameEnvironment().getGuildhall().getMainPartyAdventurers().get(index);
+        updateAdventurerStats(selectedAdventurer);
     }
 
     private void updateAdventurerStats(Adventurer adventurer) {
