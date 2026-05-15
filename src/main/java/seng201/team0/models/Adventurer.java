@@ -8,7 +8,7 @@ import java.util.List;
  * Class for holding information and operating on Adventurers
  */
 
-public abstract class Adventurer implements Purchasable {
+public class Adventurer implements Purchasable {
 
     /**
      * A series of setters for initializing an Adventurer
@@ -22,6 +22,7 @@ public abstract class Adventurer implements Purchasable {
     private Item equippedItem;
     private final List<Skill> skills = new ArrayList<>();
     private int expeditionsInARow = 0;
+    private final String type;
 
 
     /**
@@ -32,13 +33,14 @@ public abstract class Adventurer implements Purchasable {
      * @param hiringCost amount needed to buy an Adventurer from the market
      * @param pay the amount an Adventurer must be paid per Expedition
      */
-    public Adventurer(String name, int stamina, int perception, int hiringCost, int pay) {
+    public Adventurer(String name, int stamina, int perception, int hiringCost, int pay, String type) {
         this.name = name;
         this.stamina = stamina;
         this.perception = perception;
         this.hiringCost = hiringCost;
         this.pay = pay;
         this.maxStamina = stamina;
+        this.type = type;
     }
 
     /**
@@ -49,8 +51,6 @@ public abstract class Adventurer implements Purchasable {
     @Override public int getBuyPrice() { return hiringCost; }
     @Override public String getDescription() { return getType() + " — Pay: " + pay + "g/exp"; }
 
-
-    public abstract String getType();
 
     /**
      * Method for increasing an Adventurer's stamina
@@ -161,4 +161,5 @@ public abstract class Adventurer implements Purchasable {
     public Item getEquippedItem() { return equippedItem; }
     public List<Skill> getSkills() {return Collections.unmodifiableList(skills); }
 
+    public String getType() {return type;}
 }
