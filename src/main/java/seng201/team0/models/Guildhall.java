@@ -1,5 +1,7 @@
 package seng201.team0.models;
 
+import seng201.team0.factories.AdventurerFactory;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,7 +38,8 @@ public class Guildhall {
      */
     public Guildhall() {
 //        for testing guildservices
-        reservedAdventurers.addAll(List.of(new Archer(), new Swordsman(), new Wizard(), new Wizard(), new Swordsman()));
+        reservedAdventurers.addAll(AdventurerFactory.getRandom(5));
+        inventoryItems.add(new UpgradeItem("stam potion",10,"adds 10 stamina","stamina",1));
 
     }
 

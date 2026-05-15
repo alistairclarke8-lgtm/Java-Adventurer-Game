@@ -1,5 +1,6 @@
 package seng201.team0;
 
+import seng201.team0.factories.AdventurerFactory;
 import seng201.team0.gui.ScreenNavigator;
 import seng201.team0.models.*;
 import seng201.team0.services.GuildHallService;
@@ -25,7 +26,7 @@ public class GameEnvironment {
 
     public GameEnvironment(ScreenNavigator navigator) {
         this.navigator = navigator;
-        defaultAdventurers.addAll(List.of(new Archer(), new Swordsman(), new Wizard(), new Wizard(), new Swordsman()));
+        defaultAdventurers.addAll(AdventurerFactory.getRandom(5));
         navigator.launchSetupScreen(this);
 
     }
