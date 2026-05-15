@@ -5,6 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import seng201.team0.GameEnvironment;
 import seng201.team0.models.Adventurer;
+import seng201.team0.models.Item;
 
 import java.util.List;
 
@@ -49,10 +50,12 @@ public class GuildHallScreenController extends ScreenController {
     private int selectedMainPartyIndex = -1;
     private int selectedReservePartyIndex = -1;
     private Adventurer selectedAdventurer = null;
+    private Item selectedItem = null;
 
     public void initialize() {
         setupMainPartyButtons();
         setupReserveButtons();
+        setupInventoryButtons();
         backBtn.setOnAction(actionEvent -> onBackBtnClicked());
         swapBtn.setOnAction(actionEvent -> onSwapBtnClicked());
         retireBtn.setOnAction(actionEvent -> onRetireBtnClicked());
@@ -165,9 +168,36 @@ public class GuildHallScreenController extends ScreenController {
             equippedItemLabel.setText("Equipped Item: None");
         }
     }
+    private void setupInventoryButtons() {
+        List<Button> inventoryBtns = List.of(InventoryBtn1, InventoryBtn2, InventoryBtn3, InventoryBtn4, InventoryBtn5);
+        for (int i = 0; i < inventoryBtns.size(); i++) {
+            int index = i;
+            Button btn = inventoryBtns.get(i);
+            if (i < getGameEnvironment().getGuildhall().getInventoryItems().size()) {
+                btn.setText(getGameEnvironment().getGuildhall().getInventoryItems().get(i).getName());
+                btn.setVisible(true);
+                btn.setOnAction(actionEvent -> onInventoryBtnClicked(index));
+            } else {
+                btn.setVisible(false);
+            }
+        }
+    }
+
+    private void onInventoryBtnClicked(int index) {
+        if (index >= getGameEnvironment().getGuildhall().getInventoryItems().size()) return;
+        selectedItem = getGameEnvironment().getGuildhall().getInventoryItems().get(index);
+        ItemNameLabel.setText("Name: " + selectedItem.getName());
+        ItemTypeLabel.setText("Type: " + selectedItem.getType());
+//        ItemBuffLabel.setText("Buff: " + selectedItem.getBuff());
+    }
 
     private void onBackBtnClicked() {
         getGameEnvironment().navigateToMenu();
+//        for testing
+        System.out.println(getGameEnvironment().getGuildhall().getMainPartyAdventurers());
+        System.out.println(getGameEnvironment().getGuildhall().getReservedAdventurers());
+
+
     }
 
     /**

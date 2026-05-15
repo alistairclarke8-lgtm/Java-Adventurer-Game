@@ -137,7 +137,7 @@ public class SetupScreenController extends ScreenController {
     }
 
     private void updateStats (Adventurer adventurer) {
-        nameLabel.setText("Name: " + adventurer.getName());
+        nameLabel.setText("Type: " + adventurer.getType());
         staminaLabel.setText("Stamina: "+ adventurer.getStamina());
         perceptionLabel.setText("Perception: " + adventurer.getPerception());
         payLabel.setText("Pay: " + adventurer.getPay());
