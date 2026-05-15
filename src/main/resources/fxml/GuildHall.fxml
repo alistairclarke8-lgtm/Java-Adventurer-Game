@@ -32,19 +32,19 @@
             <VBox prefHeight="364.0" prefWidth="475.0">
                <children>
                   <GridPane maxHeight="-Infinity" prefHeight="198.0" prefWidth="414.0">
-                    <columnConstraints>
-                      <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     <columnConstraints>
+                        <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                         <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                         <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                         <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                    </columnConstraints>
-                    <rowConstraints>
-                      <RowConstraints maxHeight="31.0" minHeight="0.6510353088378906" prefHeight="20.754756927490234" vgrow="SOMETIMES" />
-                      <RowConstraints maxHeight="86.17448043823242" minHeight="10.0" prefHeight="77.74524307250977" vgrow="SOMETIMES" />
-                      <RowConstraints maxHeight="28.0" minHeight="3.581329345703125" prefHeight="10.60455322265625" vgrow="SOMETIMES" />
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints maxHeight="31.0" minHeight="0.6510353088378906" prefHeight="20.754756927490234" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="86.17448043823242" minHeight="10.0" prefHeight="77.74524307250977" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="28.0" minHeight="3.581329345703125" prefHeight="10.60455322265625" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="88.0" minHeight="10.0" prefHeight="84.89544677734375" vgrow="SOMETIMES" />
-                    </rowConstraints>
+                     </rowConstraints>
                      <children>
                         <Label prefWidth="61.0" text="Main Party:">
                            <GridPane.margin>
@@ -109,16 +109,16 @@
                      </padding>
                   </Label>
                   <GridPane prefHeight="27.0" prefWidth="455.0">
-                    <columnConstraints>
-                      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="40.0" prefWidth="40.0" />
+                     <columnConstraints>
                         <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="40.0" prefWidth="40.0" />
                         <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="40.0" prefWidth="40.0" />
                         <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="40.0" prefWidth="40.0" />
                         <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="40.0" prefWidth="40.0" />
-                    </columnConstraints>
-                    <rowConstraints>
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                    </rowConstraints>
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="40.0" prefWidth="40.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
                      <children>
                         <Button fx:id="swapBtn" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Swap">
                            <font>
@@ -236,16 +236,16 @@
                      </VBox.margin>
                   </Label>
                   <GridPane prefHeight="323.0" prefWidth="114.0">
-                    <columnConstraints>
-                      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                    </columnConstraints>
-                    <rowConstraints>
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     <columnConstraints>
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     </columnConstraints>
+                     <rowConstraints>
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                    </rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
                      <children>
                         <Button fx:id="InventoryBtn1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="90.0" text="Empty">
                            <font>
