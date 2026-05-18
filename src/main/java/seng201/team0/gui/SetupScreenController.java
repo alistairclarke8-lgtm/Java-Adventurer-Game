@@ -69,7 +69,7 @@ public class SetupScreenController extends ScreenController {
         for (int i=0; i < availableAdventurerBtns.size(); i++) {
             int buttonIndex= i;
             availableAdventurerBtns.get(i).setOnAction(actionEvent -> onAvailableAdventurerBtnClicked(availableAdventurerBtns, buttonIndex));
-            availableAdventurerBtns.get(i).setText(getGameEnvironment().getDefaultAdventurers().get(i).getName());
+            availableAdventurerBtns.get(i).setText(getGameEnvironment().getDefaultAdventurers().get(i).getType());
         }
         startGameBtn.setOnAction(actionEvent -> onStartGameBtnClicked());
 
@@ -114,7 +114,7 @@ public class SetupScreenController extends ScreenController {
         if (selectedAdventurerIndex != -1) {
             Adventurer selectedAdventurer = gameEnvironment.getDefaultAdventurers().get(selectedAdventurerIndex);
             if (Arrays.stream(selectedAdventurers).noneMatch(adventurer -> adventurer == selectedAdventurer)) {
-                selectedAdventurerBtns.get(index).setText(selectedAdventurer.getName());
+                selectedAdventurerBtns.get(index).setText(selectedAdventurer.getType());
                 selectedAdventurers[index] = selectedAdventurer;
             }
         }
@@ -137,7 +137,7 @@ public class SetupScreenController extends ScreenController {
     }
 
     private void updateStats (Adventurer adventurer) {
-        nameLabel.setText("Type: " + adventurer.getType());
+        nameLabel.setText("Name: " + adventurer.getName());
         staminaLabel.setText("Stamina: "+ adventurer.getStamina());
         perceptionLabel.setText("Perception: " + adventurer.getPerception());
         payLabel.setText("Pay: " + adventurer.getPay());
