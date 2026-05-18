@@ -1,5 +1,6 @@
 package seng201.team0;
 
+import seng201.team0.exception.InsufficientGoldException;
 import seng201.team0.factories.AdventurerFactory;
 import seng201.team0.gui.ScreenNavigator;
 import seng201.team0.models.*;
@@ -70,4 +71,15 @@ public class GameEnvironment {
     public Market getMarket() { return market; }
     public MarketService getMarketService() { return marketService; }
 
+
+    public void spendGold(int amount) throws InsufficientGoldException {
+        if (amount < 0) throw new IllegalArgumentException("amount must be >= 0");
+        if (amount > gold) throw new InsufficientGoldException(amount, gold);
+        gold -= amount;
+    }
+
+    public void gainGold(int amount) {
+        if (amount < 0) throw new IllegalArgumentException("amount must be >= 0");
+        gold += amount;
+    }
 }
