@@ -16,8 +16,7 @@ public class GameEnvironment {
     private String guildName;
     private final ScreenNavigator navigator;
     private int gold;
-    private int currentExpedition = 1;
-    private int expeditionsRemaining;
+    private final int currentExpedition = 1;
     private MarketService marketService;
 
     private final Guildhall guildhall = new Guildhall();

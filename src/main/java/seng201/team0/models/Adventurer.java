@@ -107,7 +107,7 @@ public class Adventurer implements Purchasable {
      * Removes any current equipped item first
      * @param item the item being equipped
      */
-    public void equip(Item item) {
+    public void setEquippedItem(Item item) {
         if (equippedItem != null) equippedItem.removeFrom(this);
         equippedItem = item;
         if (item != null) item.applyTo(this);

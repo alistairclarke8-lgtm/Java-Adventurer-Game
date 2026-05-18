@@ -4,11 +4,8 @@ package seng201.team0.models;
  *  Subclass of item for dealing with item which are applied to the Adventurer
  *  These items change an Adventurer's stats while they are equipped
  */
-public class EquipableItem  extends Item {
+public class EquipableItem extends Item {
 
-    /**
-     * Initializing the item and its attributes
-     */
     private final String stat;
     private final int amount;
 
@@ -26,33 +23,24 @@ public class EquipableItem  extends Item {
         this.amount = amount;
     }
 
-    /**
-     * Getter for the type of item we are dealing with.
-     * @return "Equipable" as this is the item type
-     */
     @Override
     public String getType() {
         return "Equipable";
     }
 
-    /**
-     * Getter for checking if the item is a consumable
-     * @return False because the item with not be consumed on use
-     */
     @Override
     public boolean isConsumedOnUse() {
         return false;
     }
 
     /**
-     * Modifying the Adventurers's stats based on the item's type
-     * It will change either
-     * @param adventurer modifying the Adventurers's stats
+     * Applies an increase to the specified stat of the given adventurer.
+     * @param adventurer the adventurer whose stat will be increased
      */
     @Override
     public void applyTo(Adventurer adventurer) {
         if (stat.equals("stamina")) {
-            adventurer.increaseStamina(amount);
+            adventurer.increaseMaxStamina(amount);
         }
         if (stat.equals("perception")) {
             adventurer.increasePerception(amount);
@@ -70,14 +58,6 @@ public class EquipableItem  extends Item {
         if ("perception".equals(stat)) adventurer.decreasePerception(amount);
     }
 
-    /**
-     * @return the stat name buffed by this item ("stamina" or "perception")
-     */
     public String getStat() { return stat; }
-
-    /** @return the size of the buff */
     public int getAmount() { return amount; }
-
-
-
 }

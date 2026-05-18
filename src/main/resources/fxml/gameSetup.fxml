@@ -129,10 +129,10 @@
          </children>
       </HBox>
       <Separator prefWidth="200.0" />
-      <HBox prefHeight="183.0" prefWidth="560.0">
+      <HBox prefHeight="92.0" prefWidth="560.0">
          <children>
             <Label prefHeight="17.0" prefWidth="135.0" text="Selected Adventurers:" />
-            <GridPane prefHeight="31.0" prefWidth="400.0">
+            <GridPane prefHeight="31.0" prefWidth="393.0">
                <columnConstraints>
                   <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                   <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -144,7 +144,7 @@
                <children>
                   <Button fx:id="selectedAdventurer1Btn" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" textOverrun="CLIP">
                      <padding>
-                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                      </padding>
                      <font>
                         <Font size="10.0" />
@@ -152,7 +152,7 @@
                   </Button>
                   <Button fx:id="selectedAdventurer2Btn" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" GridPane.columnIndex="1">
                      <padding>
-                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                      </padding>
                      <font>
                         <Font size="10.0" />
@@ -160,7 +160,7 @@
                   </Button>
                   <Button fx:id="selectedAdventurer3Btn" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" GridPane.columnIndex="2">
                      <padding>
-                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                      </padding>
                      <GridPane.margin>
                         <Insets />
@@ -180,4 +180,3 @@
       <Button fx:id="startGameBtn" mnemonicParsing="false" text="Start Game" />
    </children>
 </VBox>
-
