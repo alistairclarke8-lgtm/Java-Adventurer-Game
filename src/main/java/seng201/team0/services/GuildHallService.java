@@ -1,6 +1,7 @@
 package seng201.team0.services;
 
 import seng201.team0.exception.GuildFullException;
+import seng201.team0.exception.LastAdventurerException;
 import seng201.team0.models.Adventurer;
 import seng201.team0.models.Guildhall;
 import seng201.team0.models.Item;
@@ -87,9 +88,9 @@ public class GuildHallService {
      * @param adventurer to retire
      * @throws IllegalStateException if they are the last adventurer
      */
-    public void retire(Adventurer adventurer) {
+    public void retire(Adventurer adventurer) throws LastAdventurerException {
         if (getTotalAdventurers() <= 1) {
-            throw new IllegalStateException("Cannot retire the last adventurer.");
+            throw new LastAdventurerException();
         }
         guildhall.getMainPartyAdventurers().remove(adventurer);
         guildhall.getReservedAdventurers().remove(adventurer);
@@ -160,14 +161,14 @@ public class GuildHallService {
      * @param adventurer to equip the item to
      * @param item to equip
      */
-//    public void equipItem(Adventurer adventurer, Item item) {
-//        Item current = adventurer.getEquippedItem();
-//        if (current != null) {
-//            guildhall.getInventoryItems().add(current);
-//        }
-//        adventurer.setEquippedItem(item);
-//        guildhall.getInventoryItems().remove(item);
-//    }
+    public void equipItem(Adventurer adventurer, Item item) {
+        Item current = adventurer.getEquippedItem();
+        if (current != null) {
+            guildhall.getInventoryItems().add(current);
+        }
+        adventurer.setEquippedItem(item);
+        guildhall.getInventoryItems().remove(item);
+    }
 
     /**
      * Returns the total number of adventurers across main party and reserves.

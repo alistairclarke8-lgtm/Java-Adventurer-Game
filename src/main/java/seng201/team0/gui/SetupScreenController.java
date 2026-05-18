@@ -3,14 +3,16 @@ package seng201.team0.gui;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import seng201.team0.GameEnvironment;
+import seng201.team0.exception.SetupValidationException;
 import seng201.team0.models.Adventurer;
 import seng201.team0.models.Difficulty;
+import seng201.team0.models.SetupModel;
+import seng201.team0.services.SetupService;
 
-import java.util.Arrays;
 import java.util.List;
 
 /**
- * Controller for the setup screen. allows pl
+ * Controller for the Game Setup Page
  */
 public class SetupScreenController extends ScreenController {
 
@@ -20,14 +22,14 @@ public class SetupScreenController extends ScreenController {
     private Slider expeditionCountSlider;
     @FXML
     private Label expeditionCountLabel;
-    //    difficulty Buttons
+
     @FXML
     private Button easyBtn;
     @FXML
     private Button normalBtn;
     @FXML
     private Button hardBtn;
-    //      all starting adventurer buttons
+
     @FXML
     private Button adventurer1Btn;
     @FXML
@@ -38,7 +40,7 @@ public class SetupScreenController extends ScreenController {
     private Button adventurer4Btn;
     @FXML
     private Button adventurer5Btn;
-    //    stat labels
+
     @FXML
     private Label nameLabel;
     @FXML
@@ -47,7 +49,7 @@ public class SetupScreenController extends ScreenController {
     private Label perceptionLabel;
     @FXML
     private Label payLabel;
-    //    buttons to contain selected adventurers
+
     @FXML
     private Button selectedAdventurer1Btn;
     @FXML
@@ -60,18 +62,20 @@ public class SetupScreenController extends ScreenController {
 
     private int selectedAdventurerIndex= -1;
     private final Adventurer[] selectedAdventurers= new Adventurer[3];
-
+    private SetupModel setupModel;
+    private SetupService setupService;
 
     public void initialize() {
+        setupModel = new SetupModel();
+        setupService = new SetupService(setupModel);
         List<Button> availableAdventurerBtns = List.of(adventurer1Btn,adventurer2Btn,adventurer3Btn,adventurer4Btn,adventurer5Btn);
         List<Button> selectedAdventurerBtns = List.of(selectedAdventurer1Btn,selectedAdventurer2Btn,selectedAdventurer3Btn);
         List<Button> difficultyBtns = List.of(easyBtn,normalBtn,hardBtn);
         for (int i=0; i < availableAdventurerBtns.size(); i++) {
-            int buttonIndex= i;
-            availableAdventurerBtns.get(i).setOnAction(actionEvent -> onAvailableAdventurerBtnClicked(availableAdventurerBtns, buttonIndex));
-            availableAdventurerBtns.get(i).setText(getGameEnvironment().getDefaultAdventurers().get(i).getType());
+            int index = i;
+            availableAdventurerBtns.get(i).setText(setupService.getDefaultAdventurer(i).getType());
+            availableAdventurerBtns.get(i).setOnAction(e -> onAvailableAdventurerBtnClicked(availableAdventurerBtns, index));
         }
-        startGameBtn.setOnAction(actionEvent -> onStartGameBtnClicked());
 
         for (int i=0; i< selectedAdventurerBtns.size(); i++) {
             int index=i;
@@ -81,10 +85,27 @@ public class SetupScreenController extends ScreenController {
             int buttonIndex = i;
             difficultyBtns.get(i).setOnAction(actionEvent -> onDifficultyBtnClicked(difficultyBtns,buttonIndex));
         }
-        expeditionCountSlider.valueProperty().addListener((observable, oldValue, newValue) ->
-                onExpeditionCountUpdated(newValue.intValue()));
+        expeditionCountSlider.valueProperty().addListener((observable, oldValue, newValue) ->{
+            int count = newValue.intValue();
+            setupModel.setExpeditionCount(count);
+            expeditionCountLabel.setText(" " + count);
+        });
         guildnameField.textProperty().addListener((observable, oldValue, newValue) ->
-                getGameEnvironment().setGuildName(newValue));
+                setupModel.setGuildName(newValue)
+        );
+
+        startGameBtn.setOnAction(e -> onStartGameBtnClicked());
+    }
+
+    private void onStartGameBtnClicked() {
+        try {
+            setupService.completeSetup(selectedAdventurers);
+            getGameEnvironment().onSetupComplete(setupModel);
+        } catch (SetupValidationException e) {
+            showValidationError(e.getMessage());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void onDifficultyBtnClicked(List<Button> difficultyBtns, int buttonIndex) {
@@ -96,51 +117,50 @@ public class SetupScreenController extends ScreenController {
             }
         });
         if (difficultyBtns.get(buttonIndex) == easyBtn) {
-            getGameEnvironment().setDifficulty(Difficulty.EASY);
+            setupModel.setDifficulty(Difficulty.EASY);
         } else if (difficultyBtns.get(buttonIndex) == normalBtn) {
-            getGameEnvironment().setDifficulty(Difficulty.NORMAL);
+            setupModel.setDifficulty(Difficulty.NORMAL);
         } else if (difficultyBtns.get(buttonIndex) == hardBtn) {
-            getGameEnvironment().setDifficulty(Difficulty.HARD);
+            setupModel.setDifficulty(Difficulty.HARD);
         }
     }
 
-    private void onExpeditionCountUpdated(int i) {
-        getGameEnvironment().setNumExpeditions(i);
-        expeditionCountLabel.setText(" "+getGameEnvironment().getNumExpeditions());
-    }
+    private void onAvailableAdventurerBtnClicked(List<Button> availableAdventurerBtns, int index) {
+        selectedAdventurerIndex = index;
+        updateStats(setupService.getDefaultAdventurer(index));
 
-    private void onSelectedButtonClicked(List<Button> selectedAdventurerBtns, int index){
-        GameEnvironment gameEnvironment = getGameEnvironment();
-        if (selectedAdventurerIndex != -1) {
-            Adventurer selectedAdventurer = gameEnvironment.getDefaultAdventurers().get(selectedAdventurerIndex);
-            if (Arrays.stream(selectedAdventurers).noneMatch(adventurer -> adventurer == selectedAdventurer)) {
-                selectedAdventurerBtns.get(index).setText(selectedAdventurer.getType());
-                selectedAdventurers[index] = selectedAdventurer;
-            }
-        }
-    }
-
-    private void onAvailableAdventurerBtnClicked(List<Button> availableAdventurerbtns, int adventurerIndex) {
-        selectedAdventurerIndex = adventurerIndex;
-        updateStats(getGameEnvironment().getDefaultAdventurers().get(adventurerIndex));
-        availableAdventurerbtns.forEach(button -> {
-            if (button == availableAdventurerbtns.get(adventurerIndex)) {
-                button.setStyle("-fx-background-color: #b3b3b3; -fx-background-radius: 5;");
+        availableAdventurerBtns.forEach(btn -> {
+            if (btn == availableAdventurerBtns.get(index)) {
+                btn.setStyle("-fx-background-color: #b3b3b3; -fx-background-radius: 5;");
             } else {
-                button.setStyle("");
+                btn.setStyle("");
             }
         });
     }
 
-    private void onStartGameBtnClicked() {
-        getGameEnvironment().onSetupComplete(selectedAdventurers);
+    private void onSelectedButtonClicked(List<Button> selectedAdventurerBtns, int slot) {
+        if (selectedAdventurerIndex == -1) return;
+
+        boolean placed = setupService.selectAdventurer(selectedAdventurers, selectedAdventurerIndex, slot);
+
+        if (placed) {
+            selectedAdventurerBtns.get(slot).setText(selectedAdventurers[slot].getType());
+        }
     }
 
-    private void updateStats (Adventurer adventurer) {
+    private void updateStats(Adventurer adventurer) {
         nameLabel.setText("Name: " + adventurer.getName());
-        staminaLabel.setText("Stamina: "+ adventurer.getStamina());
+        staminaLabel.setText("Stamina: " + adventurer.getStamina());
         perceptionLabel.setText("Perception: " + adventurer.getPerception());
         payLabel.setText("Pay: " + adventurer.getPay());
+    }
+
+    private void showValidationError(String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Cannot Start Game");
+        alert.setHeaderText("Please fix the following:");
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 
     protected SetupScreenController(GameEnvironment gameEnvironment) {

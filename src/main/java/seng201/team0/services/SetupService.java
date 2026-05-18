@@ -1,9 +1,8 @@
 package seng201.team0.services;
 
-import seng201.team0.GameEnvironment;
 import seng201.team0.exception.SetupValidationException;
 import seng201.team0.models.Adventurer;
-import seng201.team0.models.Difficulty;
+import seng201.team0.models.SetupModel;
 
 import java.util.Arrays;
 
@@ -12,38 +11,14 @@ import java.util.Arrays;
  */
 public class SetupService {
 
-    private final GameEnvironment gameEnvironment;
+    private final SetupModel setupModel;
 
     /**
      * Creates a setup service.
-     * @param gameEnvironment game environment instance
+     * @param setupModel setup model instance
      */
-    public SetupService(GameEnvironment gameEnvironment) {
-        this.gameEnvironment = gameEnvironment;
-    }
-
-    /**
-     * Sets the game difficulty.
-     * @param difficulty selected difficulty
-     */
-    public void setDifficulty(Difficulty difficulty) {
-        gameEnvironment.setDifficulty(difficulty);
-    }
-
-    /**
-     * Sets expedition count.
-     * @param count number of expeditions
-     */
-    public void setExpeditionCount(int count) {
-        gameEnvironment.setNumExpeditions(count);
-    }
-
-    /**
-     * Sets the guild name.
-     * @param name guild name
-     */
-    public void setGuildName(String name) {
-        gameEnvironment.setGuildName(name);
+    public SetupService(SetupModel setupModel) {
+        this.setupModel = setupModel;
     }
 
     /**
@@ -54,11 +29,12 @@ public class SetupService {
      * @return true if selected successfully
      */
     public boolean selectAdventurer(Adventurer[] selectedAdventurers, int availableIndex, int selectedSlot) {
-        Adventurer adventurer = gameEnvironment.getDefaultAdventurers().get(availableIndex);
+        Adventurer adventurer = setupModel.getDefaultAdventurer(availableIndex);
         boolean alreadySelected = Arrays.stream(selectedAdventurers).anyMatch(a -> a == adventurer);
 
         if (alreadySelected) return false;
 
+        setupModel.setSelectedAdventurer(selectedSlot, adventurer);
         selectedAdventurers[selectedSlot] = adventurer;
         return true;
     }
@@ -69,7 +45,7 @@ public class SetupService {
      * @return adventurer at index
      */
     public Adventurer getDefaultAdventurer(int index) {
-        return gameEnvironment.getDefaultAdventurers().get(index);
+        return setupModel.getDefaultAdventurer(index);
     }
 
     /**
@@ -80,7 +56,7 @@ public class SetupService {
     public void completeSetup(Adventurer[] selectedAdventurers) throws SetupValidationException {
         StringBuilder errors = new StringBuilder();
 
-        String guildName = gameEnvironment.getGuildName();
+        String guildName = setupModel.getGuildName();
 
         if (guildName == null || guildName.isBlank()) {
             errors.append("- Guild name is required.\n");
@@ -90,11 +66,11 @@ public class SetupService {
             errors.append("- Guild name must not include special characters.\n");
         }
 
-        if (gameEnvironment.getDifficulty() == null) {
+        if (setupModel.getDifficulty() == null) {
             errors.append("- A difficulty must be selected.\n");
         }
 
-        if (gameEnvironment.getNumExpeditions() <= 0) {
+        if (setupModel.getExpeditionCount() <= 0) {
             errors.append("- An expedition count must be selected.\n");
         }
 
@@ -112,7 +88,5 @@ public class SetupService {
         if (!errors.isEmpty()) {
             throw new SetupValidationException(errors.toString().trim());
         }
-
-        gameEnvironment.onSetupComplete(selectedAdventurers);
     }
 }
