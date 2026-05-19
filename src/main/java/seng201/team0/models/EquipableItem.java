@@ -23,6 +23,7 @@ public class EquipableItem extends Item {
         this.amount = amount;
     }
 
+    /** Return the type of item i.e. equippable */
     @Override
     public String getType() {
         return "Equipable";
@@ -58,6 +59,9 @@ public class EquipableItem extends Item {
         if ("perception".equals(stat)) adventurer.decreasePerception(amount);
     }
 
+    /** @return the stat being modified by the item */
     public String getStat() { return stat; }
+
+    /** @return the amount the stat being modified is modified by */
     public int getAmount() { return amount; }
 }

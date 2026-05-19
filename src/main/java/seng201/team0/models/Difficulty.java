@@ -23,6 +23,15 @@ public enum Difficulty {
     private final double randomEventChance;
     private final double costMultiplier;
 
+    /**
+     * Constructing the difficulty
+     * @param displayName The identifier of the difficulty
+     * @param startingGold The initial amount of gold the player starts with
+     * @param rewardMultiplier The scaling factor which rewards the player with gold during expeditions
+     * @param scoreMultiplier The scaling factor which rewards the player with points during expeditions
+     * @param randomEventChance The scaling factor which determines the chance of a random event occurring
+     * @param costMultiplier The scaling factor which determines the price of items and adventurers in the market
+     */
     Difficulty(String displayName,
                int startingGold,
                double rewardMultiplier,
@@ -46,7 +55,6 @@ public enum Difficulty {
      *                  scoreMultiplier (how much the given score changes)
      *                  randomEventChance (chance of a pop-up when in the guildhall)
      */
-
     public String getDisplayName() {
         return displayName;
     }
