@@ -21,9 +21,9 @@ public class GameEnvironment {
     private final Market market = new Market();
     private final RecruitmentService recruitmentService;
 
-    public GameEnvironment(ScreenNavigator navigator, RecruitmentService recruitmentService) {
+    public GameEnvironment(ScreenNavigator navigator) {
         this.navigator = navigator;
-        this.recruitmentService = recruitmentService;
+        this.recruitmentService = new RecruitmentService(this);
         navigator.launchSetupScreen(this);
     }
 
@@ -39,8 +39,10 @@ public class GameEnvironment {
     public void navigateToMenu() {
         navigator.launchMenuScreenController(this);
     }
+    /** Navigates to the recruitment screen. */
     public void navigateToRecruitment() {
-//        navigator.launchMenuScreenController(this);
+        if (navigator == null) return;
+        navigator.launchRecruitmentScreenController(this);
     }
     public void navigateToMarket() {
         navigator.launchMarketScreenController(this);
