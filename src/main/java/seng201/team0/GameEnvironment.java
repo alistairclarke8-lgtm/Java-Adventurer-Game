@@ -13,7 +13,7 @@ public class GameEnvironment {
     private final ScreenNavigator navigator;
     private int gold;
     private final int currentExpedition = 1;
-//    private MarketService marketService;
+    private MarketService marketService;
 
     private final Guildhall guildhall = new Guildhall();
     private final GuildHallService guildHallService = new GuildHallService(guildhall);
