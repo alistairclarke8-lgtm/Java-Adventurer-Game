@@ -11,6 +11,12 @@ import seng201.team0.models.Item;
  */
 public class MarketService {
 
+    /** The minimum number of items shown per round. */
+    public static final int MIN_STOCK = 3;
+
+    /** The maximum number of items shown per round. */
+    public static final int MAX_STOCK = 6;
+
     private final GameEnvironment gameEnvironment;
 
     public MarketService(GameEnvironment gameEnvironment) {
@@ -27,6 +33,10 @@ public class MarketService {
         gameEnvironment.getGuildhall().getInventoryItems().add(item);
     }
 
+    /**
+     * Sells an item back into the market from the player's inventory
+     * @param item the item being sold
+     */
     public void sell(Item item) {
         if (!gameEnvironment.getGuildhall().getInventoryItems().contains(item)) {
             throw new IllegalArgumentException("Item is not in inventory.");
