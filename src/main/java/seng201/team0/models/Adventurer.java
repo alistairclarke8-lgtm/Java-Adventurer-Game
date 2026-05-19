@@ -51,7 +51,17 @@ public class Adventurer implements Purchasable {
     @Override public int getBuyPrice() { return hiringCost; }
     @Override public String getDescription() { return getType() + " — Pay: " + pay + "g/exp"; }
 
-
+    /**
+     * Adjusts stamina by a positive or negative amount.
+     * @param amount positive to restore, negative to drain
+     */
+    public void adjustStamina(int amount) {
+        if (amount >= 0) {
+            increaseStamina(amount);
+        } else {
+            decreaseStamina(-amount);
+        }
+    }
     /**
      * Method for increasing an Adventurer's stamina
      * @param amount the amount the Adventurer's stamina is going to increase

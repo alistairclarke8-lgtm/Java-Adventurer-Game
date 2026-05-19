@@ -12,7 +12,7 @@ public class GameEnvironment {
     private String guildName;
     private final ScreenNavigator navigator;
     private int gold;
-    private final int currentExpedition = 1;
+    private int currentExpedition = 1;
     private MarketService marketService;
 
     private final Guildhall guildhall = new Guildhall();
@@ -49,6 +49,7 @@ public class GameEnvironment {
         navigator.launchGuildHallScreenController(this);
     }
 
+    public void incrementExpedition() { currentExpedition++; }
     public int getNumExpeditions() {return numExpeditions;}
     public Difficulty getDifficulty() {return difficulty;}
     public String getGuildName() {return guildName;}
