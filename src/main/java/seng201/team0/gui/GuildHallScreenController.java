@@ -1,9 +1,14 @@
 package seng201.team0.gui;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import seng201.team0.GameEnvironment;
+import seng201.team0.exception.EmptyPartyException;
+import seng201.team0.exception.EmptyReservesException;
+import seng201.team0.exception.GuildFullException;
+import seng201.team0.exception.LastAdventurerException;
 import seng201.team0.models.Adventurer;
 import seng201.team0.models.Item;
 
@@ -61,6 +66,7 @@ public class GuildHallScreenController extends ScreenController {
         retireBtn.setOnAction(actionEvent -> onRetireBtnClicked());
         makeReserveBtn.setOnAction(actionEvent -> onMakeReserveBtnClicked());
         moveToMainBtn.setOnAction(actionEvent -> onMoveToMainBtnClicked());
+        useEquipBtn.setOnAction(actionEvent -> onUseEquipBtnClicked());
     }
 
     private void setupMainPartyButtons() {
@@ -69,7 +75,7 @@ public class GuildHallScreenController extends ScreenController {
             int index = i;
             Button btn = mainPartyBtns.get(i);
             if (i < getGameEnvironment().getGuildhall().getMainPartyAdventurers().size()) {
-                btn.setText(getGameEnvironment().getGuildhall().getMainPartyAdventurers().get(i).getName());
+                btn.setText(getGameEnvironment().getGuildhall().getMainPartyAdventurers().get(i).getType());
                 btn.setVisible(true);
             } else {
                 btn.setVisible(false);
@@ -84,12 +90,27 @@ public class GuildHallScreenController extends ScreenController {
             int index = i;
             Button btn = reservePartyBtns.get(i);
             if (i < getGameEnvironment().getGuildhall().getReservedAdventurers().size()) {
-                btn.setText(getGameEnvironment().getGuildhall().getReservedAdventurers().get(i).getName());
+                btn.setText(getGameEnvironment().getGuildhall().getReservedAdventurers().get(i).getType());
                 btn.setVisible(true);
             } else {
                 btn.setVisible(false);
             }
             btn.setOnAction(actionEvent -> onReservePartBtnClicked(reservePartyBtns, index));
+        }
+    }
+
+    private void setupInventoryButtons() {
+        List<Button> inventoryBtns = List.of(InventoryBtn1, InventoryBtn2, InventoryBtn3, InventoryBtn4, InventoryBtn5);
+        for (int i = 0; i < inventoryBtns.size(); i++) {
+            int index = i;
+            Button btn = inventoryBtns.get(i);
+            if (i < getGameEnvironment().getGuildhall().getInventoryItems().size()) {
+                btn.setText(getGameEnvironment().getGuildhall().getInventoryItems().get(i).getName());
+                btn.setVisible(true);
+                btn.setOnAction(actionEvent -> onInventoryBtnClicked(index));
+            } else {
+                btn.setVisible(false);
+            }
         }
     }
 
@@ -104,7 +125,9 @@ public class GuildHallScreenController extends ScreenController {
             selectedAdventurer = null;
             setupMainPartyButtons();
             setupReserveButtons();
-        } catch (Exception e) {}
+        } catch (EmptyPartyException | EmptyReservesException e) {
+            showError(e.getMessage());
+        }
     }
 
     private void onRetireBtnClicked() {
@@ -116,7 +139,9 @@ public class GuildHallScreenController extends ScreenController {
             selectedReservePartyIndex = -1;
             setupMainPartyButtons();
             setupReserveButtons();
-        } catch (Exception e) {}
+        } catch (LastAdventurerException e) {
+            showError(e.getMessage());
+        }
     }
 
     private void onMakeReserveBtnClicked() {
@@ -128,7 +153,9 @@ public class GuildHallScreenController extends ScreenController {
             selectedAdventurer = null;
             setupMainPartyButtons();
             setupReserveButtons();
-        } catch (Exception e) {}
+        } catch (GuildFullException | EmptyPartyException e) {
+            showError(e.getMessage());
+        }
     }
 
     private void onMoveToMainBtnClicked() {
@@ -140,7 +167,29 @@ public class GuildHallScreenController extends ScreenController {
             selectedAdventurer = null;
             setupMainPartyButtons();
             setupReserveButtons();
-        } catch (Exception e) {}
+        } catch (EmptyReservesException | GuildFullException e) {
+            showError(e.getMessage());
+        }
+    }
+
+    private void onUseEquipBtnClicked() {
+        if (selectedAdventurer == null || selectedItem == null) return;
+        if (selectedItem.isConsumedOnUse()) {
+            getGameEnvironment().getGuildHallService().useItem(selectedAdventurer, selectedItem);
+        } else {
+            getGameEnvironment().getGuildHallService().equipItem(selectedAdventurer, selectedItem);
+        }
+        selectedItem = null;
+        setupInventoryButtons();
+        updateAdventurerStats(selectedAdventurer);
+    }
+
+    private void onInventoryBtnClicked(int index) {
+        if (index >= getGameEnvironment().getGuildhall().getInventoryItems().size()) return;
+        selectedItem = getGameEnvironment().getGuildhall().getInventoryItems().get(index);
+        ItemNameLabel.setText("Name: " + selectedItem.getName());
+        ItemTypeLabel.setText("Type: " + selectedItem.getType());
+//        ItemBuffLabel.setText("Buff: " + selectedItem.);
     }
 
     private void onReservePartBtnClicked(List<Button> reservePartyBtns, int index) {
@@ -168,43 +217,19 @@ public class GuildHallScreenController extends ScreenController {
             equippedItemLabel.setText("Equipped Item: None");
         }
     }
-    private void setupInventoryButtons() {
-        List<Button> inventoryBtns = List.of(InventoryBtn1, InventoryBtn2, InventoryBtn3, InventoryBtn4, InventoryBtn5);
-        for (int i = 0; i < inventoryBtns.size(); i++) {
-            int index = i;
-            Button btn = inventoryBtns.get(i);
-            if (i < getGameEnvironment().getGuildhall().getInventoryItems().size()) {
-                btn.setText(getGameEnvironment().getGuildhall().getInventoryItems().get(i).getName());
-                btn.setVisible(true);
-                btn.setOnAction(actionEvent -> onInventoryBtnClicked(index));
-            } else {
-                btn.setVisible(false);
-            }
-        }
-    }
 
-    private void onInventoryBtnClicked(int index) {
-        if (index >= getGameEnvironment().getGuildhall().getInventoryItems().size()) return;
-        selectedItem = getGameEnvironment().getGuildhall().getInventoryItems().get(index);
-        ItemNameLabel.setText("Name: " + selectedItem.getName());
-        ItemTypeLabel.setText("Type: " + selectedItem.getType());
-//        ItemBuffLabel.setText("Buff: " + selectedItem.getBuff());
+    private void showError(String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 
     private void onBackBtnClicked() {
         getGameEnvironment().navigateToMenu();
-//        for testing
-        System.out.println(getGameEnvironment().getGuildhall().getMainPartyAdventurers());
-        System.out.println(getGameEnvironment().getGuildhall().getReservedAdventurers());
-
-
     }
 
-    /**
-     * Creates an instance of a ScreenController with the given {@link GameEnvironment}
-     *
-     * @param gameEnvironment The game environment used by this ScreenController
-     */
     protected GuildHallScreenController(GameEnvironment gameEnvironment) {
         super(gameEnvironment);
     }
