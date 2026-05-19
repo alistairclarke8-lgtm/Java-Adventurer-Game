@@ -1,9 +1,10 @@
 package seng201.team0;
 
+import seng201.team0.exception.InsufficientGoldException;
 import seng201.team0.gui.ScreenNavigator;
 import seng201.team0.models.*;
 import seng201.team0.services.GuildHallService;
-import seng201.team0.services.MarketService;
+//import seng201.team0.services.MarketService;
 
 public class GameEnvironment {
     private int numExpeditions;
@@ -12,7 +13,7 @@ public class GameEnvironment {
     private final ScreenNavigator navigator;
     private int gold;
     private final int currentExpedition = 1;
-    private MarketService marketService;
+//    private MarketService marketService;
 
     private final Guildhall guildhall = new Guildhall();
     private final GuildHallService guildHallService = new GuildHallService(guildhall);
@@ -60,4 +61,26 @@ public class GameEnvironment {
     /** @return the market */
     public Market getMarket() { return market; }
     public MarketService getMarketService() { return marketService; }
+    /**
+     * Increases the player's gold amount
+     * @param amount the amount the gold will increase by
+     *               must be a non-negative value
+     */
+    public void gainGold(int amount) {
+        if (amount < 0) throw new IllegalArgumentException("amount must be >= 0");
+        gold += amount;
+    }
+
+    /**
+     * Decreases the player's gold amount
+     * @param amount the amount the gold will decrease by
+     *               must be a non-negative value
+     *               must be not greater than the amount of gold the player has
+     */
+    public void spendGold(int amount) throws InsufficientGoldException {
+        if (amount < 0) throw new IllegalArgumentException("amount must be >= 0");
+        if (amount > gold) throw new InsufficientGoldException(amount, gold);
+        gold -= amount;
+    }
+
 }
