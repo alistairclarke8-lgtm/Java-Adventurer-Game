@@ -5,6 +5,7 @@ import seng201.team0.gui.ScreenNavigator;
 import seng201.team0.models.*;
 import seng201.team0.services.GuildHallService;
 import seng201.team0.services.MarketService;
+import seng201.team0.services.RecruitmentService;
 
 public class GameEnvironment {
     private int numExpeditions;
@@ -18,9 +19,11 @@ public class GameEnvironment {
     private final Guildhall guildhall = new Guildhall();
     private final GuildHallService guildHallService = new GuildHallService(guildhall);
     private final Market market = new Market();
+    private final RecruitmentService recruitmentService;
 
-    public GameEnvironment(ScreenNavigator navigator) {
+    public GameEnvironment(ScreenNavigator navigator, RecruitmentService recruitmentService) {
         this.navigator = navigator;
+        this.recruitmentService = recruitmentService;
         navigator.launchSetupScreen(this);
     }
 
@@ -83,4 +86,6 @@ public class GameEnvironment {
         gold -= amount;
     }
 
+    /** @return the recruitment service */
+    public RecruitmentService getRecruitmentService() { return recruitmentService; }
 }
