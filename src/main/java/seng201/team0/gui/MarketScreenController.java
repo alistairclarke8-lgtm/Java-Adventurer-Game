@@ -106,7 +106,7 @@ public class MarketScreenController extends ScreenController {
 
     @Override
     protected String getFxmlFile() {
-        return "market.fxml";
+        return "/fxml/market.fxml";
     }
 
     @Override

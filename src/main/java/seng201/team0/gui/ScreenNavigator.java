@@ -62,6 +62,10 @@ public class ScreenNavigator {
         ScreenController controller = new GuildHallScreenController(gameEnvironment);
         launchScreen(controller);
     }
+    public void launchMarketScreenController(GameEnvironment gameEnvironment) {
+        ScreenController controller = new MarketScreenController(gameEnvironment);
+        launchScreen(controller);
+    }
 
     /**
      * Replaces the root border pane's center component with the screen defined by the given

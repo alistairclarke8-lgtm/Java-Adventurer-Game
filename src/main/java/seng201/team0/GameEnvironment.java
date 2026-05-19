@@ -4,7 +4,7 @@ import seng201.team0.exception.InsufficientGoldException;
 import seng201.team0.gui.ScreenNavigator;
 import seng201.team0.models.*;
 import seng201.team0.services.GuildHallService;
-//import seng201.team0.services.MarketService;
+import seng201.team0.services.MarketService;
 
 public class GameEnvironment {
     private int numExpeditions;
@@ -40,7 +40,7 @@ public class GameEnvironment {
 //        navigator.launchMenuScreenController(this);
     }
     public void navigateToMarket() {
-//        navigator.launchMenuScreenController(this);
+        navigator.launchMarketScreenController(this);
     }
     public void navigateToExpedition() {
 //        navigator.launchMenuScreenController(this);
