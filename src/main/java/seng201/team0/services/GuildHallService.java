@@ -1,5 +1,7 @@
 package seng201.team0.services;
 
+import seng201.team0.exception.EmptyPartyException;
+import seng201.team0.exception.EmptyReservesException;
 import seng201.team0.exception.GuildFullException;
 import seng201.team0.exception.LastAdventurerException;
 import seng201.team0.models.Adventurer;
@@ -48,13 +50,13 @@ public class GuildHallService {
     /**
      * Removes an adventurer from the main party.
      * @param adventurer to remove
-     * @throws Exception if the main party is empty
+     * @throws EmptyPartyException if the main party is empty
      */
-    public void removeMainPartyAdventurer(Adventurer adventurer) throws Exception {
+    public void removeMainPartyAdventurer(Adventurer adventurer) throws EmptyPartyException {
         if (!guildhall.getMainPartyAdventurers().isEmpty()) {
             guildhall.getMainPartyAdventurers().remove(adventurer);
         } else {
-            throw new Exception("Main party is empty.");
+            throw new EmptyPartyException("Main party is empty.");
         }
     }
 
@@ -73,20 +75,20 @@ public class GuildHallService {
     /**
      * Removes an adventurer from reserves.
      * @param adventurer to remove
-     * @throws Exception if reserves are empty
+     * @throws EmptyReservesException if reserves are empty
      */
-    public void removeReservedAdventurer(Adventurer adventurer) throws Exception {
+    public void removeReservedAdventurer(Adventurer adventurer) throws EmptyReservesException {
         if (!guildhall.getReservedAdventurers().isEmpty()) {
             guildhall.getReservedAdventurers().remove(adventurer);
         } else {
-            throw new Exception("Reserves are empty.");
+            throw new EmptyReservesException("Reserves are empty.");
         }
     }
 
     /**
      * Retires an adventurer from the guild entirely.
      * @param adventurer to retire
-     * @throws IllegalStateException if they are the last adventurer
+     * @throws LastAdventurerException if they are the last adventurer
      */
     public void retire(Adventurer adventurer) throws LastAdventurerException {
         if (getTotalAdventurers() <= 1) {
@@ -99,9 +101,10 @@ public class GuildHallService {
     /**
      * Moves an adventurer from reserves to the main party.
      * @param adventurer to move
-     * @throws Exception if adventurer is not in reserves or main party is full
+     * @throws EmptyReservesException if adventurer is not in reserves
+     * @throws GuildFullException if the main party is full
      */
-    public void moveReserveToMainParty(Adventurer adventurer) throws Exception {
+    public void moveReserveToMainParty(Adventurer adventurer) throws EmptyReservesException, GuildFullException {
         if (!guildhall.getReservedAdventurers().contains(adventurer)) {
             throw new IllegalArgumentException("Adventurer is not in reserves.");
         }
@@ -115,9 +118,10 @@ public class GuildHallService {
     /**
      * Moves an adventurer from the main party to reserves.
      * @param adventurer to move
-     * @throws GuildFullException if reserves are full or main party would be empty
+     * @throws GuildFullException if reserves are full
+     * @throws EmptyPartyException if the main party would be left empty
      */
-    public void moveMainPartyToReserve(Adventurer adventurer) throws GuildFullException {
+    public void moveMainPartyToReserve(Adventurer adventurer) throws GuildFullException, EmptyPartyException {
         if (!guildhall.getMainPartyAdventurers().contains(adventurer)) {
             throw new IllegalArgumentException("Adventurer is not in main party.");
         }
@@ -136,9 +140,10 @@ public class GuildHallService {
      * Swaps a main party adventurer with a reserve adventurer.
      * @param partyAdventurer the adventurer in the main party
      * @param reserveAdventurer the adventurer in reserves
-     * @throws Exception if either adventurer is not in their respective list
+     * @throws EmptyPartyException if the main party index is invalid
+     * @throws EmptyReservesException if the reserves index is invalid
      */
-    public void swapAdventurers(Adventurer partyAdventurer, Adventurer reserveAdventurer) throws Exception {
+    public void swapAdventurers(Adventurer partyAdventurer, Adventurer reserveAdventurer) throws EmptyPartyException, EmptyReservesException {
         int partyIndex = guildhall.getMainPartyAdventurers().indexOf(partyAdventurer);
         int reserveIndex = guildhall.getReservedAdventurers().indexOf(reserveAdventurer);
         guildhall.getMainPartyAdventurers().set(partyIndex, reserveAdventurer);
