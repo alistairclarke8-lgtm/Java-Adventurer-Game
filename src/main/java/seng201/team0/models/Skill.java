@@ -40,6 +40,14 @@ public class Skill {
     public int getStaminaBonus() { return staminaBonus; }
     public int getPerceptionBonus() { return perceptionBonus; }
 
+
+    /**
+     * Compares this skill to another object for equality. Two skills are
+     * considered equal if they have the same name, description, stamina bonus,
+     * and perception bonus.
+     * @param o the object to compare against
+     * @return true if Object o is a Skill with the same fields, false otherwise
+     */
     @Override
     public boolean equals (Object o) {
         if (this == o) return true;
@@ -51,6 +59,9 @@ public class Skill {
 
     }
 
+    /**
+     * @return a human-readable string showing what the skill is about
+     */
     @Override
     public String toString() {
         return "Skill{" + name + "(+"

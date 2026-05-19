@@ -76,6 +76,7 @@ public abstract class Item implements Purchasable {
     @Override
     public int getBuyPrice() { return cost; }
 
+    /** @return the item's id */
     @Override
     public String toString() { return name + " (" + getType() + ", " + cost + "g)"; }
 }

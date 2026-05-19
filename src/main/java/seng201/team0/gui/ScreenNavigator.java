@@ -67,6 +67,10 @@ public class ScreenNavigator {
         launchScreen(controller);
     }
 
+    public void launchRecruitmentScreenController(GameEnvironment gameEnvironment) {
+        launchScreen(new RecruitmentScreenController(gameEnvironment));
+    }
+
     /**
      * Replaces the root border pane's center component with the screen defined by the given
      * {@link ScreenController}.
@@ -84,6 +88,7 @@ public class ScreenNavigator {
             rootPane.setCenter(setupParent);
             stage.setTitle(controller.getTitle());
         } catch (IOException e) {
+            //noinspection CallToPrintStackTrace
             e.printStackTrace();
         }
     }

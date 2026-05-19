@@ -1,4 +1,6 @@
-package seng201.team0.models;
+package seng201.team0.factories;
+
+import seng201.team0.models.*;
 
 import java.util.ArrayList;
 import java.util.List;
