@@ -86,7 +86,7 @@ public class RecruitmentScreenController extends ScreenController {
 
     @Override
     protected String getFxmlFile() {
-        return "/fxml/recruitment.fxml";
+        return "/fxml/recruit.fxml";
     }
 
     @Override

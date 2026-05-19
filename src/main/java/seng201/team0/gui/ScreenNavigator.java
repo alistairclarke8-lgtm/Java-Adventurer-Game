@@ -68,7 +68,8 @@ public class ScreenNavigator {
     }
 
     public void launchRecruitmentScreenController(GameEnvironment gameEnvironment) {
-        launchScreen(new RecruitmentScreenController(gameEnvironment));
+        ScreenController controller = new RecruitmentScreenController(gameEnvironment);
+        launchScreen(controller);
     }
 
     /**
