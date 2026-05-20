@@ -1,4 +1,5 @@
 package seng201.team0.exception;
+
 /**
  * Thrown when the guild cannot accept another adventurer or item because a
  * capacity limit has been reached. At most five adventurers in the main party,

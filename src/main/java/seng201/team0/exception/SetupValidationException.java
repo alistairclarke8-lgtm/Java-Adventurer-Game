@@ -5,6 +5,10 @@ package seng201.team0.exception;
  * or it includes special characters.
  */
 public class SetupValidationException extends Exception{
+
+    /**
+     * @param message the human-readable message passed to the super class, Exception
+     */
     public SetupValidationException(String message) {
         super(message);
     }

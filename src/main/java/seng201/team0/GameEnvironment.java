@@ -11,23 +11,36 @@ public class GameEnvironment {
     private int numExpeditions;
     private Difficulty difficulty;
     private String guildName;
-    private final ScreenNavigator navigator;
     private int gold;
     private int currentExpedition = 1;
-    private MarketService marketService;
     private int score = 0;
 
     private final Guildhall guildhall = new Guildhall();
     private final GuildHallService guildHallService = new GuildHallService(guildhall);
     private final Market market = new Market();
+    private final MarketService marketService;
     private final RecruitmentService recruitmentService;
+    private final ScreenNavigator navigator;
 
+
+    /**
+     * Constructs the game environment and launches the setup screen immediately
+     * @param navigator the screen navigator used to switch between screens
+     */
     public GameEnvironment(ScreenNavigator navigator) {
         this.navigator = navigator;
+        this.marketService = new MarketService(this);
         this.recruitmentService = new RecruitmentService(this);
         navigator.launchSetupScreen(this);
     }
 
+    /**
+     * Called by the SetupScreen once the player has gone through the
+     * necessary motions to begin the game.
+     * Initializes the starting gold, part, stock, recruitment pool,
+     * and expeditions, then navigates to the menu.
+     * @param setupModel the validated setup model
+     */
     public void onSetupComplete(SetupModel setupModel) {
         this.guildName = setupModel.getGuildName();
         this.numExpeditions = setupModel.getExpeditionCount();
@@ -68,6 +81,8 @@ public class GameEnvironment {
     /** @return the market */
     public Market getMarket() { return market; }
     public MarketService getMarketService() { return marketService; }
+
+
     /**
      * Increases the player's gold amount
      * @param amount the amount the gold will increase by
