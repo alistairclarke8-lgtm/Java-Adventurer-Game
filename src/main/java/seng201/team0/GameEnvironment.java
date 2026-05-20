@@ -15,6 +15,7 @@ public class GameEnvironment {
     private int gold;
     private int currentExpedition = 1;
     private MarketService marketService;
+    private int score = 0;
 
     private final Guildhall guildhall = new Guildhall();
     private final GuildHallService guildHallService = new GuildHallService(guildhall);
@@ -91,4 +92,12 @@ public class GameEnvironment {
 
     /** @return the recruitment service */
     public RecruitmentService getRecruitmentService() { return recruitmentService; }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
 }
