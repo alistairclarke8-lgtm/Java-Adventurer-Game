@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox prefHeight="29.0" prefWidth="570.0">
+         <children>
+            <Label fx:id="expeditionNameLabel" prefHeight="17.0" prefWidth="298.0" text="Expedition name">
+               <HBox.margin>
+                  <Insets bottom="5.0" />
+               </HBox.margin>
+            </Label>
+            <Label fx:id="eventNumLabel" prefHeight="17.0" prefWidth="136.0" text="Event number:" />
+            <Label fx:id="goldGainedLabel" prefHeight="17.0" prefWidth="136.0" text="Gold gained:" />
+         </children>
+      </HBox>
+      <Separator prefWidth="200.0" />
+      <Label prefHeight="54.0" prefWidth="79.0" text="Party Stamina:" />
+      <GridPane prefHeight="129.0" prefWidth="551.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <VBox prefHeight="120.0" prefWidth="160.0" style="-fx-border-color: black; -fx-border-radius: 4px; -fx-border-color: #D3D3D3;">
+               <GridPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </GridPane.margin>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+               <children>
+                  <Label fx:id="adventurerNameLabel1" prefHeight="17.0" prefWidth="132.0" text="Label">
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Slider fx:id="adventurerStamSlider1">
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                  </Slider>
+                  <Label fx:id="adventurerStamLabel1" prefHeight="17.0" prefWidth="119.0" text="Label" />
+               </children>
+            </VBox>
+            <VBox prefHeight="120.0" prefWidth="160.0" style="-fx-border-color: black; -fx-border-radius: 4px; -fx-border-color: #D3D3D3;" GridPane.columnIndex="1">
+               <GridPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </GridPane.margin>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+               <children>
+                  <Label fx:id="adventurerNameLabel2" prefHeight="17.0" prefWidth="102.0" text="Label">
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Slider fx:id="adventurerStamSlider2">
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                  </Slider>
+                  <Label fx:id="adventurerStamLabel2" prefHeight="17.0" prefWidth="100.0" text="Label" />
+               </children>
+            </VBox>
+            <VBox prefHeight="120.0" prefWidth="160.0" style="-fx-border-color: black; -fx-border-radius: 4px; -fx-border-color: #D3D3D3;" GridPane.columnIndex="2">
+               <GridPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </GridPane.margin>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+               <children>
+                  <Label fx:id="adventurerNameLabel3" prefHeight="17.0" prefWidth="105.0" text="Label">
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Slider fx:id="adventurerStamSlider3">
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                  </Slider>
+                  <Label fx:id="adventurerStamLabel3" prefHeight="17.0" prefWidth="112.0" text="Label" />
+               </children>
+            </VBox>
+            <VBox prefHeight="120.0" prefWidth="160.0" style="-fx-border-color: black; -fx-border-radius: 4px; -fx-border-color: #D3D3D3;" GridPane.columnIndex="3">
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+               <children>
+                  <Label fx:id="adventurerNameLabel4" prefHeight="17.0" prefWidth="105.0" text="Label">
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Slider fx:id="adventurerStamSlider4">
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                  </Slider>
+                  <Label fx:id="adventurerStamLabel4" prefHeight="17.0" prefWidth="114.0" text="Label" />
+               </children>
+               <GridPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </GridPane.margin>
+            </VBox>
+            <VBox prefHeight="120.0" prefWidth="160.0" style="-fx-border-color: black; -fx-border-radius: 4px; -fx-border-color: #D3D3D3;" GridPane.columnIndex="4">
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+               <children>
+                  <Label fx:id="adventurerNameLabel5" prefHeight="17.0" prefWidth="99.0" text="Label">
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Slider fx:id="adventurerStamSlider5">
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                  </Slider>
+                  <Label fx:id="adventurerStamLabel5" prefHeight="17.0" prefWidth="103.0" text="Label" />
+               </children>
+               <GridPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </GridPane.margin>
+            </VBox>
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <VBox.margin>
+            <Insets bottom="10.0" />
+         </VBox.margin>
+      </GridPane>
+      <VBox prefHeight="53.0" prefWidth="570.0">
+         <children>
+            <Separator prefWidth="570.0">
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </Separator>
+            <TextArea fx:id="eventLogField" prefHeight="200.0" prefWidth="200.0">
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </TextArea>
+         </children>
+      </VBox>
+      <Separator prefWidth="200.0">
+         <VBox.margin>
+            <Insets bottom="5.0" />
+         </VBox.margin>
+      </Separator>
+      <VBox prefHeight="185.0" prefWidth="570.0">
+         <children>
+            <Label fx:id="eventNameLabel" prefWidth="31.0" text="Event">
+               <padding>
+                  <Insets bottom="5.0" />
+               </padding>
+            </Label>
+            <GridPane prefHeight="117.0" prefWidth="572.0">
+              <columnConstraints>
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="47.656341552734375" minHeight="10.0" prefHeight="16.3377685546875" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="76.06195068359375" minHeight="10.0" prefHeight="48.550140380859375" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="81.01181030273438" minHeight="10.0" prefHeight="54.449859619140625" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Button fx:id="optionABtn" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="570.0" text="Button" GridPane.rowIndex="1" />
+                  <Button fx:id="optionBBtn" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="572.0" text="Button" GridPane.rowIndex="2" />
+                  <Label fx:id="eventDescriptionLabel" prefHeight="17.0" prefWidth="569.0" text="Event description" />
+               </children>
+            </GridPane>
+         </children>
+      </VBox>
+      <Button fx:id="retreatBtn" mnemonicParsing="false" text="Retreat" />
+   </children>
+   <padding>
+      <Insets bottom="10.0" left="20.0" right="10.0" top="10.0" />
+   </padding>
+</VBox>
