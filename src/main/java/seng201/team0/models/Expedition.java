@@ -1,63 +1,52 @@
 package seng201.team0.models;
-import java.util.ArrayList;
-import java.util.Collections;
+
 import java.util.List;
 
 /**
- * Represents a single expedition destination the player can choose to embark
- * on. Each expedition has a name, a short description, an event pool to draw
- * from, a maximum number of events for a full expedition, a pay multiplier
- * applied to adventurer wages, and a reward multiplier on gold gains.
- *
- * <p>Use {@code ExpeditionService} to actually run an expedition; this class
- * is just the data describing one.
+ * Represents one expedition the player can choose to go on.
+ * An expedition has a name, description, pay modifier, a stamina cutoff
+ * threshold that ends the expedition early, and an ordered list of
+ * {@link Event}s that play out in sequence.
  */
 public class Expedition {
 
     private final String name;
     private final String description;
-    private final int maxEvents;
     private final double payMultiplier;
-    private final double rewardMultiplier;
-    private final List<Event> eventPool;
+    private final int staminaCutoffThreshold;
+    private final List<Event> events;
 
     /**
-     * Constructs a new expedition definition.
-     * @param name display name shown when picking a destination
-     * @param description short blurb about what makes this expedition different
-     * @param maxEvents the maximum number of events for a full run
-     * @param payMultiplier multiplier applied to adventurer pay (e.g. 1.5 = harder)
-     * @param rewardMultiplier multiplier applied to gold rewards
-     * @param eventPool the events that can occur here
+     * Constructs an Expedition.
+     * @param name display name shown to the player
+     * @param description short description of the expedition
+     * @param payMultiplier multiplier applied to each adventurer's pay
+     * @param staminaCutoffThreshold if every party member's stamina drops at or below this value the expedition ends early.
+     * @param events ordered list of events. Must have at least 5
      */
-    public Expedition(String name, String description, int maxEvents,
-                      double payMultiplier, double rewardMultiplier,
-                      List<Event> eventPool) {
+    public Expedition(String name, String description, double payMultiplier, int staminaCutoffThreshold,List<Event> events) {
+        if (events == null || events.size() < 5) {
+            throw new IllegalArgumentException("An expedition must have at least 5 events.");
+        }
         this.name = name;
         this.description = description;
-        this.maxEvents = maxEvents;
         this.payMultiplier = payMultiplier;
-        this.rewardMultiplier = rewardMultiplier;
-        this.eventPool = new ArrayList<>(eventPool);
+        this.staminaCutoffThreshold = staminaCutoffThreshold;
+        this.events = List.copyOf(events);
     }
 
-    /** @return the display name */
+    /** @return expedition display name */
     public String getName() { return name; }
 
-    /** @return the short description shown in the expedition picker */
+    /** @return short description shown on the selection card */
     public String getDescription() { return description; }
 
-    /** @return the maximum number of events a full run can present */
-    public int getMaxEvents() { return maxEvents; }
+    /** @return pay multiplier for this expedition */
+    public double getPayModifier() { return payMultiplier; }
 
-    /** @return multiplier applied to adventurer pay on this expedition */
-    public double getPayMultiplier() { return payMultiplier; }
+    /** @return stamina level at or below which the expedition ends early */
+    public int getStaminaCutoffThreshold() { return staminaCutoffThreshold; }
 
-    /** @return multiplier applied to gold rewards on this expedition */
-    public double getRewardMultiplier() { return rewardMultiplier; }
-
-    /** @return an unmodifiable view of the event pool */
-    public List<Event> getEventPool() {
-        return Collections.unmodifiableList(eventPool);
-    }
+    /** @return unmodifiable ordered list of events */
+    public List<Event> getEvents() { return events; }
 }
