@@ -8,21 +8,14 @@ import seng201.team0.GameEnvironment;
 
 public class MenuScreenController extends ScreenController {
 
-    @FXML
-    private Label currentExpeditionLabel;
-    @FXML
-    private Label remainingExpeditionsLabel;
-    @FXML
-    private Label goldLabel;
+    @FXML private Label currentExpeditionLabel;
+    @FXML private Label remainingExpeditionsLabel;
+    @FXML private Label goldLabel;
 
-    @FXML
-    private Button guildHallBtn;
-    @FXML
-    private Button marketBtn;
-    @FXML
-    private Button recruitBtn;
-    @FXML
-    private Button startExpeditionBtn;
+    @FXML private Button guildHallBtn;
+    @FXML private Button marketBtn;
+    @FXML private Button recruitBtn;
+    @FXML private Button startExpeditionBtn;
 
     /**
      * Initialize the Guild Hall
