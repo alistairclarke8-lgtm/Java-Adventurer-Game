@@ -3,6 +3,7 @@ package seng201.team0;
 import seng201.team0.exception.InsufficientGoldException;
 import seng201.team0.gui.ScreenNavigator;
 import seng201.team0.models.*;
+import seng201.team0.services.ExpeditionService;
 import seng201.team0.services.GuildHallService;
 import seng201.team0.services.MarketService;
 import seng201.team0.services.RecruitmentService;
@@ -20,6 +21,8 @@ public class GameEnvironment {
     private final Market market = new Market();
     private final MarketService marketService;
     private final RecruitmentService recruitmentService;
+    private final ExpeditionService expeditionService = new ExpeditionService(this);
+
     private final ScreenNavigator navigator;
 
 
@@ -67,6 +70,9 @@ public class GameEnvironment {
     public void navigateToGuildHall() {
         navigator.launchGuildHallScreenController(this);
     }
+    public void navigateToExpeditionSelect() {
+        navigator.launchExpeditionSelectScreenController(this);
+    }
 
     public void incrementExpedition() { currentExpedition++; }
     public int getNumExpeditions() {return numExpeditions;}
@@ -104,6 +110,7 @@ public class GameEnvironment {
         if (amount > gold) throw new InsufficientGoldException(amount, gold);
         gold -= amount;
     }
+    public ExpeditionService getExpeditionService() { return expeditionService; }
 
     /** @return the recruitment service */
     public RecruitmentService getRecruitmentService() { return recruitmentService; }

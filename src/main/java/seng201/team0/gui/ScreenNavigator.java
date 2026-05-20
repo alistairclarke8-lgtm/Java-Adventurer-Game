@@ -71,6 +71,12 @@ public class ScreenNavigator {
         ScreenController controller = new RecruitmentScreenController(gameEnvironment);
         launchScreen(controller);
     }
+    public void launchExpeditionSelectScreenController(GameEnvironment gameEnvironment) {
+        ScreenController controller = new ExpeditionSelectScreenController(gameEnvironment);
+        launchScreen(controller);
+    }
+
+
 
     /**
      * Replaces the root border pane's center component with the screen defined by the given

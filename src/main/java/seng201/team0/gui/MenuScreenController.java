@@ -37,7 +37,7 @@ public class MenuScreenController extends ScreenController {
      * various screens they can go to from the menu
      */
     private void onStartExpeditionBtnClicked() {
-        getGameEnvironment().navigateToExpedition();
+        getGameEnvironment().navigateToExpeditionSelect();
     }
     private void onRecruitBtnBtnClicked() {
         getGameEnvironment().navigateToRecruitment();
