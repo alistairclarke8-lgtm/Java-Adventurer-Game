@@ -105,6 +105,20 @@ public class Adventurer implements Purchasable {
     }
 
     /**
+     * Decreases the adventurer's maximum stamina. Used to reverse a temporary
+     * max-stamina buff such as that granted by an equipped item. The current
+     * stamina is clamped to the new maximum so it never exceeds it.
+     * @param amount the amount to subtract from max stamina, must be {@code >= 0}
+     */
+    public void decreaseMaxStamina(int amount) {
+        if (amount < 0) throw new IllegalArgumentException("amount must be >= 0");
+        this.maxStamina = Math.max(0, this.maxStamina - amount);
+        if (this.stamina > this.maxStamina) {
+            this.stamina = this.maxStamina;
+        }
+    }
+
+    /**
      * Restores the adventurer's stamina back to their current max.
      */
     public void fullyRest() {
@@ -172,4 +186,5 @@ public class Adventurer implements Purchasable {
     public List<Skill> getSkills() {return Collections.unmodifiableList(skills); }
 
     public String getType() {return type;}
+
 }
