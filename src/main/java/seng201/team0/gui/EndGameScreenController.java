@@ -56,12 +56,12 @@ public class EndGameScreenController extends ScreenController {
 
     @Override
     protected String getFxmlFile() {
-        return "";
+        return "/fxml/endGame.fxml";
     }
 
     @Override
     protected String getTitle() {
-        return "";
+        return "Game Over";
     }
 
 

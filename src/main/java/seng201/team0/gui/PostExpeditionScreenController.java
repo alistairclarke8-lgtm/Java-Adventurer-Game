@@ -3,6 +3,7 @@ package seng201.team0.gui;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import seng201.team0.GameEnvironment;
 import seng201.team0.models.Adventurer;
 import seng201.team0.models.Item;
@@ -39,6 +40,8 @@ public class PostExpeditionScreenController extends ScreenController {
     @FXML private Label buffLabel2;
     @FXML private Label buffLabel3;
 
+    @FXML private TextArea randomEventsArea;
+
     @FXML private Button continueBtn;
 
     private Label[] nameLabels;
@@ -70,8 +73,26 @@ public class PostExpeditionScreenController extends ScreenController {
 
         populateAdventurerSummary();
         populateItemsFound(expeditionService.getItemsFound());
+        populateRandomEvents(expeditionService.getRandomEventMessages());
 
         continueBtn.setOnAction(e -> getGameEnvironment().navigateToMenu());
+    }
+
+    /**
+     * Populates the random events text area with the messages produced by
+     * the RandomEventService for this round.
+     * @param messages random-event messages to display
+     */
+    private void populateRandomEvents(List<String> messages) {
+        if (messages == null || messages.isEmpty()) {
+            randomEventsArea.setText("Nothing unusual happened this round.");
+            return;
+        }
+        StringBuilder builder = new StringBuilder();
+        for (String message : messages) {
+            builder.append("- ").append(message).append("\n");
+        }
+        randomEventsArea.setText(builder.toString().trim());
     }
 
     private void populateAdventurerSummary() {
