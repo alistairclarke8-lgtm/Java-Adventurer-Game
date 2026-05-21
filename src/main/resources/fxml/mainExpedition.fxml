@@ -193,7 +193,7 @@
                   <Insets bottom="5.0" />
                </VBox.margin>
             </Separator>
-            <TextArea fx:id="eventLogField" prefHeight="142.0" prefWidth="570.0">
+            <TextArea fx:id="eventLogField" editable="false" prefHeight="142.0" prefWidth="570.0">
                <VBox.margin>
                   <Insets bottom="5.0" />
                </VBox.margin>
