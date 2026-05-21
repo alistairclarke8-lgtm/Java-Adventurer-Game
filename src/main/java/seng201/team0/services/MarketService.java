@@ -7,7 +7,6 @@ import seng201.team0.models.Item;
 /**
  * Service class for market logic
  * Buying items, selling items back and refreshing the per round stock
- *
  */
 public class MarketService {
 
@@ -17,8 +16,17 @@ public class MarketService {
     /** The maximum number of items shown per round. */
     public static final int MAX_STOCK = 6;
 
+    /**
+     * The shared game environment, used to access and mutate gold, market
+     * stock, player inventory, and difficulty settings.
+     */
     private final GameEnvironment gameEnvironment;
 
+    /**
+     * Constructs a {@code MarketService} bound to the given game environment.
+     *
+     * @param gameEnvironment the active GameEnvironment, must not be null
+     */
     public MarketService(GameEnvironment gameEnvironment) {
         this.gameEnvironment = gameEnvironment;
     }
