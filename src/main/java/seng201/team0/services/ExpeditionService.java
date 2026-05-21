@@ -152,4 +152,13 @@ public class ExpeditionService {
     public int getEventsCompleted() { return eventsCompleted; }
     public List<String> getLog() { return log; }
     public List<Item> getItemsFound() { return itemsFound; }
-}
+    public boolean isExpeditionOver() { return expeditionOver; }
+    public void retreat() {
+        retreated = true;
+        expeditionOver = false;
+        finaliseExpedition();
+    }
+    public boolean wasRetreated() {
+        return retreated;
+    }
+    }
