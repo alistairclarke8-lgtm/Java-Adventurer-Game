@@ -2,7 +2,9 @@ package seng201.team0.services;
 
 import seng201.team0.GameEnvironment;
 import seng201.team0.exception.InsufficientGoldException;
+import seng201.team0.factories.ItemFactory;
 import seng201.team0.models.Item;
+import seng201.team0.models.Market;
 
 /**
  * Service class for market logic
@@ -54,5 +56,9 @@ public class MarketService {
     public int getSellPrice(Item item) {
         double multiplier = gameEnvironment.getDifficulty().getCostMultiplier();
         return (int) item.getSellPrice(multiplier);
+    }
+    public void refreshStock() {
+
+        gameEnvironment.getMarket().setItems(ItemFactory.getRandom(5));
     }
 }
