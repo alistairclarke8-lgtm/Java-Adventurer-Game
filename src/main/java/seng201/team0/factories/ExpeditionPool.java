@@ -5,6 +5,7 @@ import seng201.team0.models.EventOutcome;
 import seng201.team0.models.Expedition;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -38,7 +39,11 @@ public class ExpeditionPool {
                 buildDesertTomb()
         );
     }
-
+    public static List<Expedition> getRandom(int count) {
+        List<Expedition> shuffled = new ArrayList<>(getAll());
+        Collections.shuffle(shuffled);
+        return shuffled.subList(0, Math.min(count, shuffled.size()));
+    }
     // -------------------------------------------------------------------------
     // EXPEDITION 1
     // -------------------------------------------------------------------------
