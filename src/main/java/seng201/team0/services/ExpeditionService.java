@@ -1,9 +1,9 @@
 package seng201.team0.services;
 
 import seng201.team0.GameEnvironment;
+import seng201.team0.exception.ExpeditionOverException;
 import seng201.team0.factories.ExpeditionPool;
-import seng201.team0.models.Expedition;
-import seng201.team0.models.Item;
+import seng201.team0.models.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,4 +53,82 @@ public class ExpeditionService {
         this.itemsFound.clear();
         log.add("Your party sets out on the " + expedition.getName() + ".");
     }
+    public Event getCurrentEvent() {
+        if (expeditionOver) return null;
+        List<Event> events = currentExpedition.getEvents();
+        if (currentEventIndex >= events.size()) return null;
+        return events.get(currentEventIndex);
+    }
+
+    public void completeChoice(int choiceIndex) throws ExpeditionOverException {
+        if (expeditionOver) throw new ExpeditionOverException();
+
+        Event event = getCurrentEvent();
+        EventOption option = event.options().get(currentEventIndex);
+        EventOutcome outcome = option.rollOutcome(random);
+        log.add("-" + outcome.getDescription());
+
+        if (outcome.getGoldChange() > 0) {
+            goldEarned += outcome.getGoldChange();
+            log.add("  (+" + outcome.getGoldChange() + " gold)");
+        }
+        else if (outcome.getGoldChange() < 0) {
+            goldEarned = Math.max(0,goldEarned+ outcome.getGoldChange());
+            log.add("  (" + outcome.getGoldChange() + " gold)");
+        }
+        if (outcome.getStaminaChange() != 0) {
+            applyStaminaToParty(outcome.getStaminaChange());
+            if (outcome.getStaminaChange() > 0) {
+                log.add("  (Party stamina +" + outcome.getStaminaChange() + ")");
+            } else {
+                log.add("  (Party stamina " + outcome.getStaminaChange() + ")");
+            }
+        }
+
+        eventsCompleted++;
+        currentEventIndex++;
+
+        if (outcome.endsExpedition()) {
+            log.add("The expedition has come to an early end.");
+            expeditionOver = true;
+            return;
+        }
+
+        if (isPartyExhausted()) {
+            log.add("The party is exhausted. We have to head back to the guild.");
+            expeditionOver = true;
+            return;
+        }
+
+        if (currentEventIndex >= currentExpedition.getEvents().size()) {
+            log.add("The party has completed the " + currentExpedition.getName() + "!");
+            expeditionOver = true;
+        }
+    }
+    private void applyStaminaToParty(int delta) {
+        for (Adventurer adventurer : gameEnvironment.getGuildhall().getMainPartyAdventurers()) {
+            adventurer.adjustStamina(delta);
+        }
+    }
+    private boolean isPartyExhausted() {
+        int threshold = currentExpedition.getStaminaCutoffThreshold();
+        for (Adventurer adventurer : gameEnvironment.getGuildhall().getMainPartyAdventurers()) {
+            if (adventurer.getStamina() > threshold) return false;
+        }
+        return true;
+    }
+
+
+    public int getGoldEarned() {
+        return goldEarned;
+    }
+
+    public int getEventsCompleted() {
+        return eventsCompleted;
+    }
+
+    public List<String> getLog() {
+        return log;
+    }
+
 }
