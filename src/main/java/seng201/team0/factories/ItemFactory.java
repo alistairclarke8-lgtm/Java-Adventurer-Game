@@ -3,6 +3,7 @@ package seng201.team0.factories;
 import seng201.team0.models.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -55,5 +56,11 @@ public final class ItemFactory {
                 new Skill("Veteran", "Battle-hardened.", 10, 5)));
 
         return items;
+    }
+
+    public static List<Item> getRandom(int count) {
+        List<Item> shuffled = new ArrayList<>(buildMasterItemPool());
+        Collections.shuffle(shuffled);
+        return shuffled.subList(0, Math.min(count, shuffled.size()));
     }
 }
