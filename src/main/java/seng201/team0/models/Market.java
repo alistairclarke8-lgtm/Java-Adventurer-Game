@@ -25,11 +25,11 @@ public class Market {
 
     /**
      * removes item from shop.
+     *
      * @param item to remove from available items
-     * @return True is the item was removed
      */
-    public boolean removeItem(Item item) {
-        return availableItems.remove(item);
+    public void removeItem(Item item) {
+        availableItems.remove(item);
     }
 
 

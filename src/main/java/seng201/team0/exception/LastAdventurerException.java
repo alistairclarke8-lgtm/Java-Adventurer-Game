@@ -8,6 +8,6 @@ public class LastAdventurerException extends Exception {
      * Calls the superclass Exception with the human-readable message
      */
     public LastAdventurerException() {
-        super("Cannot retire the last adventurer.");
+        super("Cannot retire the last adventurer. The guild must contain at least one.");
     }
 }

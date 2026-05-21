@@ -12,6 +12,12 @@ import seng201.team0.services.ExpeditionService;
 
 import java.util.List;
 
+/**
+ * Controller for the in-progress expedition screen. Renders the party's
+ * current stamina, the current event prompt and option buttons, and a
+ * running log of outcomes. Routes the player to the post-expedition
+ * summary once the expedition ends.
+ */
 public class ExpeditionInProgressController extends ScreenController{
     @FXML private Label ExpeditionNameLabel;
     @FXML private Label eventNumLabel;
@@ -59,6 +65,8 @@ public class ExpeditionInProgressController extends ScreenController{
         optionABtn.setOnAction(actionEvent -> onChoiceBtnClicked(0));
         optionBBtn.setOnAction(actionEvent -> onChoiceBtnClicked(1));
         retreatBtn.setOnAction(actionEvent -> onRetreatBtnClicked());
+
+        ExpeditionNameLabel.setText(expedition.getName());
 
         refreshPartyDisplay();
         refreshEventDisplay();
