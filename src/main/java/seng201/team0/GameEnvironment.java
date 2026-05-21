@@ -22,6 +22,8 @@ public class GameEnvironment {
     private final MarketService marketService;
     private final RecruitmentService recruitmentService;
     private final ExpeditionService expeditionService = new ExpeditionService(this);
+    private Expedition selectedExpedition;
+
 
     private final ScreenNavigator navigator;
 
@@ -64,9 +66,7 @@ public class GameEnvironment {
     public void navigateToMarket() {
         navigator.launchMarketScreenController(this);
     }
-    public void navigateToExpedition() {
-//        navigator.launchMenuScreenController(this);
-    }
+    public void navigateToExpedition() {navigator.launchExpeditionInProgressScreen(this);}
     public void navigateToGuildHall() {
         navigator.launchGuildHallScreenController(this);
     }
@@ -83,6 +83,8 @@ public class GameEnvironment {
     public int getRemainingExpeditions() {return numExpeditions-currentExpedition;}
     public GuildHallService getGuildHallService() { return guildHallService; }
     public Guildhall getGuildhall() { return guildhall; }
+    public void setSelectedExpedition(Expedition expedition) {this.selectedExpedition = expedition;}
+    public Expedition getSelectedExpedition() {return selectedExpedition;}
 
     /** @return the market */
     public Market getMarket() { return market; }

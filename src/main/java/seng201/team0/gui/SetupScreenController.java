@@ -103,8 +103,6 @@ public class SetupScreenController extends ScreenController {
             getGameEnvironment().onSetupComplete(setupModel);
         } catch (SetupValidationException e) {
             showValidationError(e.getMessage());
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 

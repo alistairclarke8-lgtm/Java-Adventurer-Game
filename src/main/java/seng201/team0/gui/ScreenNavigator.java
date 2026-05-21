@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import seng201.team0.GameEnvironment;
+import seng201.team0.models.Expedition;
 
 import java.io.IOException;
 
@@ -75,6 +76,10 @@ public class ScreenNavigator {
         ScreenController controller = new ExpeditionSelectScreenController(gameEnvironment);
         launchScreen(controller);
     }
+    public void launchExpeditionInProgressScreen(GameEnvironment gameEnvironment) {
+        ScreenController controller = new ExpeditionInProgressController(gameEnvironment);
+        launchScreen(controller);
+    }
 
 
 
@@ -99,4 +104,5 @@ public class ScreenNavigator {
             e.printStackTrace();
         }
     }
+
 }
