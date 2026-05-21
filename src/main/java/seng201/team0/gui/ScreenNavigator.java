@@ -39,6 +39,11 @@ public class ScreenNavigator {
         stage.show();
     }
 
+    protected ScreenNavigator() {
+        this.stage = null;
+        this.rootPane = null;
+    }
+
     /**
      * Launches the setup screen.
      *
