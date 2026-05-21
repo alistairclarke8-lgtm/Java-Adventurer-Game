@@ -12,6 +12,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * Drives all expedition logic. Event resolution, gold tracking, pay deduction, and party stamina.
+ */
 public class ExpeditionService {
 
     /** Base probability a single event yields an item. Modulated by perception. */
@@ -88,10 +91,7 @@ public class ExpeditionService {
         log.add("Your party sets out on the " + expedition.getName() + ".");
     }
 
-    /**
-     * @return the next event the player must resolve, or null if the
-     *         expedition has ended.
-     */
+    /** @return the current event, or null if the expedition is over */
     public Event getCurrentEvent() {
         if (expeditionOver) return null;
         List<Event> events = currentExpedition.getEvents();
@@ -224,12 +224,14 @@ public class ExpeditionService {
         log.add("Score gained: " + scoreDelta);
     }
 
+    /** Applies a stamina change to every main party adventurer. */
     private void applyStaminaToParty(int delta) {
         for (Adventurer adventurer : gameEnvironment.getGuildhall().getMainPartyAdventurers()) {
             adventurer.adjustStamina(delta);
         }
     }
 
+    /** @return true if every adventurer is at or below the expedition's stamina cutoff */
     private boolean isPartyExhausted() {
         int threshold = currentExpedition.getStaminaCutoffThreshold();
         for (Adventurer adventurer : gameEnvironment.getGuildhall().getMainPartyAdventurers()) {
