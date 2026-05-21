@@ -53,6 +53,8 @@ public class GameEnvironment {
         this.difficulty = setupModel.getDifficulty();
         this.gold = difficulty.getStartingGold();
         guildHallService.addStartingParty(setupModel.getSelectedAdventurers());
+        marketService.refreshStock();
+        recruitmentService.refreshPool();
         navigateToMenu();
     }
 
@@ -73,6 +75,11 @@ public class GameEnvironment {
     }
     public void navigateToExpeditionSelect() {
         navigator.launchExpeditionSelectScreenController(this);
+    }
+    public void navigateToPostExpedition() {
+        marketService.refreshStock();
+        recruitmentService.refreshPool();
+        navigator.launchPostExpeditionScreen(this);
     }
 
     public void incrementExpedition() { currentExpedition++; }
@@ -108,11 +115,11 @@ public class GameEnvironment {
      *               must be a non-negative value
      *               must be not greater than the amount of gold the player has
      */
-    public void spendGold(int amount) throws InsufficientGoldException {
+    public void spendGold(int amount) {
         if (amount < 0) throw new IllegalArgumentException("amount must be >= 0");
-        if (amount > gold) throw new InsufficientGoldException(amount, gold);
-        gold -= amount;
+        gold = Math.max(0, gold - amount);
     }
+
     public ExpeditionService getExpeditionService() { return expeditionService; }
 
     /** @return the recruitment service */
