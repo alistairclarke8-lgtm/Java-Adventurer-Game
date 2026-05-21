@@ -100,24 +100,18 @@ public class GameEnvironment {
 
 
     /**
-     * Increases the player's gold amount
-     * @param amount the amount the gold will increase by
-     *               must be a non-negative value
-     */
-    public void gainGold(int amount) {
-        if (amount < 0) throw new IllegalArgumentException("amount must be >= 0");
-        gold += amount;
-    }
-
-    /**
      * Decreases the player's gold amount
      * @param amount the amount the gold will decrease by
      *               must be a non-negative value
      *               must be not greater than the amount of gold the player has
      */
-    public void spendGold(int amount) {
+    public void spendGold(int amount) throws InsufficientGoldException {
         if (amount < 0) throw new IllegalArgumentException("amount must be >= 0");
-        gold = Math.max(0, gold - amount);
+        if (amount > gold) throw new InsufficientGoldException(amount, gold);
+        gold -= amount;
+    }
+    public void adjustGold(int amount) {
+        gold = Math.max(0, gold + amount);
     }
 
     public ExpeditionService getExpeditionService() { return expeditionService; }

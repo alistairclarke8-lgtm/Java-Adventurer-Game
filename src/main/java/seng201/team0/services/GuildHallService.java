@@ -1,9 +1,6 @@
 package seng201.team0.services;
 
-import seng201.team0.exception.EmptyPartyException;
-import seng201.team0.exception.EmptyReservesException;
-import seng201.team0.exception.GuildFullException;
-import seng201.team0.exception.LastAdventurerException;
+import seng201.team0.exception.*;
 import seng201.team0.models.Adventurer;
 import seng201.team0.models.Guildhall;
 import seng201.team0.models.Item;
@@ -121,12 +118,12 @@ public class GuildHallService {
      * @throws GuildFullException if reserves are full
      * @throws EmptyPartyException if the main party would be left empty
      */
-    public void moveMainPartyToReserve(Adventurer adventurer) throws GuildFullException, EmptyPartyException {
+    public void moveMainPartyToReserve(Adventurer adventurer) throws GuildFullException, EmptyPartyException, LastInPartyException {
         if (!guildhall.getMainPartyAdventurers().contains(adventurer)) {
-            throw new IllegalArgumentException("Adventurer is not in main party.");
+            throw new EmptyPartyException("Adventurer is not in main party.");
         }
         if (guildhall.getMainPartyAdventurers().size() <= 1) {
-            throw new IllegalStateException("Main party must have at least one adventurer.");
+            throw new LastInPartyException("You cannot move your last adventurer to reserves.");
         }
         if (guildhall.getReservedAdventurers().size() >= Guildhall.reservesCapacity) {
             throw new GuildFullException("Reserves are full (max " + Guildhall.reservesCapacity + ").");

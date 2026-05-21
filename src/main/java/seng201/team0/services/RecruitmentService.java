@@ -79,8 +79,7 @@ public class RecruitmentService {
      *                                   purchase the adventurer,
      * @throws GuildFullException if the player's guild is full of adventurers
      */
-    public void hire(Adventurer adventurer)
-            throws InsufficientGoldException, GuildFullException {
+    public void hire(Adventurer adventurer) throws InsufficientGoldException, GuildFullException {
         if (!availableRecruits.contains(adventurer)) {
             throw new IllegalArgumentException("Adventurer is not in the recruitment pool.");
         }

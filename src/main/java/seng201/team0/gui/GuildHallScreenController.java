@@ -3,10 +3,7 @@ package seng201.team0.gui;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import seng201.team0.GameEnvironment;
-import seng201.team0.exception.EmptyPartyException;
-import seng201.team0.exception.EmptyReservesException;
-import seng201.team0.exception.GuildFullException;
-import seng201.team0.exception.LastAdventurerException;
+import seng201.team0.exception.*;
 import seng201.team0.models.Adventurer;
 import seng201.team0.models.Item;
 
@@ -113,7 +110,10 @@ public class GuildHallScreenController extends ScreenController {
     }
 
     private void onSwapBtnClicked() {
-        if (selectedMainPartyIndex == -1 || selectedReservePartyIndex == -1) return;
+        if (selectedMainPartyIndex == -1 || selectedReservePartyIndex == -1) {
+            showError("Please select an adventurer from both the main party and reserves.");
+            return;
+        }
         try {
             getGameEnvironment().getGuildHallService().swapAdventurers(
                     getGameEnvironment().getGuildhall().getMainPartyAdventurers().get(selectedMainPartyIndex),
@@ -129,7 +129,10 @@ public class GuildHallScreenController extends ScreenController {
     }
 
     private void onRetireBtnClicked() {
-        if (selectedAdventurer == null) return;
+        if (selectedAdventurer == null) {
+            showError("Please select an adventurer to retire.");
+            return;
+        }
         try {
             getGameEnvironment().getGuildHallService().retire(selectedAdventurer);
             selectedAdventurer = null;
@@ -143,7 +146,10 @@ public class GuildHallScreenController extends ScreenController {
     }
 
     private void onMakeReserveBtnClicked() {
-        if (selectedMainPartyIndex == -1) return;
+        if (selectedMainPartyIndex == -1) {
+            showError("Please select a main party adventurer to move to reserves.");
+            return;
+        }
         try {
             getGameEnvironment().getGuildHallService().moveMainPartyToReserve(
                     getGameEnvironment().getGuildhall().getMainPartyAdventurers().get(selectedMainPartyIndex));
@@ -151,13 +157,16 @@ public class GuildHallScreenController extends ScreenController {
             selectedAdventurer = null;
             setupMainPartyButtons();
             setupReserveButtons();
-        } catch (GuildFullException | EmptyPartyException e) {
+        } catch (GuildFullException | EmptyPartyException | LastInPartyException e) {
             showError(e.getMessage());
         }
     }
 
     private void onMoveToMainBtnClicked() {
-        if (selectedReservePartyIndex == -1) return;
+        if (selectedReservePartyIndex == -1) {
+            showError("Please select a reserve adventurer to move to the main party.");
+            return;
+        }
         try {
             getGameEnvironment().getGuildHallService().moveReserveToMainParty(
                     getGameEnvironment().getGuildhall().getReservedAdventurers().get(selectedReservePartyIndex));
@@ -165,13 +174,17 @@ public class GuildHallScreenController extends ScreenController {
             selectedAdventurer = null;
             setupMainPartyButtons();
             setupReserveButtons();
-        } catch (EmptyReservesException | GuildFullException e) {
+        } catch (GuildFullException | EmptyReservesException e) {
             showError(e.getMessage());
         }
+
     }
 
     private void onUseEquipBtnClicked() {
-        if (selectedAdventurer == null || selectedItem == null) return;
+        if (selectedAdventurer == null || selectedItem == null) {
+            showError("Please select an adventurer and an item.");
+            return;
+        }
         if (selectedItem.isConsumedOnUse()) {
             getGameEnvironment().getGuildHallService().useItem(selectedAdventurer, selectedItem);
         } else {

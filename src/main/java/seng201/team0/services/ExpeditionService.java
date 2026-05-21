@@ -116,20 +116,20 @@ public class ExpeditionService {
     private void finaliseExpedition() {
         double payModifier = currentExpedition.getPayModifier();
         for (Adventurer adventurer : gameEnvironment.getGuildhall().getMainPartyAdventurers()) {
-            payDeducted += (int) (adventurer.getPay() * payModifier);
+            payDeducted += (int)(adventurer.getPay() * payModifier);
         }
 
         netGain = goldEarned - payDeducted;
-
-        if (netGain >= 0) {
-            gameEnvironment.gainGold(netGain);
-        } else {
-            gameEnvironment.spendGold(Math.min(-netGain, gameEnvironment.getGold()));
-        }
+        gameEnvironment.adjustGold(netGain);
 
         log.add("Gold earned: " + goldEarned + "g");
         log.add("Pay deducted: " + payDeducted + "g");
         log.add("Net gain: " + netGain + "g");
+    }
+    public void retreat() {
+        retreated = true;
+        expeditionOver = true;
+        finaliseExpedition();
     }
 
     private void applyStaminaToParty(int delta) {
@@ -153,12 +153,5 @@ public class ExpeditionService {
     public List<String> getLog() { return log; }
     public List<Item> getItemsFound() { return itemsFound; }
     public boolean isExpeditionOver() { return expeditionOver; }
-    public void retreat() {
-        retreated = true;
-        expeditionOver = false;
-        finaliseExpedition();
-    }
-    public boolean wasRetreated() {
-        return retreated;
-    }
-    }
+    public boolean wasRetreated() { return retreated; }
+}

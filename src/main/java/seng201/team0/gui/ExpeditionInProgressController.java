@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import seng201.team0.GameEnvironment;
 import seng201.team0.exception.ExpeditionOverException;
+import seng201.team0.exception.InsufficientGoldException;
 import seng201.team0.models.Adventurer;
 import seng201.team0.models.Event;
 import seng201.team0.models.EventOption;
@@ -19,7 +20,7 @@ import java.util.List;
  * summary once the expedition ends.
  */
 public class ExpeditionInProgressController extends ScreenController{
-    @FXML private Label ExpeditionNameLabel;
+    @FXML private Label expeditionNameLabel;
     @FXML private Label eventNumLabel;
     @FXML private Label goldGainedLabel;
 
@@ -66,7 +67,7 @@ public class ExpeditionInProgressController extends ScreenController{
         optionBBtn.setOnAction(actionEvent -> onChoiceBtnClicked(1));
         retreatBtn.setOnAction(actionEvent -> onRetreatBtnClicked());
 
-        ExpeditionNameLabel.setText(expedition.getName());
+        expeditionNameLabel.setText(expedition.getName());
 
         refreshPartyDisplay();
         refreshEventDisplay();
@@ -87,11 +88,13 @@ public class ExpeditionInProgressController extends ScreenController{
             appendRecentLogs();
 
             if (expeditionService.getCurrentEvent() == null) {
+                getGameEnvironment().incrementExpedition();
                 getGameEnvironment().navigateToPostExpedition();
             } else {
                 refreshEventDisplay();
             }
         } catch (ExpeditionOverException e) {
+            getGameEnvironment().incrementExpedition();
             getGameEnvironment().navigateToPostExpedition();
         }
     }

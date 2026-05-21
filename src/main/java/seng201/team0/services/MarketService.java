@@ -63,7 +63,7 @@ public class MarketService {
         }
         int price = getSellPrice(item);
         gameEnvironment.getGuildhall().getInventoryItems().remove(item);
-        gameEnvironment.gainGold(price);
+        gameEnvironment.adjustGold(price);
     }
 
     /**
