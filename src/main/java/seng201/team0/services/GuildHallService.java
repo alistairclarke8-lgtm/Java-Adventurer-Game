@@ -41,8 +41,8 @@ public class GuildHallService {
      * @throws GuildFullException if the main party is full
      */
     public void makeMainPartyAdventurer(Adventurer adventurer) throws GuildFullException {
-        if (guildhall.getMainPartyAdventurers().size() >= Guildhall.MAIN_PARTY_CAPACITY) {
-            throw new GuildFullException("Main party is full (max " + Guildhall.MAIN_PARTY_CAPACITY + ").");
+        if (guildhall.getMainPartyAdventurers().size() >= Guildhall.mainPartyCapacity) {
+            throw new GuildFullException("Main party is full (max " + Guildhall.mainPartyCapacity + ").");
         }
         guildhall.getMainPartyAdventurers().add(adventurer);
     }
@@ -66,8 +66,8 @@ public class GuildHallService {
      * @throws GuildFullException if reserves are full
      */
     public void makeReservedAdventurer(Adventurer adventurer) throws GuildFullException {
-        if (guildhall.getReservedAdventurers().size() >= Guildhall.RESERVES_CAPACITY) {
-            throw new GuildFullException("Reserves are full (max " + Guildhall.RESERVES_CAPACITY + ").");
+        if (guildhall.getReservedAdventurers().size() >= Guildhall.reservesCapacity) {
+            throw new GuildFullException("Reserves are full (max " + Guildhall.reservesCapacity + ").");
         }
         guildhall.getReservedAdventurers().add(adventurer);
     }
@@ -108,8 +108,8 @@ public class GuildHallService {
         if (!guildhall.getReservedAdventurers().contains(adventurer)) {
             throw new IllegalArgumentException("Adventurer is not in reserves.");
         }
-        if (guildhall.getMainPartyAdventurers().size() >= Guildhall.MAIN_PARTY_CAPACITY) {
-            throw new GuildFullException("Main party is full (max " + Guildhall.MAIN_PARTY_CAPACITY + ").");
+        if (guildhall.getMainPartyAdventurers().size() >= Guildhall.mainPartyCapacity) {
+            throw new GuildFullException("Main party is full (max " + Guildhall.mainPartyCapacity + ").");
         }
         removeReservedAdventurer(adventurer);
         makeMainPartyAdventurer(adventurer);
@@ -128,8 +128,8 @@ public class GuildHallService {
         if (guildhall.getMainPartyAdventurers().size() <= 1) {
             throw new IllegalStateException("Main party must have at least one adventurer.");
         }
-        if (guildhall.getReservedAdventurers().size() >= Guildhall.RESERVES_CAPACITY) {
-            throw new GuildFullException("Reserves are full (max " + Guildhall.RESERVES_CAPACITY + ").");
+        if (guildhall.getReservedAdventurers().size() >= Guildhall.reservesCapacity) {
+            throw new GuildFullException("Reserves are full (max " + Guildhall.reservesCapacity + ").");
         }
         guildhall.getMainPartyAdventurers().remove(adventurer);
         guildhall.getReservedAdventurers().add(adventurer);

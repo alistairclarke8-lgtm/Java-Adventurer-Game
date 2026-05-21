@@ -86,9 +86,9 @@ public class RecruitmentService {
         }
         int price = getHirePrice(adventurer);
         if (gameEnvironment.getGuildhall().getReservedAdventurers().size()
-                >= Guildhall.RESERVES_CAPACITY) {
+                >= Guildhall.reservesCapacity) {
             throw new GuildFullException("Reserves are full (max "
-                    + Guildhall.RESERVES_CAPACITY + ").");
+                    + Guildhall.reservesCapacity + ").");
         }
         gameEnvironment.spendGold(price);
         gameEnvironment.getGuildHallService().makeReservedAdventurer(adventurer);

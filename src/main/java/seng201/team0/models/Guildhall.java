@@ -1,9 +1,6 @@
 package seng201.team0.models;
 
-import seng201.team0.factories.AdventurerFactory;
-
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Guildhall represents the players guild and holds their main party and reserved adventurers,
@@ -12,10 +9,10 @@ import java.util.List;
 public class Guildhall {
 
     /** Maximum number of adventurers in the main party. */
-    public static final int MAIN_PARTY_CAPACITY = 5;
+    public static final int mainPartyCapacity = 5;
 
     /** Maximum number of adventurers in the reserves. */
-    public static final int RESERVES_CAPACITY = 5;
+    public static final int reservesCapacity = 5;
 
     private ArrayList<Adventurer> mainPartyAdventurers = new ArrayList<>();
     private final ArrayList<Adventurer> reservedAdventurers = new ArrayList<>();

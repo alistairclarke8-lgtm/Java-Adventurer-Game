@@ -1,4 +1,4 @@
-package seng201.team0.unittests;
+package seng201.team0.unittests.models;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -104,10 +104,10 @@ public class AdventurerTests {
     void equipAndUnequipUpdatesEquippedItemAndStats() {
         int oldPerception = adventurer.getPerception();
         EquipableItem lens = new EquipableItem("Lens", 10, "x", "perception", 5);
-        adventurer.equip(lens);
+        adventurer.setEquippedItem(lens);
         assertSame(lens, adventurer.getEquippedItem());
         assertEquals(oldPerception + 5, adventurer.getPerception());
-        adventurer.equip(null);
+        adventurer.setEquippedItem(null);
         assertNull(adventurer.getEquippedItem());
         assertEquals(oldPerception, adventurer.getPerception());
     }
@@ -116,8 +116,8 @@ public class AdventurerTests {
     void equipReplacesPreviousItem() {
         EquipableItem boots = new EquipableItem("Boots", 10, "x", "stamina", 5);
         EquipableItem armor = new EquipableItem("Armor", 20, "x", "stamina", 15);
-        adventurer.equip(boots);
-        adventurer.equip(armor);
+        adventurer.setEquippedItem(boots);
+        adventurer.setEquippedItem(armor);
         assertSame(armor, adventurer.getEquippedItem());
     }
 
