@@ -140,7 +140,8 @@ public class ExpeditionSelectScreenController extends ScreenController {
      * Starts the selected expedition and navigates to the in-progress screen.
      */
     private void depart() {
+        getGameEnvironment().setSelectedExpedition(selectedExpedition);
         getGameEnvironment().getExpeditionService().startExpedition(selectedExpedition);
-//        getGameEnvironment().navigateToExpedition();
+        getGameEnvironment().navigateToExpedition();
     }
 }

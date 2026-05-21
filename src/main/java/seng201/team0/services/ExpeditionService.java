@@ -64,7 +64,7 @@ public class ExpeditionService {
         if (expeditionOver) throw new ExpeditionOverException();
 
         Event event = getCurrentEvent();
-        EventOption option = event.options().get(currentEventIndex);
+        EventOption option = event.options().get(choiceIndex);
         EventOutcome outcome = option.rollOutcome(random);
         log.add("-" + outcome.getDescription());
 
