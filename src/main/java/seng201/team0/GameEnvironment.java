@@ -15,6 +15,7 @@ public class GameEnvironment {
     private int gold;
     private int currentExpedition = 1;
     private int score = 0;
+    private boolean won = false;
 
     private final Guildhall guildhall = new Guildhall();
     private final GuildHallService guildHallService = new GuildHallService(guildhall);
@@ -123,5 +124,13 @@ public class GameEnvironment {
 
     public void setScore(int score) {
         this.score = score;
+    }
+
+    public boolean isWon() {
+        return won;
+    }
+
+    public int getExpeditionsCompleted() {
+        return currentExpedition;
     }
 }

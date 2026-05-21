@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Factory for generating the available adventurers in each game
+ */
 public class AdventurerFactory {
     private static final List<Adventurer> POOL = List.of(
             new Adventurer("Simon", 70, 40, 18, 8,  "Archer"),
@@ -32,6 +35,12 @@ public class AdventurerFactory {
             new Adventurer("Charlie", 90, 95, 38, 15, "Frog")
     );
 
+    /**
+     * Adventurer pool is shuffled every method call.
+     * This is in order ot receive random adventurers each call.
+     * @param count the number of adventurers need to return
+     * @return a shuffled list of adventurers of length (count)
+     */
     public static List<Adventurer> getRandom(int count) {
         List<Adventurer> shuffled = new ArrayList<>(POOL);
         Collections.shuffle(shuffled);
