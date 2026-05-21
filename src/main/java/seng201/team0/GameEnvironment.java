@@ -110,6 +110,10 @@ public class GameEnvironment {
         if (amount > gold) throw new InsufficientGoldException(amount, gold);
         gold -= amount;
     }
+    /**
+     * Used to adjust gold when gold should not decrease below 0.
+     * @param amount of gold.
+     */
     public void adjustGold(int amount) {
         gold = Math.max(0, gold + amount);
     }

@@ -9,6 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * Drives all expedition logic. Event resolution, gold tracking, pay deduction, and party stamina.
+ */
 public class ExpeditionService {
 
     private final GameEnvironment gameEnvironment;
@@ -27,23 +30,31 @@ public class ExpeditionService {
     private final List<String> log = new ArrayList<>();
     private final List<Item> itemsFound = new ArrayList<>();
 
+    /**
+     * @param gameEnvironment the game environment
+     * @param random the random instance to use
+     */
     public ExpeditionService(GameEnvironment gameEnvironment, Random random) {
         this.gameEnvironment = gameEnvironment;
         this.random = random;
     }
 
+    /** Uses a default {@link Random}. */
     public ExpeditionService(GameEnvironment gameEnvironment) {
         this(gameEnvironment, new Random());
     }
 
+    /** Picks 3 random expeditions for this round. */
     public void refreshExpeditions() {
         availableExpeditions = ExpeditionPool.getRandom(3);
     }
 
+    /** @return the expeditions available this round */
     public List<Expedition> getAvailableExpeditions() {
         return availableExpeditions;
     }
 
+    /** Resets all expedition state and begins the given expedition. */
     public void startExpedition(Expedition expedition) {
         this.currentExpedition = expedition;
         this.currentEventIndex = 0;
@@ -58,6 +69,7 @@ public class ExpeditionService {
         log.add("Your party sets out on the " + expedition.getName() + ".");
     }
 
+    /** @return the current event, or null if the expedition is over */
     public Event getCurrentEvent() {
         if (expeditionOver) return null;
         List<Event> events = currentExpedition.getEvents();
@@ -65,6 +77,13 @@ public class ExpeditionService {
         return events.get(currentEventIndex);
     }
 
+    /**
+     * Completes the player's choice for the current event.
+     * Applies gold and stamina changes, advances the event index,
+     * and finalises the expedition if it ends.
+     * @param choiceIndex index of the chosen option
+     * @throws ExpeditionOverException if the expedition has already ended
+     */
     public void completeChoice(int choiceIndex) throws ExpeditionOverException {
         if (expeditionOver) throw new ExpeditionOverException();
 
@@ -113,6 +132,8 @@ public class ExpeditionService {
             finaliseExpedition();
         }
     }
+
+    /** Calculates pay, applies net gold change, and logs the results. */
     private void finaliseExpedition() {
         double payModifier = currentExpedition.getPayModifier();
         for (Adventurer adventurer : gameEnvironment.getGuildhall().getMainPartyAdventurers()) {
@@ -126,18 +147,22 @@ public class ExpeditionService {
         log.add("Pay deducted: " + payDeducted + "g");
         log.add("Net gain: " + netGain + "g");
     }
+
+    /** Ends the expedition early and finalises. */
     public void retreat() {
         retreated = true;
         expeditionOver = true;
         finaliseExpedition();
     }
 
+    /** Applies a stamina change to every main party adventurer. */
     private void applyStaminaToParty(int delta) {
         for (Adventurer adventurer : gameEnvironment.getGuildhall().getMainPartyAdventurers()) {
             adventurer.adjustStamina(delta);
         }
     }
 
+    /** @return true if every adventurer is at or below the expedition's stamina cutoff */
     private boolean isPartyExhausted() {
         int threshold = currentExpedition.getStaminaCutoffThreshold();
         for (Adventurer adventurer : gameEnvironment.getGuildhall().getMainPartyAdventurers()) {
