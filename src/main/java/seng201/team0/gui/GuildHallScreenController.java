@@ -1,9 +1,7 @@
 package seng201.team0.gui;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import seng201.team0.GameEnvironment;
 import seng201.team0.exception.EmptyPartyException;
 import seng201.team0.exception.EmptyReservesException;
@@ -50,7 +48,7 @@ public class GuildHallScreenController extends ScreenController {
 
     @FXML private Label ItemNameLabel;
     @FXML private Label ItemTypeLabel;
-    @FXML private Label ItemBuffLabel;
+    @FXML private TextArea ItemDescriptionTextArea;
 
     private int selectedMainPartyIndex = -1;
     private int selectedReservePartyIndex = -1;
@@ -189,7 +187,7 @@ public class GuildHallScreenController extends ScreenController {
         selectedItem = getGameEnvironment().getGuildhall().getInventoryItems().get(index);
         ItemNameLabel.setText("Name: " + selectedItem.getName());
         ItemTypeLabel.setText("Type: " + selectedItem.getType());
-//        ItemBuffLabel.setText("Buff: " + selectedItem.);
+        ItemDescriptionTextArea.setText(selectedItem.getDescription());
     }
 
     private void onReservePartBtnClicked(List<Button> reservePartyBtns, int index) {
