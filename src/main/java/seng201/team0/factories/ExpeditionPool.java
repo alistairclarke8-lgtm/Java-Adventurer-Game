@@ -7,10 +7,18 @@ import seng201.team0.models.Expedition;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Factory class generating the pool of available expeditions
+ * Each expedition has its own event pool with theme-matching prompts,
+ * options and weighted outcomes.
+ */
 public class ExpeditionPool {
 
     private ExpeditionPool() {}
 
+    /**
+     * Builds a fresh list of expeditions available each round
+     */
     public static List<Expedition> getAll() {
         return List.of(
                 buildRuinedCitadel(),

@@ -25,7 +25,7 @@ public class RecruitmentService {
     private final List<Adventurer> availableRecruits = new ArrayList<>();
 
     /**
-     * Constructs a RecruitmentService with a default {@link Random}.
+     * Constructs a RecruitmentService with a default.
      * @param gameEnvironment the game environment to operate on
      */
     public RecruitmentService(GameEnvironment gameEnvironment) {
@@ -37,12 +37,22 @@ public class RecruitmentService {
         this.random = random;
     }
 
+    /**
+     * refreshes the available adventurers in the recruitment screen
+     */
     public void refreshPool() {
         availableRecruits.clear();
         int size = MIN_POOL + random.nextInt(MAX_POOL - MIN_POOL + 1);
         availableRecruits.addAll(AdventurerFactory.getRandom(size));
     }
 
+    /**
+     *
+     * @param adventurer the adventurer in question being purchased
+     * @throws InsufficientGoldException if the player does not have enough gold to
+     *                                   purchase the adventurer,
+     * @throws GuildFullException if the player's guild is full of adventurers
+     */
     public void hire(Adventurer adventurer)
             throws InsufficientGoldException, GuildFullException {
         if (!availableRecruits.contains(adventurer)) {
@@ -59,6 +69,12 @@ public class RecruitmentService {
         availableRecruits.remove(adventurer);
     }
 
+    /**
+     *
+     * @param adventurer the adventurer in question
+     * @return the cost to hire an adventurer weighted to the
+     *         difficulty of the game environment
+     */
     public int getHirePrice(Adventurer adventurer) {
         double multiplier = gameEnvironment.getDifficulty().getCostMultiplier();
         return (int) (adventurer.getHiringCost() * multiplier);
