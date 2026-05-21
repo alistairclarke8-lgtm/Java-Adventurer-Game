@@ -42,8 +42,7 @@ public class RecruitmentService {
      */
     public void refreshPool() {
         availableRecruits.clear();
-        int size = MIN_POOL + random.nextInt(MAX_POOL - MIN_POOL + 1);
-        availableRecruits.addAll(AdventurerFactory.getRandom(size));
+        availableRecruits.addAll(AdventurerFactory.getRandom(5));
     }
 
     /**

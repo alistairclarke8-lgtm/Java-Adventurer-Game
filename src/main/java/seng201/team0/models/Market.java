@@ -1,6 +1,7 @@
 package seng201.team0.models;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * represents the market where players can buy and sell items.
@@ -35,6 +36,11 @@ public class Market {
     /** @return an unmodifiable view of the items currently for sale */
     public ArrayList<Item> getAvailableItems() {
         return availableItems;
+    }
+
+    public void setItems(List<Item> items) {
+        availableItems.clear();
+        availableItems.addAll(items);
     }
 
     /**

@@ -75,11 +75,16 @@ public class ExpeditionInProgressController extends ScreenController{
         try {
             expeditionService.completeChoice(choiceIndex);
             refreshPartyDisplay();
-            refreshEventDisplay();
             refreshGoldDisplay();
             appendRecentLogs();
+
+            if (expeditionService.getCurrentEvent() == null) {
+                getGameEnvironment().navigateToPostExpedition();
+            } else {
+                refreshEventDisplay();
+            }
         } catch (ExpeditionOverException e) {
-            showValidationError(e.getMessage());
+            getGameEnvironment().navigateToPostExpedition();
         }
     }
     private void refreshPartyDisplay() {

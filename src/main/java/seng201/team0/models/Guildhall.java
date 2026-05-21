@@ -37,10 +37,6 @@ public class Guildhall {
      * Constructs an empty Guildhall.
      */
     public Guildhall() {
-//        for testing guild services
-        reservedAdventurers.addAll(AdventurerFactory.getRandom(5));
-        inventoryItems.add(new UpgradeItem("stam potion",10,"adds 10 stamina","stamina",1));
-
     }
 
     /** @return the main party adventurers */

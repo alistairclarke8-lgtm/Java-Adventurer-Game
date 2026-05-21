@@ -80,6 +80,10 @@ public class ScreenNavigator {
         ScreenController controller = new ExpeditionInProgressController(gameEnvironment);
         launchScreen(controller);
     }
+    public void launchPostExpeditionScreen(GameEnvironment gameEnvironment) {
+        ScreenController controller = new PostExpeditionScreenController(gameEnvironment);
+        launchScreen(controller);
+    }
 
 
 
