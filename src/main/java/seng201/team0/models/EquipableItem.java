@@ -55,7 +55,7 @@ public class EquipableItem extends Item {
      */
     @Override
     public void removeFrom(Adventurer adventurer) {
-        if ("stamina".equals(stat)) adventurer.decreaseStamina(amount);
+        if ("stamina".equals(stat)) adventurer.decreaseMaxStamina(amount);
         if ("perception".equals(stat)) adventurer.decreasePerception(amount);
     }
 

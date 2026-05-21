@@ -134,4 +134,7 @@ public class GameEnvironment {
     public int getExpeditionsCompleted() {
         return currentExpedition;
     }
+
+    public void gainGold(int netGain) {
+    }
 }
