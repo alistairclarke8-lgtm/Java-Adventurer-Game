@@ -135,10 +135,8 @@ public class PostExpeditionScreenController extends ScreenController {
         for (int i = 0; i < itemNameLabels.length; i++) {
             if (i < items.size()) {
                 itemNameLabels[i].setText(items.get(i).getName());
-                buffLabels[i].setText(items.get(i).getDescription());
             } else {
                 itemNameLabels[i].setText("-");
-                buffLabels[i].setText("");
             }
         }
     }
