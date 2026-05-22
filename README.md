@@ -6,9 +6,9 @@ for gold and loot over a player-chosen number of rounds.
 
 # **Requirements**
 
-Java 21 (any vendor, OpenJDK works)
+Java 25 (any vendor, OpenJDK works)
 
-Internet access on the first build (Gradle downloads JavaFX 21 and the
+Internet access on the first build (Gradle downloads JavaFX 25 and the
 build plugins; subsequent builds are offline)
 
 Target platform: Linux Mint (the JAR has also been verified to run on
@@ -20,7 +20,7 @@ macOS and Windows with the same Java requirement)
 
 A self-contained ("fat") JAR is produced in build/libs/:
 
-java -jar build/libs/seng201-team0-1.0-SNAPSHOT.jar
+java -jar build/libs/seng201_team0-1.0-SNAPSHOT.jar
 
 JavaFX is bundled inside the JAR, so no separate JavaFX install is required.
 
@@ -38,7 +38,7 @@ so no system-wide Gradle install is needed.
 gradlew.bat shadowJar
 
 The runnable fat JAR will appear at
-build/libs/seng201-team0-1.0-SNAPSHOT.jar. 
+build/libs/seng201_team0-1.0-SNAPSHOT.jar. 
 The default build task also
 produces it as a side-effect.
 To run directly without packaging:
@@ -54,11 +54,10 @@ IntelliJ will detect the Gradle build automatically. Click Trust
 Project and Load Gradle Project when prompted.
 Wait for the initial Gradle sync to finish (dependencies cache into
 ~/.gradle/caches/).
-Set the project SDK to a Java 21 JDK: File → Project Structure →
+Set the project SDK to a Java 25 JDK: File → Project Structure →
 Project → SDK.
 To run, right-click seng201.team0.App and choose Run 'App.main()'.
-Alternatively use the Gradle tool window: adventurer-resource-collector
-→ Tasks → application → run.
+
 
 
 # **Cloning into IntelliJ from Eng-Git**
