@@ -46,12 +46,11 @@ public class ExpeditionSelectScreenController extends ScreenController {
         super(gameEnvironment);
     }
 
-    @Override
-    protected String getFxmlFile() { return "/fxml/ExpeditionSelection.fxml"; }
-
-    @Override
-    protected String getTitle() { return "Choose Expedition"; }
-
+    /**
+     * Wires up UI arrays, refreshes available expeditions, populates all
+     * displays, and registers button handlers. The depart button is disabled
+     * until an expedition is selected.
+     */
     @FXML
     public void initialize() {
         expeditionButtons = new Button[]{expeditionBtn1, expeditionBtn2, expeditionBtn3};
@@ -144,4 +143,12 @@ public class ExpeditionSelectScreenController extends ScreenController {
         getGameEnvironment().getExpeditionService().startExpedition(selectedExpedition);
         getGameEnvironment().navigateToExpedition();
     }
+
+    /** @return the location and filename of the fxml file being retrieved */
+    @Override
+    protected String getFxmlFile() { return "/fxml/ExpeditionSelection.fxml"; }
+
+    /** @return the screen title string */
+    @Override
+    protected String getTitle() { return "Choose Expedition"; }
 }

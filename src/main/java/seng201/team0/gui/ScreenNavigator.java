@@ -25,7 +25,6 @@ public class ScreenNavigator {
 
     /**
      * Creates a ScreenNavigator with the given stage.
-     *
      * @param stage The JavaFX stage
      */
     public ScreenNavigator(Stage stage) {
@@ -39,6 +38,7 @@ public class ScreenNavigator {
         stage.show();
     }
 
+    /** Protected no-arg constructor for subclassing or testing. */
     protected ScreenNavigator() {
         this.stage = null;
         this.rootPane = null;
@@ -64,32 +64,71 @@ public class ScreenNavigator {
         launchScreen(controller);
     }
 
+    /**
+     * Launches the guild hall screen.
+     *
+     * @param gameEnvironment the shared game environment
+     */
     public void launchGuildHallScreenController(GameEnvironment gameEnvironment) {
         ScreenController controller = new GuildHallScreenController(gameEnvironment);
         launchScreen(controller);
     }
+
+    /**
+     * Launches the market screen.
+     *
+     * @param gameEnvironment the shared game environment
+     */
     public void launchMarketScreenController(GameEnvironment gameEnvironment) {
         ScreenController controller = new MarketScreenController(gameEnvironment);
         launchScreen(controller);
     }
 
+    /**
+     * Launches the recruitment screen.
+     *
+     * @param gameEnvironment the shared game environment
+     */
     public void launchRecruitmentScreenController(GameEnvironment gameEnvironment) {
         ScreenController controller = new RecruitmentScreenController(gameEnvironment);
         launchScreen(controller);
     }
+
+    /**
+     * Launches the expedition selection screen.
+     *
+     * @param gameEnvironment the shared game environment
+     */
     public void launchExpeditionSelectScreenController(GameEnvironment gameEnvironment) {
         ScreenController controller = new ExpeditionSelectScreenController(gameEnvironment);
         launchScreen(controller);
     }
+
+    /**
+     * Launches the in-progress expedition screen.
+     *
+     * @param gameEnvironment the shared game environment
+     */
     public void launchExpeditionInProgressScreen(GameEnvironment gameEnvironment) {
         ScreenController controller = new ExpeditionInProgressController(gameEnvironment);
         launchScreen(controller);
     }
+
+    /**
+     * Launches the post-expedition summary screen.
+     *
+     * @param gameEnvironment the shared game environment
+     */
     public void launchPostExpeditionScreen(GameEnvironment gameEnvironment) {
         ScreenController controller = new PostExpeditionScreenController(gameEnvironment);
         launchScreen(controller);
     }
 
+    /**
+     * Launches the end-game screen.
+     *
+     * @param gameEnvironment the shared game environment
+     */
     public void launchEndGameScreen(GameEnvironment gameEnvironment) {
         ScreenController controller = new EndGameScreenController(gameEnvironment);
         launchScreen(controller);

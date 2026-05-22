@@ -11,6 +11,11 @@ import seng201.team0.services.ExpeditionService;
 
 import java.util.List;
 
+/**
+ * Controller for the post-expedition summary screen. Displays the expedition
+ * name, events completed, gold earned and deducted, net gain, items found,
+ * party stamina, and any random event messages from the completed expedition.
+ */
 public class PostExpeditionScreenController extends ScreenController {
 
     @FXML private Label expeditionNameLabel;
@@ -49,10 +54,18 @@ public class PostExpeditionScreenController extends ScreenController {
     private Label[] itemNameLabels;
     private Label[] buffLabels;
 
+    /**
+     * Constructs the controller.
+     * @param gameEnvironment the shared game environment
+     */
     protected PostExpeditionScreenController(GameEnvironment gameEnvironment) {
         super(gameEnvironment);
     }
 
+    /**
+     * Wires up label arrays, populates all summary fields from the expedition
+     * service, and registers the continue button handler.
+     */
     @FXML
     public void initialize() {
         nameLabels = new Label[]{adventurerNameLabel1,adventurerNameLabel2,adventurerNameLabel3, adventurerNameLabel4, adventurerNameLabel5
@@ -95,6 +108,10 @@ public class PostExpeditionScreenController extends ScreenController {
         randomEventsArea.setText(builder.toString().trim());
     }
 
+    /**
+     * Populates the adventurer summary panel with each party member's name
+     * and current stamina. Empty slots are blanked out.
+     */
     private void populateAdventurerSummary() {
         List<Adventurer> party = getGameEnvironment().getGuildhall().getMainPartyAdventurers();
         for (int i = 0; i < nameLabels.length; i++) {
@@ -109,6 +126,11 @@ public class PostExpeditionScreenController extends ScreenController {
         }
     }
 
+    /**
+     * Populates the items-found panel with each item's name and description.
+     * Empty slots are blanked out.
+     * @param items the list of items found during the expedition
+     */
     private void populateItemsFound(List<Item> items) {
         for (int i = 0; i < itemNameLabels.length; i++) {
             if (i < items.size()) {
@@ -121,11 +143,13 @@ public class PostExpeditionScreenController extends ScreenController {
         }
     }
 
+    /** @return the location and filename of the fxml file being retrieved */
     @Override
     protected String getFxmlFile() {
         return "/fxml/postExpedition.fxml";
     }
 
+    /** @return the screen title string */
     @Override
     protected String getTitle() {
         return "Expedition Complete";

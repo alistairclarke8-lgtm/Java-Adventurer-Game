@@ -12,59 +12,54 @@ import seng201.team0.services.SetupService;
 import java.util.List;
 
 /**
- * Controller for the Game Setup Page
+ * Controller for the game setup screen. Allows the player to enter a guild
+ * name, choose a difficulty, set the expedition count, and select three
+ * starting adventurers before starting the game.
  */
 public class SetupScreenController extends ScreenController {
 
-    @FXML
-    private TextField guildnameField;
-    @FXML
-    private Slider expeditionCountSlider;
-    @FXML
-    private Label expeditionCountLabel;
+    @FXML private TextField guildNameField;
+    @FXML private Slider expeditionCountSlider;
+    @FXML private Label expeditionCountLabel;
 
-    @FXML
-    private Button easyBtn;
-    @FXML
-    private Button normalBtn;
-    @FXML
-    private Button hardBtn;
+    @FXML private Button easyBtn;
+    @FXML private Button normalBtn;
+    @FXML private Button hardBtn;
 
-    @FXML
-    private Button adventurer1Btn;
-    @FXML
-    private Button adventurer2Btn;
-    @FXML
-    private Button adventurer3Btn;
-    @FXML
-    private Button adventurer4Btn;
-    @FXML
-    private Button adventurer5Btn;
+    @FXML private Button adventurer1Btn;
+    @FXML private Button adventurer2Btn;
+    @FXML private Button adventurer3Btn;
+    @FXML private Button adventurer4Btn;
+    @FXML private Button adventurer5Btn;
 
-    @FXML
-    private Label nameLabel;
-    @FXML
-    private Label staminaLabel;
-    @FXML
-    private Label perceptionLabel;
-    @FXML
-    private Label payLabel;
+    @FXML private Label nameLabel;
+    @FXML private Label staminaLabel;
+    @FXML private Label perceptionLabel;
+    @FXML private Label payLabel;
 
-    @FXML
-    private Button selectedAdventurer1Btn;
-    @FXML
-    private Button selectedAdventurer2Btn;
-    @FXML
-    private Button selectedAdventurer3Btn;
+    @FXML private Button selectedAdventurer1Btn;
+    @FXML private Button selectedAdventurer2Btn;
+    @FXML private Button selectedAdventurer3Btn;
 
-    @FXML
-    private Button startGameBtn;
+    @FXML private Button startGameBtn;
 
     private int selectedAdventurerIndex= -1;
     private final Adventurer[] selectedAdventurers= new Adventurer[3];
     private SetupModel setupModel;
     private SetupService setupService;
 
+    /**
+     * Constructs the controller.
+     * @param gameEnvironment the shared game environment
+     */
+    protected SetupScreenController(GameEnvironment gameEnvironment) {
+        super(gameEnvironment);
+    }
+
+    /**
+     * Initializes the setup model and service, wires up all button and
+     * listener handlers, and populates the available adventurer buttons.
+     */
     public void initialize() {
         setupModel = new SetupModel();
         setupService = new SetupService(setupModel);
@@ -90,13 +85,17 @@ public class SetupScreenController extends ScreenController {
             setupModel.setExpeditionCount(count);
             expeditionCountLabel.setText(" " + count);
         });
-        guildnameField.textProperty().addListener((observable, oldValue, newValue) ->
+        guildNameField.textProperty().addListener((observable, oldValue, newValue) ->
                 setupModel.setGuildName(newValue)
         );
 
         startGameBtn.setOnAction(e -> onStartGameBtnClicked());
     }
 
+    /**
+     * Validates the setup and starts the game. Shows a validation error
+     * dialog if the setup is incomplete or invalid.
+     */
     private void onStartGameBtnClicked() {
         try {
             setupService.completeSetup(selectedAdventurers);
@@ -106,6 +105,12 @@ public class SetupScreenController extends ScreenController {
         }
     }
 
+    /**
+     * Highlights the selected difficulty button and updates the difficulty
+     * on the setup model.
+     * @param difficultyBtns the list of difficulty buttons
+     * @param buttonIndex zero-based index of the clicked difficulty button
+     */
     private void onDifficultyBtnClicked(List<Button> difficultyBtns, int buttonIndex) {
         difficultyBtns.forEach(button -> {
             if (button == difficultyBtns.get(buttonIndex)) {
@@ -123,6 +128,12 @@ public class SetupScreenController extends ScreenController {
         }
     }
 
+    /**
+     * Marks the clicked adventurer as the current selection and updates the
+     * stats panel. Highlights the selected button.
+     * @param availableAdventurerBtns the list of available adventurer buttons
+     * @param index zero-based index of the clicked adventurer
+     */
     private void onAvailableAdventurerBtnClicked(List<Button> availableAdventurerBtns, int index) {
         selectedAdventurerIndex = index;
         updateStats(setupService.getDefaultAdventurer(index));
@@ -136,6 +147,12 @@ public class SetupScreenController extends ScreenController {
         });
     }
 
+    /**
+     * Places the currently selected adventurer into the given party slot and
+     * updates the slot button label. Does nothing if no adventurer is selected.
+     * @param selectedAdventurerBtns the list of selected-party slot buttons
+     * @param slot zero-based index of the target party slot
+     */
     private void onSelectedButtonClicked(List<Button> selectedAdventurerBtns, int slot) {
         if (selectedAdventurerIndex == -1) return;
 
@@ -146,6 +163,10 @@ public class SetupScreenController extends ScreenController {
         }
     }
 
+    /**
+     * Updates the stats panel to display the given adventurer's attributes.
+     * @param adventurer the adventurer whose stats should be displayed
+     */
     private void updateStats(Adventurer adventurer) {
         nameLabel.setText("Name: " + adventurer.getName());
         staminaLabel.setText("Stamina: " + adventurer.getStamina());
@@ -153,6 +174,11 @@ public class SetupScreenController extends ScreenController {
         payLabel.setText("Pay: " + adventurer.getPay());
     }
 
+    /**
+     * Displays a modal error dialog describing a setup validation failure.
+     *
+     * @param message the validation error message to display
+     */
     private void showValidationError(String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Cannot Start Game");
@@ -161,15 +187,13 @@ public class SetupScreenController extends ScreenController {
         alert.showAndWait();
     }
 
-    protected SetupScreenController(GameEnvironment gameEnvironment) {
-        super(gameEnvironment);
-    }
-
+    /** @return the location and filename of the fxml file being retrieved */
     @Override
     protected String getFxmlFile() {
         return "/fxml/gameSetup.fxml";
     }
 
+    /** @return the screen title string */
     @Override
     protected String getTitle() {
         return "Game Setup";

@@ -9,6 +9,11 @@ import seng201.team0.models.Item;
 
 import java.util.List;
 
+/**
+ * Controller for the Guild Hall screen. Displays the main party, reserve
+ * party, and inventory, and allows the player to swap, retire, move, equip,
+ * and use items on adventurers.
+ */
 public class GuildHallScreenController extends ScreenController {
 
     @FXML private Button backBtn;
@@ -52,6 +57,18 @@ public class GuildHallScreenController extends ScreenController {
     private Adventurer selectedAdventurer = null;
     private Item selectedItem = null;
 
+    /**
+     * Constructs the controller.
+     * @param gameEnvironment the shared game environment
+     */
+    protected GuildHallScreenController(GameEnvironment gameEnvironment) {
+        super(gameEnvironment);
+    }
+
+    /**
+     * Wires up all button arrays and handlers, then performs the initial
+     * population of the main party, reserve, and inventory displays.
+     */
     public void initialize() {
         setupMainPartyButtons();
         setupReserveButtons();
@@ -64,6 +81,10 @@ public class GuildHallScreenController extends ScreenController {
         useEquipBtn.setOnAction(actionEvent -> onUseEquipBtnClicked());
     }
 
+    /**
+     * Populates the main party buttons with adventurer types and registers
+     * selection handlers. Hides slots with no adventurer.
+     */
     private void setupMainPartyButtons() {
         List<Button> mainPartyBtns = List.of(mainPartyBtn1, mainPartyBtn2, mainPartyBtn3, mainPartyBtn4, mainPartyBtn5);
         for (int i = 0; i < mainPartyBtns.size(); i++) {
@@ -79,6 +100,10 @@ public class GuildHallScreenController extends ScreenController {
         }
     }
 
+    /**
+     * Populates the reserve party buttons with adventurer types and registers
+     * selection handlers. Hides slots with no adventurer.
+     */
     private void setupReserveButtons() {
         List<Button> reservePartyBtns = List.of(reserveParty1, reserveParty2, reserveParty3, reserveParty4, reserveParty5);
         for (int i = 0; i < reservePartyBtns.size(); i++) {
@@ -94,6 +119,10 @@ public class GuildHallScreenController extends ScreenController {
         }
     }
 
+    /**
+     * Populates the inventory buttons with item names and registers selection
+     * handlers. Hides empty slots.
+     */
     private void setupInventoryButtons() {
         List<Button> inventoryBtns = List.of(InventoryBtn1, InventoryBtn2, InventoryBtn3, InventoryBtn4, InventoryBtn5);
         for (int i = 0; i < inventoryBtns.size(); i++) {
@@ -109,6 +138,10 @@ public class GuildHallScreenController extends ScreenController {
         }
     }
 
+    /**
+     * Swaps the selected main party and reserve adventurers. Shows an error
+     * if either selection is absent or the operation is invalid.
+     */
     private void onSwapBtnClicked() {
         if (selectedMainPartyIndex == -1 || selectedReservePartyIndex == -1) {
             showError("Please select an adventurer from both the main party and reserves.");
@@ -128,6 +161,10 @@ public class GuildHallScreenController extends ScreenController {
         }
     }
 
+    /**
+     * Retires the selected adventurer from the guild. Shows an error if no
+     * adventurer is selected or they are the last remaining member.
+     */
     private void onRetireBtnClicked() {
         if (selectedAdventurer == null) {
             showError("Please select an adventurer to retire.");
@@ -145,6 +182,10 @@ public class GuildHallScreenController extends ScreenController {
         }
     }
 
+    /**
+     * Moves the selected main party adventurer to the reserves. Shows an
+     * error if the operation would leave the party empty or the reserves full.
+     */
     private void onMakeReserveBtnClicked() {
         if (selectedMainPartyIndex == -1) {
             showError("Please select a main party adventurer to move to reserves.");
@@ -162,6 +203,10 @@ public class GuildHallScreenController extends ScreenController {
         }
     }
 
+    /**
+     * Moves the selected reserve adventurer to the main party. Shows an error
+     * if the party is full or reserves are empty.
+     */
     private void onMoveToMainBtnClicked() {
         if (selectedReservePartyIndex == -1) {
             showError("Please select a reserve adventurer to move to the main party.");
@@ -180,6 +225,11 @@ public class GuildHallScreenController extends ScreenController {
 
     }
 
+    /**
+     * Uses or equips the selected item on the selected adventurer, depending
+     * on whether the item is consumed on use. Shows an error if either
+     * selection is absent.
+     */
     private void onUseEquipBtnClicked() {
         if (selectedAdventurer == null || selectedItem == null) {
             showError("Please select an adventurer and an item.");
@@ -195,6 +245,11 @@ public class GuildHallScreenController extends ScreenController {
         updateAdventurerStats(selectedAdventurer);
     }
 
+    /**
+     * Selects the inventory item at the given index and updates the item
+     * detail labels.
+     * @param index zero-based index of the clicked inventory slot
+     */
     private void onInventoryBtnClicked(int index) {
         if (index >= getGameEnvironment().getGuildhall().getInventoryItems().size()) return;
         selectedItem = getGameEnvironment().getGuildhall().getInventoryItems().get(index);
@@ -203,6 +258,12 @@ public class GuildHallScreenController extends ScreenController {
         ItemDescriptionTextArea.setText(selectedItem.getDescription());
     }
 
+    /**
+     * Selects the reserve adventurer at the given index and updates the
+     * adventurer stats panel.
+     * @param reservePartyBtns the list of reserve party buttons
+     * @param index zero-based index of the clicked reserve slot
+     */
     private void onReservePartBtnClicked(List<Button> reservePartyBtns, int index) {
         if (index >= getGameEnvironment().getGuildhall().getReservedAdventurers().size()) return;
         selectedReservePartyIndex = index;
@@ -210,6 +271,12 @@ public class GuildHallScreenController extends ScreenController {
         updateAdventurerStats(selectedAdventurer);
     }
 
+    /**
+     * Selects the main party adventurer at the given index and updates the
+     * adventurer stats panel.
+     * @param mainPartyBtns the list of main party buttons
+     * @param index zero-based index of the clicked main party slot
+     */
     private void onMainPartyBtnClicked(List<Button> mainPartyBtns, int index) {
         if (index >= getGameEnvironment().getGuildhall().getMainPartyAdventurers().size()) return;
         selectedMainPartyIndex = index;
@@ -217,6 +284,11 @@ public class GuildHallScreenController extends ScreenController {
         updateAdventurerStats(selectedAdventurer);
     }
 
+    /**
+     * Updates the adventurer stats panel to reflect the given adventurer's
+     * current name, stamina, perception, pay, and equipped item.
+     * @param adventurer the adventurer whose stats should be displayed
+     */
     private void updateAdventurerStats(Adventurer adventurer) {
         adventurerNameLabel.setText("Name: " + adventurer.getName());
         adventurerStaminaLabel.setText("Stamina: " + adventurer.getStamina());
@@ -229,6 +301,10 @@ public class GuildHallScreenController extends ScreenController {
         }
     }
 
+    /**
+     * Displays a modal error dialog with the given message.
+     * @param message the error message to display
+     */
     private void showError(String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
@@ -237,19 +313,18 @@ public class GuildHallScreenController extends ScreenController {
         alert.showAndWait();
     }
 
+    /** Navigates back to the main menu. */
     private void onBackBtnClicked() {
         getGameEnvironment().navigateToMenu();
     }
 
-    protected GuildHallScreenController(GameEnvironment gameEnvironment) {
-        super(gameEnvironment);
-    }
-
+    /** @return the location and filename of the fxml file being retrieved */
     @Override
     protected String getFxmlFile() {
         return "/fxml/GuildHall.fxml";
     }
 
+    /** @return the screen title string */
     @Override
     protected String getTitle() {
         return "Guild Hall";
