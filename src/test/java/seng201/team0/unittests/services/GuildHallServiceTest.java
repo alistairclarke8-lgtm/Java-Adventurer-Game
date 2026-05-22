@@ -2,10 +2,7 @@ package seng201.team0.unittests.services;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import seng201.team0.exception.EmptyPartyException;
-import seng201.team0.exception.EmptyReservesException;
-import seng201.team0.exception.GuildFullException;
-import seng201.team0.exception.LastAdventurerException;
+import seng201.team0.exception.*;
 import seng201.team0.models.Adventurer;
 import seng201.team0.models.EquipableItem;
 import seng201.team0.models.Guildhall;
@@ -114,7 +111,7 @@ class GuildHallServiceTest {
     @Test
     void moveMainPartyToReserve_rejectsIfWouldEmptyParty() throws GuildFullException {
         service.makeMainPartyAdventurer(alice);
-        assertThrows(IllegalStateException.class,
+        assertThrows(LastInPartyException.class,
                 () -> service.moveMainPartyToReserve(alice));
     }
 

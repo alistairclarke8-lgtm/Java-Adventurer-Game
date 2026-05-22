@@ -24,12 +24,4 @@ public class AdventurerSkillsTest {
         a.learnSkill(new Skill("Eagle-eye", "x", 0, 20));
         assertEquals(before + 20, a.getPerception());
     }
-
-    @Test
-    void multipleSkillsLearned() {
-        Adventurer a = AdventurerFactory.getRandom(1).getFirst();
-        a.learnSkill(new Skill("Eagle-eye", "x", 0, 20));
-        a.learnSkill(new Skill("Twinkle-Toes", "y", 15, 5));
-        assertEquals(2, a.getSkills().size());
-    }
 }

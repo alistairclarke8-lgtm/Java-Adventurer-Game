@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import seng201.team0.GameEnvironment;
 import seng201.team0.exception.ExpeditionOverException;
+import seng201.team0.exception.InsufficientGoldException;
 import seng201.team0.unittests.gui.TestNavigator;
 import seng201.team0.models.Adventurer;
 import seng201.team0.models.Difficulty;
@@ -68,11 +69,11 @@ class ExpeditionServiceTest {
         assertEquals(0, service.getEventsCompleted());
         assertEquals(0, service.getGoldEarned());
         assertFalse(service.isExpeditionOver());
-        assertSame(expedition.getEvents().get(0), service.getCurrentEvent());
+        assertSame(expedition.getEvents().getFirst(), service.getCurrentEvent());
     }
 
     @Test
-    void completeChoice_advancesEventAndUpdatesGold() throws ExpeditionOverException {
+    void completeChoice_advancesEventAndUpdatesGold() throws ExpeditionOverException, InsufficientGoldException {
         service.startExpedition(expedition);
         service.completeChoice(0);
         assertEquals(1, service.getEventsCompleted());
@@ -80,7 +81,7 @@ class ExpeditionServiceTest {
     }
 
     @Test
-    void completeChoice_endsAfterAllEvents() throws ExpeditionOverException {
+    void completeChoice_endsAfterAllEvents() throws ExpeditionOverException, InsufficientGoldException {
         service.startExpedition(expedition);
         for (int i = 0; i < 5; i++) service.completeChoice(0);
         assertTrue(service.isExpeditionOver());
@@ -88,14 +89,14 @@ class ExpeditionServiceTest {
     }
 
     @Test
-    void completeChoice_throwsAfterEnd() throws ExpeditionOverException {
+    void completeChoice_throwsAfterEnd() throws ExpeditionOverException, InsufficientGoldException {
         service.startExpedition(expedition);
         for (int i = 0; i < 5; i++) service.completeChoice(0);
         assertThrows(ExpeditionOverException.class, () -> service.completeChoice(0));
     }
 
     @Test
-    void completeChoice_outcomeFlagEndsExpedition() throws ExpeditionOverException {
+    void completeChoice_outcomeFlagEndsExpedition() throws ExpeditionOverException, InsufficientGoldException {
         List<Event> events = new ArrayList<>();
         events.add(new Event("p", List.of(new EventOption("opt",
                 List.of(new EventOutcome("over", 1, 0, 0, true))))));
@@ -117,7 +118,7 @@ class ExpeditionServiceTest {
     }
 
     @Test
-    void partyExhaustion_endsExpedition() throws ExpeditionOverException {
+    void partyExhaustion_endsExpedition() throws ExpeditionOverException, InsufficientGoldException {
         // Build an expedition with a stamina cutoff of 100, so any drain ends it
         List<Event> events = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
