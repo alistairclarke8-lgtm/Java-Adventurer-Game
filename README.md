@@ -20,7 +20,7 @@ macOS and Windows with the same Java requirement)
 
 A self-contained ("fat") JAR is produced in build/libs/:
 
-java -jar build/libs/**PUT JAR NAME HERE**.jar
+java -jar build/libs/seng201-team0-1.0-SNAPSHOT.jar
 
 JavaFX is bundled inside the JAR, so no separate JavaFX install is required.
 
@@ -38,7 +38,7 @@ so no system-wide Gradle install is needed.
 gradlew.bat shadowJar
 
 The runnable fat JAR will appear at
-build/libs/**PUT JAR NAME HERE**.jar. 
+build/libs/seng201-team0-1.0-SNAPSHOT.jar. 
 The default build task also
 produces it as a side-effect.
 To run directly without packaging:
