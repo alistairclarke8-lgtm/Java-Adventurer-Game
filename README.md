@@ -2,7 +2,7 @@
 
 A JavaFX guild management game built for SENG201 at the University of Canterbury.
 Hire adventurers, buy items, and send your party on expeditions to collect loot and gold.
-By William Condon (ID: 11583704) and Allistair Clarke ().
+By William Condon (ID: 11583704) and Alistair Clarke (ID: 64289867).
 
 Requirements: Java 17+
 
