@@ -33,7 +33,6 @@ public class GameEnvironment {
     private final RandomEventService randomEventService;
     private Expedition selectedExpedition;
 
-
     private final ScreenNavigator navigator;
 
 

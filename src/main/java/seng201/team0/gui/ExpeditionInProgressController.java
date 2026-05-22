@@ -56,6 +56,9 @@ public class ExpeditionInProgressController extends ScreenController{
     private Expedition expedition;
     private int lastLogIndex;
 
+    /**
+     * Wires up UI arrays and button handlers, then performs the initial render.
+     */
     @FXML
     public void initialize() {
 
@@ -76,6 +79,9 @@ public class ExpeditionInProgressController extends ScreenController{
         appendRecentLogs();
     }
 
+    /**
+     * Retreats from the expedition and navigates to the post-expedition screen.
+     */
     private void onRetreatBtnClicked() {
         try {
             expeditionService.retreat();
@@ -89,6 +95,11 @@ public class ExpeditionInProgressController extends ScreenController{
         }
     }
 
+    /**
+     * Processes the chosen event option, refreshes displays, and advances to
+     * the next event or post-expedition screen.
+     * @param choiceIndex zero-based index of the selected option
+     */
     private void onChoiceBtnClicked(int choiceIndex) {
         try {
             expeditionService.completeChoice(choiceIndex);
@@ -110,6 +121,11 @@ public class ExpeditionInProgressController extends ScreenController{
             getGameEnvironment().navigateToPostExpedition();
         }
     }
+
+    /**
+     * Updates each adventurer's name, stamina bar, and stamina label.
+     * Empty slots are blanked out.
+     */
     private void refreshPartyDisplay() {
         List<Adventurer> party = getGameEnvironment().getGuildhall().getMainPartyAdventurers();
         for (int i = 0; i < nameLabels.length; i++) {
@@ -128,6 +144,11 @@ public class ExpeditionInProgressController extends ScreenController{
             }
         }
     }
+
+    /**
+     * Updates the event number, description, and choice button labels.
+     * Does nothing if there is no current event.
+     */
     private void refreshEventDisplay() {
         Event event = expeditionService.getCurrentEvent();
         if (event == null) return;
@@ -142,10 +163,14 @@ public class ExpeditionInProgressController extends ScreenController{
         optionBBtn.setText(event.options().get(1).label());
     }
 
+    /** Updates the gold-earned label. */
     private void refreshGoldDisplay() {
         goldGainedLabel.setText("Gold gained: " + expeditionService.getGoldEarned());
     }
 
+    /**
+     * Appends log entries added since the last call to the event log text area.
+     */
     private void appendRecentLogs() {
         List<String> log = expeditionService.getLog();
         for (int i = lastLogIndex; i < log.size(); i++) {
@@ -154,6 +179,10 @@ public class ExpeditionInProgressController extends ScreenController{
         lastLogIndex = log.size();
     }
 
+    /**
+     * Appends a single line to the event log.
+     * @param message the line to append
+     */
     private void appendLog(String message) {
         eventLogField.appendText(message + "\n");
     }
@@ -172,16 +201,25 @@ public class ExpeditionInProgressController extends ScreenController{
     }
 
 
+    /**
+     * Constructs the controller and retrieves the expedition service and
+     * selected expedition from the game environment.
+     *
+     * @param gameEnvironment the shared game environment
+     */
     protected ExpeditionInProgressController(GameEnvironment gameEnvironment) {
         super(gameEnvironment);
         this.expeditionService = gameEnvironment.getExpeditionService();
         this.expedition = gameEnvironment.getSelectedExpedition();
     }
+
+    /** @return the location and filename of the fxml file being retrieved */
     @Override
     protected String getFxmlFile() {
         return "/fxml/mainExpedition.fxml";
     }
 
+    /** @return the screen title string */
     @Override
     protected String getTitle() {
         return "Screen for an expedition in progress.";
