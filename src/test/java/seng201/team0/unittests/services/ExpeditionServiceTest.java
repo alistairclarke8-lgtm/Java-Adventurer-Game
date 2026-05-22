@@ -69,7 +69,7 @@ class ExpeditionServiceTest {
         assertEquals(0, service.getEventsCompleted());
         assertEquals(0, service.getGoldEarned());
         assertFalse(service.isExpeditionOver());
-        assertSame(expedition.getEvents().get(0), service.getCurrentEvent());
+        assertSame(expedition.getEvents().getFirst(), service.getCurrentEvent());
     }
 
     @Test
