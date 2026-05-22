@@ -96,6 +96,8 @@ public class ExpeditionInProgressController extends ScreenController{
         } catch (ExpeditionOverException e) {
             getGameEnvironment().incrementExpedition();
             getGameEnvironment().navigateToPostExpedition();
+        } catch (InsufficientGoldException e) {
+            throw new RuntimeException(e);
         }
     }
     private void refreshPartyDisplay() {
