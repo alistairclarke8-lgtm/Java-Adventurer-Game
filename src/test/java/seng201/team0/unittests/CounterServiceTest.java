@@ -2,7 +2,7 @@ package seng201.team0.unittests;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import seng201.team0.services.CounterService;
+import seng201.team0.unittests.services.CounterService;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
