@@ -13,7 +13,9 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * Drives all expedition logic. Event resolution, gold tracking, pay deduction, and party stamina.
+ * Drives all expedition logic: event resolution, gold tracking, pay deduction,
+ * item drops, and party stamina. Maintains per-expedition state from departure
+ * through to finalization.
  */
 public class ExpeditionService {
 

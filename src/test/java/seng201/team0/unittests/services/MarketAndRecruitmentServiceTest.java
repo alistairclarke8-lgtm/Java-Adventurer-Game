@@ -57,7 +57,7 @@ class MarketAndRecruitmentServiceTest {
     @Test
     void buy_deductsGoldAndAddsToInventory() throws InsufficientGoldException {
         market.refreshStock();
-        Item item = environment.getMarket().getAvailableItems().get(0);
+        Item item = environment.getMarket().getAvailableItems().getFirst();
         int goldBefore = environment.getGold();
         int price = market.getBuyPrice(item);
         market.buy(item);
@@ -75,7 +75,7 @@ class MarketAndRecruitmentServiceTest {
     @Test
     void sell_addsGoldAndRemovesFromInventory() throws InsufficientGoldException {
         market.refreshStock();
-        Item item = environment.getMarket().getAvailableItems().get(0);
+        Item item = environment.getMarket().getAvailableItems().getFirst();
         market.buy(item);
         int goldAfterBuy = environment.getGold();
         int sellPrice = market.getSellPrice(item);
@@ -103,7 +103,7 @@ class MarketAndRecruitmentServiceTest {
     void refreshPool_populatesRecruits() {
         recruits.refreshPool();
         int size = recruits.getAvailableRecruits().size();
-        assertTrue(size >= RecruitmentService.MIN_POOL && size <= RecruitmentService.MAX_POOL,
+        assertTrue(size >= RecruitmentService.minPool && size <= RecruitmentService.maxPool,
                 "pool size out of range: " + size);
     }
 
@@ -125,7 +125,7 @@ class MarketAndRecruitmentServiceTest {
     @Test
     void hire_addsToReservesAndDeductsGold() throws Exception {
         recruits.refreshPool();
-        Adventurer chosen = recruits.getAvailableRecruits().get(0);
+        Adventurer chosen = recruits.getAvailableRecruits().getFirst();
         int goldBefore = environment.getGold();
         int price = recruits.getHirePrice(chosen);
         recruits.hire(chosen);
@@ -142,7 +142,7 @@ class MarketAndRecruitmentServiceTest {
             environment.getGuildhall().getReservedAdventurers().add(
                     new Adventurer("D" + i, 50, 10, 10, 5, "Dummy"));
         }
-        Adventurer chosen = recruits.getAvailableRecruits().get(0);
+        Adventurer chosen = recruits.getAvailableRecruits().getFirst();
         assertThrows(GuildFullException.class, () -> recruits.hire(chosen));
     }
 }

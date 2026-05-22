@@ -12,24 +12,18 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * Service class that handles adventurer recruitment logic.
- *
- * Each round, a pool of randomly generated Adventurer candidates is
- * made available via refreshPool(). The player can inspect the pool,
- * check hire prices adjusted for difficulty, and hire adventurers into the
- * guildhall reserves, provided they have enough gold and reserve space.
- *
- * All gold and guildhall mutations are delegated to GameEnvironment
- * so that game state remains consistent across services.
+ * Handles adventurer recruitment logic. Each round a pool of randomly
+ * generated candidates is made available. The player can hire adventurers
+ * into the guildhall reserves subject to gold and capacity constraints.
  */
 public class RecruitmentService {
 
 
     /** The minimum number of recruits shown per round. */
-    public static final int MIN_POOL = 3;
+    public static final int minPool = 3;
 
     /** The maximum number of recruits shown per round. */
-    public static final int MAX_POOL = 5;
+    public static final int maxPool = 5;
 
     private final GameEnvironment gameEnvironment;
     private final Random random;
@@ -44,13 +38,10 @@ public class RecruitmentService {
     }
 
     /**
-     * Constructs a RecruitmentService with an explicit Random instance.
-     *
-     * Use this constructor in tests to pass a seeded Random and get
-     * deterministic recruit generation.
-     *
-     * @param gameEnvironment the active GameEnvironment; must not be null
-     * @param random the random instance to use for pool generation; must not be null
+     * Constructs the service with an explicit Random parameter for deterministic
+     * testing.
+     * @param gameEnvironment the active game environment
+     * @param random the random source used for pool generation
      */
     public RecruitmentService(GameEnvironment gameEnvironment, Random random) {
         this.gameEnvironment = gameEnvironment;
@@ -67,17 +58,12 @@ public class RecruitmentService {
     }
 
     /**
-     * Hires an adventurer from the current pool into the guildhall reserves.
-     * The hire price is calculated via getHirePrice(Adventurer), which
-     * applies the current difficulty cost multiplier. On success, the gold is
-     * deducted, the adventurer is moved to the guildhall reserves via
-     * makeReservedAdventurer(Adventurer) in GuildHallService,
-     * and removed from the available pool.
-     *
-     * @param adventurer the adventurer in question being purchased
-     * @throws InsufficientGoldException if the player does not have enough gold to
-     *                                   purchase the adventurer,
-     * @throws GuildFullException if the player's guild is full of adventurers
+     * Hires the given adventurer into the guildhall reserves, deducting the
+     * difficulty-adjusted hire price from the treasury and removing them from
+     * the available pool.
+     * @param adventurer the adventurer to hire
+     * @throws InsufficientGoldException if the player cannot afford the hire price
+     * @throws GuildFullException if the guildhall reserves are at capacity
      */
     public void hire(Adventurer adventurer) throws InsufficientGoldException, GuildFullException {
         if (!availableRecruits.contains(adventurer)) {

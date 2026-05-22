@@ -10,17 +10,9 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * Service that runs the per-round random events
- * Once each expedition has resolved, this
- * service is consulted to roll a chance for any of three event types:
- * An adventurer's stat is raised or lowered.
- * An adventurer learns a new skill.
- * An adventurer retires from the guild; chance scales with the
- *     number of expeditions the adventurer has run consecutively without
- *     being rested in the reserves.
- * The chance of any single event firing is gated by
- * seng201.team0.models.Difficulty#getRandomEventChance(), so harder
- * difficulties trigger random events more often.
+ * Runs per-round random events after each expedition. Rolls each main-party
+ * adventurer for a stat change, a skill gain, and fatigue-based retirement.
+ * Event frequency is gated by the current difficulty's random-event chance.
  */
 public class RandomEventService {
 
@@ -56,12 +48,11 @@ public class RandomEventService {
     }
 
     /**
-     * Rolls any random events that occur after an expedition completes.
-     * Each main-party adventurer is rolled once for each of the three event categories.
-     * The chance of each is gated by the current difficulty's random-event chance.
-     * Returns a list of human-readable messages that the post-expedition screen can present to the player.
-     *
-     * @return list of messages describing what happened, in order
+     * Rolls random events for each main-party adventurer after an expedition.
+     * Each adventurer is independently checked for a stat change, a skill
+     * gain, and fatigue-based retirement. Returns human-readable messages
+     * for display on the post-expedition screen.
+     * @return unmodifiable list of messages describing events that occurred
      */
     public List<String> runRandomEvents() {
         List<String> messages = new ArrayList<>();
