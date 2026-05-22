@@ -75,7 +75,7 @@ public class PostExpeditionScreenController extends ScreenController {
         populateItemsFound(expeditionService.getItemsFound());
         populateRandomEvents(expeditionService.getRandomEventMessages());
 
-        continueBtn.setOnAction(e -> getGameEnvironment().navigateToMenu());
+        continueBtn.setOnAction(e -> getGameEnvironment().continueAfterExpedition());
     }
 
     /**

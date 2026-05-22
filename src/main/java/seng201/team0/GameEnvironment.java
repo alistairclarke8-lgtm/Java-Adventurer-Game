@@ -179,8 +179,10 @@ public class GameEnvironment {
     /** @return the 1-indexed current expedition number */
     public int getCurrentExpedition() {return currentExpedition;}
 
-    /** @return remaining expeditions including the current one */
-    public int getRemainingExpeditions() {return numExpeditions-currentExpedition;}
+    /** @return remaining expeditions including the current one. Cannot be less than zero. */
+    public int getRemainingExpeditions() {
+        return Math.max(0, numExpeditions - currentExpedition);
+    }
 
     /** @return the guildhall service */
     public GuildHallService getGuildHallService() { return guildHallService; }

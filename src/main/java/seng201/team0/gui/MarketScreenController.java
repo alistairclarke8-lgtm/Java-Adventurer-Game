@@ -18,9 +18,9 @@ import seng201.team0.models.Item;
 public class MarketScreenController extends ScreenController {
     @FXML private Label goldLabel;
     @FXML private Button backBtn;
-    @FXML private ListView shopList;
+    @FXML private ListView<Item> shopList;
     @FXML private Button buyBtn;
-    @FXML private ListView inventoryList;
+    @FXML private ListView<Item> inventoryList;
     @FXML private Button sellBtn;
     @FXML private Label detailsLabel;
 

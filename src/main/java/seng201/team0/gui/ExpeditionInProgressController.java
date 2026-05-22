@@ -77,7 +77,16 @@ public class ExpeditionInProgressController extends ScreenController{
     }
 
     private void onRetreatBtnClicked() {
-        getGameEnvironment().navigateToMenu();
+        try {
+            expeditionService.retreat();
+            appendRecentLogs();
+            getGameEnvironment().navigateToPostExpedition();
+        } catch (InsufficientGoldException e) {
+            // Treasury is short on pay. Pay was already capped at available gold
+            // inside finaliseExpedition, so this is a defensive branch only.
+            showError("Treasury Issue", e.getMessage());
+            getGameEnvironment().navigateToPostExpedition();
+        }
     }
 
     private void onChoiceBtnClicked(int choiceIndex) {
@@ -88,16 +97,17 @@ public class ExpeditionInProgressController extends ScreenController{
             appendRecentLogs();
 
             if (expeditionService.getCurrentEvent() == null) {
-                getGameEnvironment().incrementExpedition();
+                //getGameEnvironment().incrementExpedition();
                 getGameEnvironment().navigateToPostExpedition();
             } else {
                 refreshEventDisplay();
             }
         } catch (ExpeditionOverException e) {
-            getGameEnvironment().incrementExpedition();
+            //getGameEnvironment().incrementExpedition();
             getGameEnvironment().navigateToPostExpedition();
         } catch (InsufficientGoldException e) {
-            throw new RuntimeException(e);
+            showError("Treasury Issue", e.getMessage());
+            getGameEnvironment().navigateToPostExpedition();
         }
     }
     private void refreshPartyDisplay() {
@@ -148,11 +158,16 @@ public class ExpeditionInProgressController extends ScreenController{
         eventLogField.appendText(message + "\n");
     }
 
-    private void showValidationError(String message) {
+    /**
+     * Shows an error alert with the given header and body.
+     * @param header short summary shown in the dialog header
+     * @param body   detailed message shown in the dialog body
+     */
+    private void showError(String header, String body) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Cannot Start Game");
-        alert.setHeaderText("Please fix the following:");
-        alert.setContentText(message);
+        alert.setTitle("Expedition");
+        alert.setHeaderText(header);
+        alert.setContentText(body);
         alert.showAndWait();
     }
 

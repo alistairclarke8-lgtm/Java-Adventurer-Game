@@ -91,6 +91,11 @@ public class GuildHallService {
         if (getTotalAdventurers() <= 1) {
             throw new LastAdventurerException();
         }
+        Item equipped = adventurer.getEquippedItem();
+        if (equipped != null) {
+            adventurer.setEquippedItem(null);
+            guildhall.getInventoryItems().add(equipped);
+        }
         guildhall.getMainPartyAdventurers().remove(adventurer);
         guildhall.getReservedAdventurers().remove(adventurer);
     }
