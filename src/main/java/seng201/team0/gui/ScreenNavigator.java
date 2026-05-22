@@ -90,6 +90,11 @@ public class ScreenNavigator {
         launchScreen(controller);
     }
 
+    public void launchEndGameScreen(GameEnvironment gameEnvironment) {
+        ScreenController controller = new EndGameScreenController(gameEnvironment);
+        launchScreen(controller);
+    }
+
 
 
     /**
@@ -113,5 +118,6 @@ public class ScreenNavigator {
             e.printStackTrace();
         }
     }
+
 
 }
