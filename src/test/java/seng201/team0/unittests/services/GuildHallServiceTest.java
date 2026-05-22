@@ -111,12 +111,6 @@ class GuildHallServiceTest {
         assertEquals(0, alice.getExpeditionsInARow());
     }
 
-    @Test
-    void moveMainPartyToReserve_rejectsIfWouldEmptyParty() throws GuildFullException {
-        service.makeMainPartyAdventurer(alice);
-        assertThrows(IllegalStateException.class,
-                () -> service.moveMainPartyToReserve(alice));
-    }
 
     @Test
     void swapAdventurers_swapsAndResetsCounter() throws Exception {

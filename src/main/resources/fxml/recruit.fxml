@@ -9,10 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-      prefHeight="400.0" prefWidth="600.0" spacing="10.0"
-      xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="seng201.team0.gui.RecruitmentScreenController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="10.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng201.team0.gui.RecruitmentScreenController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
@@ -22,7 +19,7 @@
                 <Label text="Recruit Adventurers">
                     <font><Font size="20.0" /></font>
                 </Label>
-                <Label fx:id="goldLabel" text="Gold: 0g" HBox.hgrow="ALWAYS" />
+                <Label fx:id="goldLabel" prefHeight="17.0" prefWidth="250.0" text="Gold: 0g" HBox.hgrow="ALWAYS" />
                 <Button fx:id="backBtn" text="Back to Menu" />
             </children>
         </HBox>
@@ -33,10 +30,10 @@
                     <children>
                         <Label text="Available recruits:" />
                         <ListView fx:id="recruitsList" prefHeight="240" />
-                        <Button fx:id="hireBtn" text="Hire" prefWidth="100" prefHeight="36" />
+                        <Button fx:id="hireBtn" prefHeight="36" prefWidth="100" text="Hire" />
                     </children>
                 </VBox>
-                <VBox spacing="6" prefWidth="240">
+                <VBox prefWidth="240" spacing="6">
                     <children>
                         <Label text="Details:" />
                         <Label fx:id="detailsLabel" text="Pick an adventurer to view details." wrapText="true" />
