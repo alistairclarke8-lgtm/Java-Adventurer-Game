@@ -16,10 +16,10 @@
     <children>
         <HBox alignment="CENTER_LEFT" spacing="20">
             <children>
-                <Label styleClass="title-label" text="Market">
+                <Label prefHeight="26.0" prefWidth="122.0" styleClass="title-label" text="Market">
                     <font><Font size="20.0" /></font>
                 </Label>
-                <Label fx:id="goldLabel" prefHeight="17.0" prefWidth="364.0" text="Gold: 0g" HBox.hgrow="ALWAYS" />
+                <Label fx:id="goldLabel" prefHeight="17.0" prefWidth="275.0" text="Gold: 0g" HBox.hgrow="ALWAYS" />
                 <Button fx:id="backBtn" text="Back to Menu" />
             </children>
         </HBox>
