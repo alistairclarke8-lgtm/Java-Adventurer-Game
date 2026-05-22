@@ -59,9 +59,9 @@
                         <Font size="10.0" />
                      </font>
                   </Label>
-                  <ProgressBar fx:id="stamProgressBar1" prefWidth="200.0" progress="0.0">
+                  <ProgressBar fx:id="stamProgressBar1" prefHeight="23.0" prefWidth="92.0" progress="0.0">
                      <VBox.margin>
-                        <Insets bottom="10.0" />
+                        <Insets bottom="5.0" />
                      </VBox.margin>
                   </ProgressBar>
                   <Label fx:id="adventurerStamLabel1" prefHeight="17.0" prefWidth="119.0" text="Label">
@@ -88,7 +88,7 @@
                   </Label>
                   <ProgressBar fx:id="stamProgressBar2" prefWidth="200.0" progress="0.0">
                      <VBox.margin>
-                        <Insets bottom="10.0" />
+                        <Insets bottom="5.0" />
                      </VBox.margin>
                   </ProgressBar>
                   <Label fx:id="adventurerStamLabel2" prefHeight="17.0" prefWidth="100.0" text="Label">
@@ -115,7 +115,7 @@
                   </Label>
                   <ProgressBar fx:id="stamProgressBar3" prefWidth="200.0" progress="0.0">
                      <VBox.margin>
-                        <Insets bottom="10.0" />
+                        <Insets bottom="5.0" />
                      </VBox.margin>
                   </ProgressBar>
                   <Label fx:id="adventurerStamLabel3" prefHeight="17.0" prefWidth="112.0" text="Label">
@@ -139,7 +139,7 @@
                   </Label>
                   <ProgressBar fx:id="stamProgressBar4" prefWidth="200.0" progress="0.0">
                      <VBox.margin>
-                        <Insets bottom="10.0" />
+                        <Insets bottom="5.0" />
                      </VBox.margin>
                   </ProgressBar>
                   <Label fx:id="adventurerStamLabel4" prefHeight="17.0" prefWidth="114.0" text="Label">
@@ -166,7 +166,7 @@
                   </Label>
                   <ProgressBar fx:id="stamProgressBar5" prefWidth="200.0" progress="0.0">
                      <VBox.margin>
-                        <Insets bottom="10.0" />
+                        <Insets bottom="5.0" />
                      </VBox.margin>
                   </ProgressBar>
                   <Label fx:id="adventurerStamLabel5" prefHeight="17.0" prefWidth="103.0" text="Label">
